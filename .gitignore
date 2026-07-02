@@ -1,2 +1,6 @@
 /build
 /.dccache
+/*.uf2
+/*.zip
+/gerbers/
+kicad/amigahid-pico-backups/
