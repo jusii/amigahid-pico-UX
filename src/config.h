@@ -40,6 +40,10 @@
 #  define QM1_AMIGA_B1  22
 #  define QM1_AMIGA_B2  26
 #  define QM1_AMIGA_B3  27
+
+#  ifdef PORT2_ROLE_KEYBOARD
+#    error PORT2_ROLE=KEYBOARD pin mapping is not defined for REV2 yet
+#  endif
 #elif defined(BOARD_HIDPICO_REV4)
 #  define HAS_SCREEN
 #  define HAS_KEYBOARD
@@ -62,6 +66,14 @@
 #  define QM1_AMIGA_B1  11
 #  define QM1_AMIGA_B2  12
 #  define QM1_AMIGA_B3  13
+
+#  ifdef PORT2_ROLE_KEYBOARD
+// controller port 2 is repurposed as a real amiga keyboard input. these are
+// the existing port 2 'h' and 'v' gpios (kicad nets: lcont2 h / lcont2 v),
+// reusing their bss138 level shifters. wired to a real keyboard, not the amiga.
+#    define KBD_REAL_CLK 26 // port 2 'h' line -> real keyboard kclk (pico input)
+#    define KBD_REAL_DAT 27 // port 2 'v' line -> real keyboard kdat (bidirectional)
+#  endif
 #else
 #  error Board type has not been defined; check cmake command line
 #endif

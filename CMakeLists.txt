@@ -56,6 +56,19 @@ endif ()
 # set the board revision (changes which pins are mapped to which ports)
 add_compile_definitions(${BOARD_TYPE})
 
+# controller port 2 role:
+#   JOYSTICK - default; port 2 reserved for (future) joystick emulation, no-op today
+#   KEYBOARD - repurpose port 2 as a real amiga keyboard input (rx via pio)
+# in KEYBOARD mode port 2 is wired to a real amiga keyboard, NOT to the amiga.
+if (NOT PORT2_ROLE)
+	set(PORT2_ROLE JOYSTICK)
+endif ()
+if (NOT (PORT2_ROLE STREQUAL "JOYSTICK" OR PORT2_ROLE STREQUAL "KEYBOARD"))
+	message(FATAL_ERROR "PORT2_ROLE must be JOYSTICK or KEYBOARD (got '${PORT2_ROLE}')")
+endif ()
+add_compile_definitions(PORT2_ROLE_${PORT2_ROLE}=1)
+message(STATUS "Controller port 2 role: ${PORT2_ROLE}")
+
 # debugging for tinyusb - be warned that it can cause timing issues causing things to break
 # add_compile_definitions(CFG_TUSB_DEBUG=2)
 

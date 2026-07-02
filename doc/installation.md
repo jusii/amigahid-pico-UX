@@ -4,6 +4,17 @@
 
 the file [CMakeLists.txt](/CMakeLists.txt) has a small number of configuration options. the critical aspects of the build can be specified on the `cmake` commandline; you should not normally need to edit the [CMakeLists.txt](/CMakeLists.txt) file unless you are doing something outlandish.
 
+### controller port 2 role
+
+controller port 2 can be built in one of two roles via `-DPORT2_ROLE=`:
+
+* `JOYSTICK` (default) - port 2 is reserved for (future) joystick emulation.
+* `KEYBOARD` - port 2 is repurposed as an input for a real amiga keyboard, decoded and merged with the usb/bluetooth path. wire port 2 to the keyboard (not the amiga); see the [hardware](./hardware.md) guide for the adapter pinout.
+
+```shell
+$ cmake -B build/ -S . -DBOARD_TYPE=BOARD_HIDPICO_REV4 -DPORT2_ROLE=KEYBOARD
+```
+
 ## building the source code
 
 prior to installation, ensure you have cmake, gnu make and gcc targetted to arm-none-eabi. you should be able to find these in debian. homebrew in macos has a cask for prebuilt gcc 10 binaries from arm. under windows, you're probably best off using wsl.

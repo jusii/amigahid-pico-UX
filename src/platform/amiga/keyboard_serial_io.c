@@ -39,6 +39,13 @@ static bool local_reset_active = false;
 static bool external_reset_active = false;
 static bool reset_line_was_low = false;
 
+// a real amiga keyboard tracks its own ctrl-lamiga-ramiga reset combo,
+// independent of the usb/bt source, so the two cannot corrupt each other's
+// modifier state at the merge point.
+static bool rkb_ctrl = false;
+static bool rkb_lamiga = false;
+static bool rkb_ramiga = false;
+
 enum _keyboard_pin_state { LOW, HIGH };
 
 #define AKB_EVENT_QUEUE_DEPTH 64
@@ -288,6 +295,66 @@ void amiga_send(uint8_t keycode, bool up)
     // for a lwo pulse. according to adcd2.1, while the computer cannot detect
     // out-of-sync, the keyboard can by looking for the pulse, sending $f9 then the
     // repeated code.
+}
+
+void amiga_send_rawkey(uint8_t keycode, bool up)
+{
+    amiga_keyboard_event_t event = {
+        .type = AKB_EVENT_SEND,
+        .keycode = keycode,
+        .up = up,
+    };
+
+    /*
+     * Unlike the USB path, a real amiga keyboard already presents caps lock as
+     * a native toggle: it sends caps DOWN when the lamp engages and caps UP
+     * when it disengages. Forward those verbatim (the amiga interprets them
+     * directly) and just mirror our shared caps_lock state so the USB keyboard
+     * lamp and the OLED stay in agreement.
+     */
+    if (keycode == AMIGA_CAPSLOCK) {
+        caps_lock = !up;
+        usb_hid_sync_keyboard_leds();
+
+        if (!in_reset)
+            amiga_queue_event(&event, false);
+        return;
+    }
+
+    if (keycode == AMIGA_CTRL)
+        rkb_ctrl = !up;
+    if (keycode == AMIGA_LAMIGA)
+        rkb_lamiga = !up;
+    if (keycode == AMIGA_RAMIGA)
+        rkb_ramiga = !up;
+
+    if ((rkb_ctrl && rkb_lamiga && rkb_ramiga) && !in_reset) {
+        in_reset = true;
+        local_reset_active = true;
+        external_reset_active = false;
+        amiga_clear_queued_events();
+        amiga_reset_stateful_flags();
+        event.type = AKB_EVENT_ASSERT_RESET;
+        event.keycode = 0;
+        event.up = false;
+        amiga_queue_event(&event, true);
+        return;
+    }
+
+    if (local_reset_active && !(rkb_ctrl && rkb_lamiga && rkb_ramiga)) {
+        local_reset_active = false;
+        in_reset = false;
+        event.type = AKB_EVENT_RELEASE_RESET;
+        event.keycode = 0;
+        event.up = false;
+        amiga_queue_event(&event, true);
+        event.type = AKB_EVENT_SEND;
+        event.keycode = keycode;
+        event.up = up;
+    }
+
+    if (!in_reset)
+        amiga_queue_event(&event, false);
 }
 
 void amiga_assert_reset()

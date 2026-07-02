@@ -14,6 +14,7 @@
 
 #include "display/disp_ssd.h"
 #include "platform/amiga/keyboard_serial_io.h"
+#include "platform/amiga/keyboard_recv.h"
 #include "platform/amiga/quad_mouse.h"
 #include "util/debug_cons.h"
 #include "util/output.h"
@@ -50,6 +51,11 @@ int main(void)
     // start amiga mouse emulation
     amiga_quad_mouse_init();
 
+#ifdef PORT2_ROLE_KEYBOARD
+    // start receiving from a real amiga keyboard attached to port 2
+    amiga_keyboard_recv_init();
+#endif
+
 #ifdef ENABLE_BLUETOOTH_HID
     bt_hid_init();
 #endif
@@ -60,6 +66,11 @@ int main(void)
 
 #ifdef ENABLE_BLUETOOTH_HID
         bt_hid_task();
+#endif
+
+#ifdef PORT2_ROLE_KEYBOARD
+        // drain + inject any keycodes from the real amiga keyboard
+        amiga_keyboard_recv_task();
 #endif
 
         // amiga keyboard service routine

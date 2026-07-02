@@ -1,0 +1,78 @@
+; this file is part of amigahid-pico, (c) 2021 just nine <nine@aphlor.org>
+; please locate the full source at https://github.com/borb/amigahid-pico
+;
+; released under the terms of the Eclipse Public License 2.0 (EPL-2.0).
+; please find the complete license text at https://spdx.org/licenses/EPL-2.0
+;
+; statemachine program for RECEIVING amiga keycodes from a real amiga keyboard.
+; the pico plays the role of the host/computer: the keyboard is the clock master
+; and we sample data on each clock strobe, then drive the handshake ourselves.
+;
+; pin mapping is supplied entirely from c (amiga_recv_pio_init), so this program
+; is agnostic to the actual gpio numbers:
+;   - jmp pin     -> kclk (keyboard clock, input only)
+;   - in  base    -> kdat (keyboard data, sampled here)
+;   - set base    -> kdat (driven low for the handshake ack)
+;
+; the line is open-collector / active low; idle is high (kdat hi-z = input).
+; bit decoding (active-low inversion + rotate) is done on the cpu side, this
+; program just shifts the raw 8 line levels in, msb first.
+
+.program amiga_recv
+
+.wrap_target
+    set pindirs, 0          ; kdat = input (hi-z), idle high via external pull-up
+    set x, 7                ; receive 8 bits
+bit_loop:
+    jmp pin, bit_loop       ; spin while kclk is high; fall through on the low strobe
+    in pins, 1              ; kclk low: sample kdat into isr (shift left, msb first)
+wait_high:
+    jmp pin, clk_high       ; kclk back high -> this bit is complete
+    jmp wait_high
+clk_high:
+    jmp x--, bit_loop       ; more bits to go
+    push noblock            ; deliver the assembled byte (isr[7:0]); never stall
+    ; --- autonomous handshake: pull kdat low ~85us, independent of the cpu ---
+    set pindirs, 1          ; kdat = output
+    set pins, 0             ; drive kdat low = acknowledge
+    set y, 20
+ack_loop:
+    jmp y--, ack_loop [31]  ; 21 * 32 cycles ~= 84us at an 8MHz sm clock
+    set pindirs, 0          ; release kdat (back to hi-z input)
+.wrap
+
+% c-sdk {
+#include "hardware/clocks.h"
+
+// configure a state machine to receive bytes from a real amiga keyboard.
+// clk_pin is the keyboard clock (input), dat_pin is the keyboard data line
+// (sampled, and driven low for the handshake). they need not be adjacent.
+static inline void amiga_recv_pio_init(PIO pio, uint sm, uint offset, uint clk_pin, uint dat_pin)
+{
+    pio_sm_config c = amiga_recv_program_get_default_config(offset);
+
+    // kclk is polled with `jmp pin`; kdat is both the `in` source and `set` target
+    sm_config_set_jmp_pin(&c, clk_pin);
+    sm_config_set_in_pins(&c, dat_pin);
+    sm_config_set_set_pins(&c, dat_pin, 1);
+
+    // shift left so the first received (msb) bit ends up in bit 7; no autopush
+    sm_config_set_in_shift(&c, false, false, 0);
+
+    // we only receive, so hand the whole fifo to rx for extra buffering depth
+    sm_config_set_fifo_join(&c, PIO_FIFO_JOIN_RX);
+
+    // run the sm at ~8MHz so the handshake delay loop lands near 85us regardless
+    // of system clock; bit sampling just follows the keyboard's edges
+    sm_config_set_clkdiv(&c, (float)clock_get_hz(clk_sys) / 8000000.0f);
+
+    // both lines belong to the pio; kdat starts as input (hi-z), kclk is input
+    pio_gpio_init(pio, clk_pin);
+    pio_gpio_init(pio, dat_pin);
+    pio_sm_set_consecutive_pindirs(pio, sm, clk_pin, 1, false);
+    pio_sm_set_consecutive_pindirs(pio, sm, dat_pin, 1, false);
+
+    pio_sm_init(pio, sm, offset, &c);
+    pio_sm_set_enabled(pio, sm, true);
+}
+%}

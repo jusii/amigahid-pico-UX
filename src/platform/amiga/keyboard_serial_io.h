@@ -56,6 +56,19 @@ void amiga_hid_modifier(hid_keyboard_modifier_bm_t modifier, bool up);
 void amiga_send(uint8_t keycode, bool up);
 
 /**
+ * @brief Inject an Amiga keycode received from a real Amiga keyboard
+ *
+ * Shares the output queue with the USB/BT path (the merge point) but handles
+ * the stateful concerns differently: a real keyboard already toggles caps lock
+ * natively (down to engage, up to disengage) and tracks its own ctrl-amiga-amiga
+ * reset combo independently of the USB source.
+ *
+ * @param keycode   Amiga keycode (0x00-0x7f), already decoded from the wire
+ * @param up        true if key release, false if press
+ */
+void amiga_send_rawkey(uint8_t keycode, bool up);
+
+/**
  * @brief Assert the reset signal - Amiga will hold in reset until released
  */
 void amiga_assert_reset();
