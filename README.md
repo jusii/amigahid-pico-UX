@@ -1,6 +1,6 @@
 # amigahid-pico
 
-please note: the interesting stuff goes into the [development](https://github.com/borb/amigahid-pico/tree/development) branch, so if main seems slow, check it out.
+**about this fork:** this fork adds support for attaching a *real amiga keyboard* to controller port 2 (build with `-DPORT2_ROLE=KEYBOARD`; see [installation](./doc/installation.md) and [hardware](./doc/hardware.md)). it is based on upstream [pr #44](https://github.com/borb/amigahid-pico/pull/44) (bluetooth support by stefan reinauer) — see that pr for details of the bluetooth work. tested configuration: rev 5 pcb, standard pico (non-w), `BOARD_HIDPICO_REV4` firmware target with `PORT2_ROLE=KEYBOARD`. the original project lives at [borb/amigahid-pico](https://github.com/borb/amigahid-pico).
 
 ## introduction
 
@@ -12,7 +12,7 @@ it currently supports keyboards and mice and provides connection via the interna
 
 ## **important note**
 
-* current kicad files are for r5 pcb, pin mappings are not yet in the source tree! i have not yet generated this board as a pcb, but it is mostly identical to r4. the keyboard and controller port 1 are correct at time of writing, and will be fixed for the second controller port when the next prototype arrives.
+* current kicad files are for the r5 pcb, which is mostly identical to r4. there is no separate r5 firmware target: build `BOARD_HIDPICO_REV4` (the default) — this fork has been built and tested on an r5 board with the rev 4 target. controller port 2 can now be used as an input for a real amiga keyboard via `-DPORT2_ROLE=KEYBOARD` (see the [hardware](./doc/hardware.md) guide for wiring).
 
 * **always read the [errata](./doc/errata.md) section for the current pcb layout before deciding whether or not to build.**
 
