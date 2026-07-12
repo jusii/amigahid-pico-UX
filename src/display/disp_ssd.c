@@ -108,6 +108,7 @@ typedef enum
                                 // Byte2 = 0x14: Enable charge pump.
 
 #if defined(DISPLAY_SH1106)
+    // docs: https://www.displaysino.com/upload/default/20231213/b188c34d10028900625ffc3e1c7d59e4.pdf
     // the sh1106 has no charge pump command; it uses an internal dc-dc 
     // converter and page-based addressing instead)
     SET_LOWER_COL_ADDR = 0x00,   // Set lower nibble of column address (0x00-0x0f).
