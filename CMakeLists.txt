@@ -17,6 +17,12 @@ if (NOT PICO_BOARD)
 	set(PICO_BOARD pico)
 endif ()
 
+# DISPLAY_SSD1306 (0.96" panels, default) or
+# DISPLAY_SH1106 (1.3" panels; page-addressed, 132-wide ram with a 2px column offset)
+if (NOT DISPLAY_CONTROLLER)
+	set(DISPLAY_CONTROLLER DISPLAY_SSD1306)
+endif ()
+
 # use sdk from git submodule
 include(pico-sdk/pico_sdk_init.cmake)
 
@@ -55,6 +61,9 @@ endif ()
 
 # set the board revision (changes which pins are mapped to which ports)
 add_compile_definitions(${BOARD_TYPE})
+
+# set the display controller type (ssd1306 vs sh1106)
+add_compile_definitions(${DISPLAY_CONTROLLER})
 
 # controller port 2 role:
 #   JOYSTICK - default; port 2 reserved for (future) joystick emulation, no-op today
