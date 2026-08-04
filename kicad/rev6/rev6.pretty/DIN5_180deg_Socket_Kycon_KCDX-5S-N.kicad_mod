@@ -1,40 +1,41 @@
 (footprint "DIN5_180deg_Socket_Kycon_KCDX-5S-N"
 	(version 20260206)
-	(generator "amigahid-pico-rev6")
+	(generator "pcbnew")
 	(generator_version "10.0")
 	(layer "F.Cu")
 	(descr "DIN 41524 5-pin 180 deg female PCB socket, right-angle THT, Kycon KCDX-5S-N (10 mm pitch, non-shielded). Amiga A2000 / A3000 / A3000T / A4000T keyboard connector: 1=KCLK 2=KDAT 3=NC 4=GND 5=+5V. Dimensions from the Kycon KCDX-5S-N engineering drawing rev A5 (08/06/18), Recommended PCB Layout (Bottom View), https://www.kycon.com/Pub_Eng_Draw/KCDX-5S-N.pdf : 7 x 1.40 mm dia holes; pins 1/2/3 at 12.50 mm from the socket edge on a 7.50 mm pitch; pins 4/5 at 15.00 mm from the socket edge, 10.00 mm apart; two mounting-tab holes (0.3 x 1.0 mm tabs, pad MP) at 3.00 mm from the socket edge, 10.00 mm apart; body 20.5 x 19.5 x 15.5 mm, socket flange 14.0 mm dia. MIRRORED: the Kycon drawing is a BOTTOM view, so the pad X coordinates are negated here to give the F.Cu top view. Sanity rule for this footprint (mating face at y=0, body at +y): an observer facing the socket sees left-to-right = DECREASING x, so the socket front view reads 3(+7.5) 5(+5) 2(0) 4(-5) 1(-7.5) - the DIN 41524 female order 3,5,2,4,1, which is the mirror of the male plug's 1,4,2,5,3. Anchor (0,0) = centre of the socket edge / mating face plane - place it on the board edge line. Pad-to-drill sizes enlarged to 2.40 mm pads for hand soldering. VERIFY AGAINST A PHYSICAL SAMPLE BEFORE FAB.")
 	(tags "connector din din5 41524 180deg socket receptacle right-angle tht amiga keyboard a2000 a3000 a4000t kycon kcdx-5s-n amigahid rev6")
-	(property "Reference" "REF**"
+	(property "Reference" "J11"
 		(at 0 -1.5 0)
 		(unlocked yes)
 		(layer "F.SilkS")
-		(uuid "100ff19e-3067-4d8d-b3f7-a004cdaaaa44")
+		(uuid "e491d41d-09d5-4262-8a0d-41a2e39ecdee")
 		(effects
 			(font
-				(size 1.0 1.0)
+				(size 1 1)
 				(thickness 0.15)
 			)
 		)
 	)
-	(property "Value" "DIN5_180deg_Socket_Kycon_KCDX-5S-N"
-		(at 0 17.0 0)
+	(property "Value" "DIN5 KBD IN"
+		(at 0 17 0)
 		(unlocked yes)
 		(layer "F.Fab")
-		(uuid "a151c774-a870-47a1-9c9f-9afce9d9d666")
+		(hide yes)
+		(uuid "761cc86b-647f-4ff0-83bb-4be7874add02")
 		(effects
 			(font
-				(size 1.0 1.0)
+				(size 1 1)
 				(thickness 0.15)
 			)
 		)
 	)
-	(property "Datasheet" "https://www.kycon.com/Pub_Eng_Draw/KCDX-5S-N.pdf"
+	(property "Datasheet" "http://www.mouser.com/ds/2/18/40_c091_abd_e-75918.pdf"
 		(at 0 0 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "bc4aaca9-3499-4ff9-8fc7-1a6d0f1d7102")
+		(uuid "6b283eb2-676d-4eec-979d-b141f94489b5")
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -42,12 +43,12 @@
 			)
 		)
 	)
-	(property "Description" "DIN 5-pin 180 deg female PCB socket, right angle THT (Kycon KCDX-5S-N class) - Amiga A2000/A3000/A4000T keyboard connector"
+	(property "Description" "DIN 41524 5-pin 180 deg female socket (A2000/A3000/A4000T keyboard port); MP = shell/mounting tabs"
 		(at 0 0 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "1c574ae5-541f-4a1f-b9ea-d410423235e4")
+		(uuid "c6e28368-d729-44be-9fa3-30e050460216")
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -57,69 +58,15 @@
 	)
 	(attr through_hole)
 	(duplicate_pad_numbers_are_jumpers no)
-	(fp_rect
-		(start -10.25 0)
-		(end 10.25 15.5)
-		(stroke
-			(width 0.1)
-			(type solid)
-		)
-		(fill no)
-		(layer "F.Fab")
-		(uuid "4554a9b0-74cc-4ceb-9038-7bc6ba75a9e8")
-	)
-	(fp_rect
-		(start -10.5 -0.25)
-		(end 10.5 15.75)
-		(stroke
-			(width 0.05)
-			(type solid)
-		)
-		(fill no)
-		(layer "F.CrtYd")
-		(uuid "be9cc118-1d7c-41b1-b258-fc7cb14f671b")
-	)
-	(fp_text user "${REFERENCE}"
-		(at 0 7.75 0)
-		(unlocked yes)
-		(layer "F.Fab")
-		(uuid "66041cca-6aad-4940-9588-177610c9aba1")
-		(effects
-			(font
-				(size 1.0 1.0)
-				(thickness 0.15)
-			)
-		)
-	)
 	(fp_line
-		(start -10.36 -0.11)
-		(end 10.36 -0.11)
-		(stroke
-			(width 0.12)
-			(type solid)
-		)
-		(layer "F.SilkS")
-		(uuid "9f5b8b36-b05d-4802-b217-83a57ffc89b0")
-	)
-	(fp_line
-		(start -10.36 -0.11)
+		(start -10.36 0.21)
 		(end -10.36 15.61)
 		(stroke
 			(width 0.12)
 			(type solid)
 		)
 		(layer "F.SilkS")
-		(uuid "0335239e-0313-4434-ac4f-68faed99f83c")
-	)
-	(fp_line
-		(start 10.36 -0.11)
-		(end 10.36 15.61)
-		(stroke
-			(width 0.12)
-			(type solid)
-		)
-		(layer "F.SilkS")
-		(uuid "b8eaf992-0c7b-4354-be3f-291f8a371503")
+		(uuid "293e4c50-669c-46cd-872c-51122eac8b67")
 	)
 	(fp_line
 		(start -10.36 15.61)
@@ -129,7 +76,7 @@
 			(type solid)
 		)
 		(layer "F.SilkS")
-		(uuid "c7117ca8-4374-446d-b961-3298514e2be4")
+		(uuid "58e50d2e-22c3-4253-b636-6ee876f0a2e5")
 	)
 	(fp_line
 		(start -3.6 15.61)
@@ -139,7 +86,7 @@
 			(type solid)
 		)
 		(layer "F.SilkS")
-		(uuid "3591e945-c981-4391-acff-9d25eb9adbd7")
+		(uuid "127547fd-9280-46ef-95b5-184e8a431d07")
 	)
 	(fp_line
 		(start 6.4 15.61)
@@ -149,27 +96,17 @@
 			(type solid)
 		)
 		(layer "F.SilkS")
-		(uuid "9f2d30ea-5783-42fd-bd55-022b5c1a2746")
+		(uuid "e535a9f6-1ae3-4de9-bb25-af5ac291365f")
 	)
 	(fp_line
-		(start -7.0 0)
-		(end -7.0 1.0)
+		(start 10.36 0.21)
+		(end 10.36 15.61)
 		(stroke
-			(width 0.1)
+			(width 0.12)
 			(type solid)
 		)
-		(layer "F.Fab")
-		(uuid "dd87e36e-adb6-48f9-8f2a-1f2f05919d41")
-	)
-	(fp_line
-		(start 7.0 0)
-		(end 7.0 1.0)
-		(stroke
-			(width 0.1)
-			(type solid)
-		)
-		(layer "F.Fab")
-		(uuid "25273ff1-6474-4b11-b297-f841efbb1216")
+		(layer "F.SilkS")
+		(uuid "20d0e720-2fb9-491c-bee4-984fca0e53d4")
 	)
 	(fp_circle
 		(center -9.6 12.5)
@@ -180,7 +117,49 @@
 		)
 		(fill no)
 		(layer "F.SilkS")
-		(uuid "523ec5d1-7e3a-4324-a356-ae4ed6da08ff")
+		(uuid "1e3fe1b7-1d10-450c-8dd8-b0768c80b212")
+	)
+	(fp_rect
+		(start -10.5 -0.25)
+		(end 10.5 15.75)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "88973fce-aab9-4fa3-b628-93fbe80836ee")
+	)
+	(fp_line
+		(start -7 0)
+		(end -7 1)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "3951875d-db23-4df3-b8ba-4c28e2a37318")
+	)
+	(fp_line
+		(start 7 0)
+		(end 7 1)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "5e017b27-ed75-4ad7-b64d-e77dffe94d39")
+	)
+	(fp_rect
+		(start -10.25 0)
+		(end 10.25 15.5)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.Fab")
+		(uuid "e3bb9ef3-896c-42df-8c91-697d79d0f0f8")
 	)
 	(fp_circle
 		(center -9.6 12.5)
@@ -191,23 +170,19 @@
 		)
 		(fill no)
 		(layer "F.Fab")
-		(uuid "a6bd3ed8-c448-46a8-a03b-9640cd1b7e10")
+		(uuid "b5f607a7-170e-45eb-ba3e-e687f981dd4f")
 	)
-	(pad "3" thru_hole circle
-		(at 7.5 12.5)
-		(size 2.4 2.4)
-		(drill 1.4)
-		(layers "*.Cu" "*.Mask")
-		(remove_unused_layers no)
-		(uuid "2abe6813-2f73-4d9b-9d5d-611c6ba54467")
-	)
-	(pad "2" thru_hole circle
-		(at 0.0 12.5)
-		(size 2.4 2.4)
-		(drill 1.4)
-		(layers "*.Cu" "*.Mask")
-		(remove_unused_layers no)
-		(uuid "f000189d-c44e-4f2c-b533-988120b275f6")
+	(fp_text user "${REFERENCE}"
+		(at 0 7.75 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "6db32435-015c-4572-9c17-9c2ef296e443")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
 	)
 	(pad "1" thru_hole rect
 		(at -7.5 12.5)
@@ -215,38 +190,55 @@
 		(drill 1.4)
 		(layers "*.Cu" "*.Mask")
 		(remove_unused_layers no)
-		(uuid "45d30f36-b267-42d7-ac77-c295457a523f")
+		(uuid "3564e39c-0c20-405f-89b2-24d44d970ad1")
 	)
-	(pad "5" thru_hole circle
-		(at 5.0 15.0)
+	(pad "2" thru_hole circle
+		(at 0 12.5)
 		(size 2.4 2.4)
 		(drill 1.4)
 		(layers "*.Cu" "*.Mask")
 		(remove_unused_layers no)
-		(uuid "c9245e47-9f03-4e9d-bd90-8de9dbd1c65f")
+		(uuid "48107308-4a50-4d4e-9dd7-128e2ce983bd")
+	)
+	(pad "3" thru_hole circle
+		(at 7.5 12.5)
+		(size 2.4 2.4)
+		(drill 1.4)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "65de64e5-066f-4165-8115-3f26e392a001")
 	)
 	(pad "4" thru_hole circle
-		(at -5.0 15.0)
+		(at -5 15)
 		(size 2.4 2.4)
 		(drill 1.4)
 		(layers "*.Cu" "*.Mask")
 		(remove_unused_layers no)
-		(uuid "c5345fff-2f0a-486e-9973-6dd656d3cf9e")
+		(uuid "63114132-c58a-4909-a034-5ce05308f5bb")
+	)
+	(pad "5" thru_hole circle
+		(at 5 15)
+		(size 2.4 2.4)
+		(drill 1.4)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "9358d8e3-d565-4588-8343-fd3e9b1aa56a")
 	)
 	(pad "MP" thru_hole circle
-		(at -5.0 3.0)
+		(at -5 3)
 		(size 2.4 2.4)
 		(drill 1.4)
 		(layers "*.Cu" "*.Mask")
 		(remove_unused_layers no)
-		(uuid "55be6dd5-cb37-45f5-a47b-c663e475d195")
+		(uuid "e449fcd5-a0f7-478e-8d9f-8363dc09ec86")
 	)
 	(pad "MP" thru_hole circle
-		(at 5.0 3.0)
+		(at 5 3)
 		(size 2.4 2.4)
 		(drill 1.4)
 		(layers "*.Cu" "*.Mask")
 		(remove_unused_layers no)
-		(uuid "c0b0a210-8ad1-4e7e-8dc1-795b54f43683")
+		(uuid "7d4c717d-a30a-41ce-af74-1426648049b3")
 	)
+	(embedded_fonts no)
 )

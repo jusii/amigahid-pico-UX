@@ -9063,7 +9063,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Connector_Dsub:DSUB-9_Pins_Horizontal_P2.77x2.84mm_EdgePinOffset4.94mm_Housed_MountingHolesOffset4.94mm"
+		(property "Footprint" "rev6:DSUB-9_Pins_Horizontal_P2.77x2.84mm_EdgePinOffset4.94mm_Housed_MountingHolesOffset4.94mm"
 			(at 74.93 434.34 0)
 			(hide yes)
 			(effects
@@ -9339,7 +9339,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Connector_Dsub:DSUB-9_Pins_Horizontal_P2.77x2.84mm_EdgePinOffset4.94mm_Housed_MountingHolesOffset4.94mm"
+		(property "Footprint" "rev6:DSUB-9_Pins_Horizontal_P2.77x2.84mm_EdgePinOffset4.94mm_Housed_MountingHolesOffset4.94mm"
 			(at 74.93 504.19 0)
 			(hide yes)
 			(effects
@@ -11021,6 +11021,16 @@
 			(type default)
 		)
 		(uuid "3d505833-9237-5ba5-b50f-6880f14a1db5")
+	)
+	(label "kb_pwrled_bal"
+		(at 400.05 168.91 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "0f1e2d3c-4b5a-4697-8888-aaaabbbbcccc")
 	)
 	(label "kb_pwrled"
 		(at 381 168.91 180)
@@ -13057,7 +13067,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Connector_USB:USB_A_Molex_67643_Horizontal"
+		(property "Footprint" "rev6:USB_A_Molex_67643_Horizontal"
 			(at 320.04 424.18 0)
 			(hide yes)
 			(effects
