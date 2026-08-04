@@ -27,6 +27,9 @@ endif ()
 if (NOT DISPLAY_CONTROLLER)
 	set(DISPLAY_CONTROLLER DISPLAY_SSD1306)
 endif ()
+if (NOT (DISPLAY_CONTROLLER STREQUAL "DISPLAY_SSD1306" OR DISPLAY_CONTROLLER STREQUAL "DISPLAY_SH1106"))
+	message(FATAL_ERROR "DISPLAY_CONTROLLER must be DISPLAY_SSD1306 or DISPLAY_SH1106 (got '${DISPLAY_CONTROLLER}')")
+endif ()
 
 # use sdk from git submodule
 include(pico-sdk/pico_sdk_init.cmake)
@@ -56,6 +59,15 @@ endif ()
 option(DEBUG_HID_STATUS "Enable HID status debug output" OFF)
 if (DEBUG_HID_STATUS)
 	add_compile_definitions(DEBUG_HID_STATUS=1)
+endif ()
+
+# real amiga keyboard input timings (milliseconds), for bench tuning; see
+# src/platform/amiga/keyboard_recv.c for the defaults and what they mean
+if (KBDIN_RESET_HOLD_MS)
+	add_compile_definitions(KBDIN_RESET_HOLD_MS=${KBDIN_RESET_HOLD_MS})
+endif ()
+if (KBDIN_RESET_HOLD_MAX_MS)
+	add_compile_definitions(KBDIN_RESET_HOLD_MAX_MS=${KBDIN_RESET_HOLD_MAX_MS})
 endif ()
 
 # enable bluetooth hid host support when building for pico w
