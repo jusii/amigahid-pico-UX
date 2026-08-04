@@ -36,17 +36,20 @@
 // heartbeat so the two cannot be confused
 #define STATUS_LED_PAIRING_MS   120
 
-static bool source_present[STATUS_LED_SOURCE_COUNT];
+// the bluetooth call sites run from the cyw43 background interrupt (see
+// status_led.h), so everything a setter writes is volatile: the task must reread
+// it rather than cache a copy from before the preemption
+static volatile bool source_present[STATUS_LED_SOURCE_COUNT];
 
 static uint32_t heartbeat_since;
 static bool heartbeat_lit;
 
-static bool activity_pending;
-static uint32_t activity_since;
+static volatile bool activity_pending;
+static volatile uint32_t activity_since;
 
-static bool pairing_active;
-static uint32_t pairing_since;
-static bool pairing_lit;
+static volatile bool pairing_active;
+static volatile uint32_t pairing_since;
+static volatile bool pairing_lit;
 
 static inline bool status_led_any_source(void)
 {

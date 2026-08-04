@@ -16,6 +16,16 @@
  * every entry point here is core0-only: the call sites are the hid callbacks,
  * the bluetooth state changes and the main loop. core1 runs the quadrature
  * mouse output loop and must not call into this module.
+ *
+ * core0 is not the same as "never concurrent", though. pico_cyw43_arch_none
+ * builds btstack on the threadsafe-background async context, so the bluetooth
+ * call sites run from an interrupt handler which can preempt status_led_task()
+ * mid-update - the same reason bt_hid.c posts hid reports to a queue instead of
+ * bridging them inline. the setters therefore only latch single words and the
+ * task alone drives the pins, so the worst a preemption can do is paint one
+ * stale led frame which the next pass corrects. anything added here which
+ * accumulates across calls, or touches a pin from a setter, needs real mutual
+ * exclusion first.
  */
 
 #ifndef _UTIL_STATUS_LED_H
