@@ -3,7 +3,7 @@
 	(generator "amigahid-pico-rev6")
 	(generator_version "10.0")
 	(layer "F.Cu")
-	(descr "DIN 41524 5-pin 180 deg female PCB socket, right-angle THT, Kycon KCDX-5S-N (10 mm pitch, non-shielded). Amiga A2000 / A3000 / A3000T / A4000T keyboard connector: 1=KCLK 2=KDAT 3=NC 4=GND 5=+5V. Dimensions from the Kycon KCDX-5S-N engineering drawing rev A5 (08/06/18), Recommended PCB Layout (Bottom View), https://www.kycon.com/Pub_Eng_Draw/KCDX-5S-N.pdf : 7 x 1.40 mm dia holes; pins 3/2/1 at 12.50 mm from the socket edge on a 7.50 mm pitch; pins 5/4 at 15.00 mm from the socket edge, 10.00 mm apart; two mounting-tab holes (0.3 x 1.0 mm tabs, pad MP) at 3.00 mm from the socket edge, 10.00 mm apart; body 20.5 x 19.5 x 15.5 mm, socket flange 14.0 mm dia. Anchor (0,0) = centre of the socket edge / mating face plane - place it on the board edge line. Pad-to-drill sizes enlarged to 2.40 mm pads for hand soldering. VERIFY AGAINST A PHYSICAL SAMPLE BEFORE FAB.")
+	(descr "DIN 41524 5-pin 180 deg female PCB socket, right-angle THT, Kycon KCDX-5S-N (10 mm pitch, non-shielded). Amiga A2000 / A3000 / A3000T / A4000T keyboard connector: 1=KCLK 2=KDAT 3=NC 4=GND 5=+5V. Dimensions from the Kycon KCDX-5S-N engineering drawing rev A5 (08/06/18), Recommended PCB Layout (Bottom View), https://www.kycon.com/Pub_Eng_Draw/KCDX-5S-N.pdf : 7 x 1.40 mm dia holes; pins 1/2/3 at 12.50 mm from the socket edge on a 7.50 mm pitch; pins 4/5 at 15.00 mm from the socket edge, 10.00 mm apart; two mounting-tab holes (0.3 x 1.0 mm tabs, pad MP) at 3.00 mm from the socket edge, 10.00 mm apart; body 20.5 x 19.5 x 15.5 mm, socket flange 14.0 mm dia. MIRRORED: the Kycon drawing is a BOTTOM view, so the pad X coordinates are negated here to give the F.Cu top view. Sanity rule for this footprint (mating face at y=0, body at +y): an observer facing the socket sees left-to-right = DECREASING x, so the socket front view reads 3(+7.5) 5(+5) 2(0) 4(-5) 1(-7.5) - the DIN 41524 female order 3,5,2,4,1, which is the mirror of the male plug's 1,4,2,5,3. Anchor (0,0) = centre of the socket edge / mating face plane - place it on the board edge line. Pad-to-drill sizes enlarged to 2.40 mm pads for hand soldering. VERIFY AGAINST A PHYSICAL SAMPLE BEFORE FAB.")
 	(tags "connector din din5 41524 180deg socket receptacle right-angle tht amiga keyboard a2000 a3000 a4000t kycon kcdx-5s-n amigahid rev6")
 	(property "Reference" "REF**"
 		(at 0 -1.5 0)
@@ -172,8 +172,8 @@
 		(uuid "25273ff1-6474-4b11-b297-f841efbb1216")
 	)
 	(fp_circle
-		(center 9.6 12.5)
-		(end 9.85 12.5)
+		(center -9.6 12.5)
+		(end -9.85 12.5)
 		(stroke
 			(width 0.25)
 			(type solid)
@@ -183,8 +183,8 @@
 		(uuid "523ec5d1-7e3a-4324-a356-ae4ed6da08ff")
 	)
 	(fp_circle
-		(center 9.6 12.5)
-		(end 9.85 12.5)
+		(center -9.6 12.5)
+		(end -9.85 12.5)
 		(stroke
 			(width 0.1)
 			(type solid)
@@ -194,7 +194,7 @@
 		(uuid "a6bd3ed8-c448-46a8-a03b-9640cd1b7e10")
 	)
 	(pad "3" thru_hole circle
-		(at -7.5 12.5)
+		(at 7.5 12.5)
 		(size 2.4 2.4)
 		(drill 1.4)
 		(layers "*.Cu" "*.Mask")
@@ -210,7 +210,7 @@
 		(uuid "f000189d-c44e-4f2c-b533-988120b275f6")
 	)
 	(pad "1" thru_hole rect
-		(at 7.5 12.5)
+		(at -7.5 12.5)
 		(size 2.4 2.4)
 		(drill 1.4)
 		(layers "*.Cu" "*.Mask")
@@ -218,7 +218,7 @@
 		(uuid "45d30f36-b267-42d7-ac77-c295457a523f")
 	)
 	(pad "5" thru_hole circle
-		(at -5.0 15.0)
+		(at 5.0 15.0)
 		(size 2.4 2.4)
 		(drill 1.4)
 		(layers "*.Cu" "*.Mask")
@@ -226,7 +226,7 @@
 		(uuid "c9245e47-9f03-4e9d-bd90-8de9dbd1c65f")
 	)
 	(pad "4" thru_hole circle
-		(at 5.0 15.0)
+		(at -5.0 15.0)
 		(size 2.4 2.4)
 		(drill 1.4)
 		(layers "*.Cu" "*.Mask")

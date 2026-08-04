@@ -3,7 +3,7 @@
 	(generator "amigahid-pico-rev6")
 	(generator_version "10.0")
 	(layer "F.Cu")
-	(descr "Mini-DIN 6-pin (PS/2) female PCB socket, right-angle THT, Same Sky / CUI Devices MD-60S; hole grid also matches Kycon KMDGX-6S. Amiga A4000 keyboard connector, which uses the PS/2 pin positions exactly: 1=KDAT 3=GND 4=+5V 5=KCLK, 2 and 6 NC. Dimensions from the Same Sky MD-S series datasheet dated 09/12/2024, page 3, MD-60S Recommended PCB Layout / Top View / Date Codes after 03/03/2022, https://www.sameskydevices.com/product/resource/md-s.pdf : 6 x 0.9 +0.1/-0 mm dia holes, row 4/2/1/3 at 8.50 mm and row 6/5 at 11.00 mm from the mating face, outer columns 6.80 mm apart and the inner pair 2.60 mm apart, earth-terminal slot 2.2 x 0.7 mm on the centreline 4.70 mm from the face, body 14.0 x 12.4 x 12.8 mm. Cross-checked against Kycon KMDGX-xS-N rev B5 (03/28/18) 6-position Recommended PCB Layout (Bottom View), https://www.kycon.com/Pub_Eng_Draw/KMDGX-xS-N.pdf , which gives the same grid with 1.10 mm dia holes and a 2.30 mm dia locating boss in place of the earth tab (Kycon grid numbers map to standard pins as 1=1 2=2 3=3 5=4 6=5 8=6). Holes are drilled 1.10 mm and the centre feature is one plated 2.40 mm hole (pad SH) that clears both the CUI earth tab and the Kycon boss. Anchor (0,0) = centre of the mating face plane - place it on the board edge line. VERIFY AGAINST A PHYSICAL SAMPLE BEFORE FAB.")
+	(descr "Mini-DIN 6-pin (PS/2) female PCB socket, right-angle THT, Same Sky / CUI Devices MD-60S; hole grid also matches Kycon KMDGX-6S. Amiga A4000 keyboard connector, which uses the PS/2 pin positions exactly: 1=KDAT 3=GND 4=+5V 5=KCLK, 2 and 6 NC. Dimensions from the Same Sky MD-S series datasheet dated 09/12/2024, page 3, MD-60S Recommended PCB Layout / Top View / Date Codes after 03/03/2022, https://www.sameskydevices.com/product/resource/md-s.pdf : 6 x 0.9 +0.1/-0 mm dia holes, row 3/1/2/4 at 8.50 mm and row 5/6 at 11.00 mm from the mating face (X MIRRORED from the datasheet drawing: the Same Sky layout is drawn with the mating face at the BOTTOM of the page, i.e. rotated 180 deg from this footprint's face-at-y=0 orientation, which also reverses left/right. Sanity rule for this footprint (mating face at y=0, body at +y): an observer facing the socket sees left-to-right = DECREASING x, so the front view reads 6(+3.4) 5(-3.4) upper, 4(+3.4) 3(-3.4) middle, 2(+1.3) 1(-1.3) lower - the standard PS/2 female socket front view, which is the mirror of the plug), outer columns 6.80 mm apart and the inner pair 2.60 mm apart, earth-terminal slot 2.2 x 0.7 mm on the centreline 4.70 mm from the face, body 14.0 x 12.4 x 12.8 mm. Cross-checked against Kycon KMDGX-xS-N rev B5 (03/28/18) 6-position Recommended PCB Layout (Bottom View), https://www.kycon.com/Pub_Eng_Draw/KMDGX-xS-N.pdf , which gives the same grid with 1.10 mm dia holes and a 2.30 mm dia locating boss in place of the earth tab (Kycon grid numbers map to standard pins as 1=1 2=2 3=3 5=4 6=5 8=6). Holes are drilled 1.10 mm and the centre feature is one plated 2.40 mm hole (pad SH) that clears both the CUI earth tab and the Kycon boss. Anchor (0,0) = centre of the mating face plane - place it on the board edge line. VERIFY AGAINST A PHYSICAL SAMPLE BEFORE FAB.")
 	(tags "connector mini-din minidin md-60s kmdgx ps2 ps/2 6-pin socket receptacle right-angle tht amiga keyboard a4000 amigahid rev6")
 	(property "Reference" "REF**"
 		(at 0 -1.5 0)
@@ -152,8 +152,8 @@
 		(uuid "b9d30ebc-81c9-4d01-82f7-afdbaa5b2e16")
 	)
 	(fp_circle
-		(center 1.3 6.9)
-		(end 1.55 6.9)
+		(center -1.3 6.9)
+		(end -1.55 6.9)
 		(stroke
 			(width 0.25)
 			(type solid)
@@ -163,8 +163,8 @@
 		(uuid "fed818b4-986f-4e94-8a7c-7608baa60a6e")
 	)
 	(fp_circle
-		(center 1.3 6.9)
-		(end 1.55 6.9)
+		(center -1.3 6.9)
+		(end -1.55 6.9)
 		(stroke
 			(width 0.1)
 			(type solid)
@@ -174,7 +174,7 @@
 		(uuid "e74e4f50-d93f-40a1-ae8b-29cd82468ae6")
 	)
 	(pad "4" thru_hole circle
-		(at -3.4 8.5)
+		(at 3.4 8.5)
 		(size 1.8 1.8)
 		(drill 1.1)
 		(layers "*.Cu" "*.Mask")
@@ -182,7 +182,7 @@
 		(uuid "c2e42697-d552-4512-b01e-f4c15162797f")
 	)
 	(pad "2" thru_hole circle
-		(at -1.3 8.5)
+		(at 1.3 8.5)
 		(size 1.8 1.8)
 		(drill 1.1)
 		(layers "*.Cu" "*.Mask")
@@ -190,7 +190,7 @@
 		(uuid "e79b3537-ecd7-4ca5-8971-4179f2e0e227")
 	)
 	(pad "1" thru_hole rect
-		(at 1.3 8.5)
+		(at -1.3 8.5)
 		(size 1.8 1.8)
 		(drill 1.1)
 		(layers "*.Cu" "*.Mask")
@@ -198,7 +198,7 @@
 		(uuid "1f2962fd-8c59-4675-97b5-0b9f8ccf5eea")
 	)
 	(pad "3" thru_hole circle
-		(at 3.4 8.5)
+		(at -3.4 8.5)
 		(size 1.8 1.8)
 		(drill 1.1)
 		(layers "*.Cu" "*.Mask")
@@ -206,7 +206,7 @@
 		(uuid "9a5e9457-d897-4d48-9306-b25404032f3a")
 	)
 	(pad "6" thru_hole circle
-		(at -3.4 11.0)
+		(at 3.4 11.0)
 		(size 1.8 1.8)
 		(drill 1.1)
 		(layers "*.Cu" "*.Mask")
@@ -214,7 +214,7 @@
 		(uuid "ac39c1c8-c326-4bc9-9021-77e3680c3b60")
 	)
 	(pad "5" thru_hole circle
-		(at 3.4 11.0)
+		(at -3.4 11.0)
 		(size 1.8 1.8)
 		(drill 1.1)
 		(layers "*.Cu" "*.Mask")
