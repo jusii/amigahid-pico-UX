@@ -431,6 +431,18 @@ static void bt_classic_packet_handler(uint8_t packet_type, uint16_t channel, uin
             break;
         }
 
+        // the prompts above are put up by a request event, but nothing
+        // guarantees an hid connection follows one: an ssp attempt from a phone
+        // is auto-accepted and then simply never opens a channel. dismiss the
+        // prompt whenever a pairing attempt reaches any conclusion at all, or a
+        // stray one would sit on the display forever - and its blink would keep
+        // the activity led hostage with it.
+        case HCI_EVENT_SIMPLE_PAIRING_COMPLETE:
+        case HCI_EVENT_AUTHENTICATION_COMPLETE:
+        case HCI_EVENT_DISCONNECTION_COMPLETE:
+            bt_hid_passkey_done();
+            break;
+
         case HCI_EVENT_HID_META:
             switch (hci_event_hid_meta_get_subevent_code(packet)) {
                 case HID_SUBEVENT_INCOMING_CONNECTION:
