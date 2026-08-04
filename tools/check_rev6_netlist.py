@@ -981,7 +981,10 @@ def check_power(rep, nl, low_nets):
                         % (sorted(nl.net_raw.get(n, str(n)) for n in vnets), nl.net_raw.get(anet, anet)))
 
     # F2 / F3 branches
-    for fref, dest, rating in (("F2", "usba_5v", "500"), ("F3", "kbin_5v", "200")):
+    # F3 holds the keyboard-IN rail.  a serial amiga keyboard draws 100-150 mA,
+    # so the old 200 mA part sat at 50-75% of Ihold (and R1max 6.0 ohm); 500 mA
+    # keeps it under a third of hold with R1max 1.0 ohm.
+    for fref, dest, rating in (("F2", "usba_5v", "500"), ("F3", "kbin_5v", "500")):
         if not nl.has(fref):
             rep.chk("F.%s" % fref, False, "%s polyfuse (SYS5V -> %s) missing" % (fref, dest.upper()))
             continue
@@ -1032,6 +1035,19 @@ def check_power(rep, nl, low_nets):
             "no 100nF decoupling cap between SYS5V and GND")
     rep.chk("F.bulk_usba", bool(cap_between("usba_5v", 150e-6, at_least=True)),
             "no >=150uF bulk cap between USBA_5V and GND (usb host requirement)")
+    # keyboard-IN rail needs local bulk: a real amiga keyboard's cold-start
+    # inrush is otherwise pulled straight through F3.
+    rep.chk("F.bulk_kbin", bool(cap_between("kbin_5v", 10e-6, at_least=True)),
+            "no >=10uF local bulk between KBIN_5V and GND")
+    # the 220uF/150uF cans are polarised aluminium on a CP_Elec land: the
+    # symbol must be polarised too, or nothing catches a future reversal.
+    for ref in sorted(nl.comps):
+        if not ref.upper().startswith("C"):
+            continue
+        if "cp_elec" not in nl.comps[ref].get("footprint", "").lower():
+            continue
+        rep.chk("F.%s.polarised" % ref, "polarized" in nl.desc(ref) or "polarised" in nl.desc(ref),
+                "%s sits on a polarised CP_Elec land but uses an unpolarised symbol" % ref)
 
     # rails: membership and sources
     rep.chk("F.sys5v_exists", "sys5v" in nl.net_nodes, "no SYS5V net in the design")
@@ -1095,14 +1111,28 @@ def check_power(rep, nl, low_nets):
                     "%s is not in a GP%d -> 1k -> LED -> GND chain (anode on %s, cathode on %s)"
                     % (led, gp, nl.net_raw.get(anet, anet), nl.net_raw.get(knet, knet)))
 
-    # JP1 solder jumper: kb_pwrled <-> SYS5V
+    # JP1 solder jumper: kb_pwrled <-> R <-> SYS5V.  the resistor is not
+    # optional: closing a bare strap would put the whole of SYS5V across the
+    # keyboard's power LED (whose ballast lives on the amiga motherboard) and
+    # would back-feed a live A500's LED-drive node.
     if not nl.has("JP1"):
         rep.chk("F.JP1", False, "JP1 (kb_pwrled to SYS5V solder jumper) missing")
     else:
         nets = {nl.net_of("JP1", p) for p in nl.comp_pins.get("JP1", [])}
-        rep.chk("F.JP1", nets == {"kb_pwrled", "sys5v"},
-                "JP1 must bridge kb_pwrled and SYS5V, found %s"
+        rep.chk("F.JP1", "kb_pwrled" in nets and len(nets) == 2,
+                "JP1 must bridge kb_pwrled and the SYS5V ballast resistor, found %s"
                 % sorted(nl.net_raw.get(n, str(n)) for n in nets))
+        mid = next(iter(nets - {"kb_pwrled"}), None) if "kb_pwrled" in nets else None
+        ballast = nl.parts_between(mid, "sys5v",
+                                   lambda r: r.upper().startswith("R")) if mid else []
+        rep.chk("F.JP1.ballast", len(ballast) == 1,
+                "expected exactly one series resistor between JP1 and SYS5V, found %s"
+                % (ballast or "none"))
+        for r in ballast:
+            ohms = parse_res(nl.value(r))
+            rep.chk("F.JP1.ballast_value", ohms is not None and 220.0 <= ohms <= 2200.0,
+                    "%s (JP1 ballast) is %r; must be 220R-2k2 to hold the LED near 5-10 mA"
+                    % (r, nl.value(r)))
         if "jumper" not in nl.desc("JP1"):
             rep.warn("JP1 %r does not look like a solder jumper" % nl.value("JP1"))
 
@@ -1127,10 +1157,14 @@ def check_esd(rep, nl):
     rep.sec("G. esd clamps on amiga-facing lines")
     clamps = sorted(r for r in nl.comps
                     if re.search(ESD_PATTERN, nl.desc(r)) and "usblc6" not in nl.desc(r))
-    rep.chk("G.count", len(clamps) >= 19,
-            "expected >=19 ground-clamp TVS parts, found %d (%s)"
+    rep.chk("G.count", len(clamps) >= 21,
+            "expected >=21 ground-clamp TVS parts, found %d (%s)"
             % (len(clamps), ", ".join(clamps) if clamps else "none"))
-    for line in ESD_LINES:
+    # the 19 shifted lines plus the two copper-only LED pass-throughs, which
+    # run amiga connector -> board -> keyboard connector with nothing else on
+    # them.  the 5V pins deliberately get no clamp: a 5.0 V VRWM part sitting
+    # on a 5 V rail leaks, and G.no_rail_steering below forbids it outright.
+    for line in ESD_LINES + ["kb_pwrled", "kb_drvled"]:
         found = []
         for ref in clamps:
             nets = {nl.net_of(ref, p) for p in nl.comp_pins.get(ref, [])}

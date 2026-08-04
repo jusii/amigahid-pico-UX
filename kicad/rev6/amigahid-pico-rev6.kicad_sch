@@ -2508,6 +2508,183 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Device:C_Polarized"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0.254)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "C"
+				(at 0.635 2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "C_Polarized"
+				(at 0.635 -2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" ""
+				(at 0.9652 -3.81 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Polarized capacitor"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "cap capacitor"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "CP_*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "C_Polarized_0_1"
+				(rectangle
+					(start -2.286 0.508)
+					(end 2.286 1.016)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.778 2.286) (xy -0.762 2.286)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.27 2.794) (xy -1.27 1.778)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start 2.286 -0.508)
+					(end -2.286 -1.016)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+			)
+			(symbol "C_Polarized_1_1"
+				(pin passive line
+					(at 0 3.81 270)
+					(length 2.794)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -3.81 90)
+					(length 2.794)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Device:D_Schottky"
 			(pin_numbers
 				(hide yes)
@@ -10615,7 +10792,7 @@
 				)
 			)
 		)
-		(property "Value" "green"
+		(property "Value" "yellow-green"
 			(at 415.29 133.35 0)
 			(effects
 				(font
@@ -10650,7 +10827,16 @@
 				)
 			)
 		)
-		(property "LCSC" "C2297"
+		(property "LCSC" "C2289"
+			(at 415.29 130.81 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "KT-0603YG"
 			(at 415.29 130.81 0)
 			(hide yes)
 			(effects
@@ -10849,7 +11035,7 @@
 	(wire
 		(pts
 			(xy 398.78 168.91)
-			(xy 406.4 168.91)
+			(xy 402.59 168.91)
 		)
 		(stroke
 			(width 0)
@@ -10858,7 +11044,7 @@
 		(uuid "ce4d825f-3549-52e8-b817-1f1f37d7f859")
 	)
 	(label "SYS5V"
-		(at 406.4 168.91 0)
+		(at 414.02 168.91 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11354,7 +11540,7 @@
 				)
 			)
 		)
-		(property "Value" "200mA"
+		(property "Value" "500mA"
 			(at 419.1 270.51 0)
 			(effects
 				(font
@@ -11398,7 +11584,7 @@
 				)
 			)
 		)
-		(property "MPN" "MF-MSMF020-2"
+		(property "MPN" "MF-MSMF050-2"
 			(at 419.1 264.16 0)
 			(hide yes)
 			(effects
@@ -11457,7 +11643,7 @@
 		(uuid "38d8f141-248a-5e4d-b182-5ac754c50af0")
 	)
 	(symbol
-		(lib_id "Device:C")
+		(lib_id "Device:C_Polarized")
 		(at 314.96 320.04 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -11499,7 +11685,7 @@
 				)
 			)
 		)
-		(property "Description" "Unpolarized capacitor"
+		(property "Description" "Polarized capacitor"
 			(at 314.96 320.04 0)
 			(hide yes)
 			(effects
@@ -11928,7 +12114,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:C")
+		(lib_id "Device:C_Polarized")
 		(at 391.16 320.04 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -11944,7 +12130,7 @@
 				)
 			)
 		)
-		(property "Value" "220uF"
+		(property "Value" "150uF"
 			(at 391.16 326.39 0)
 			(effects
 				(font
@@ -11970,7 +12156,7 @@
 				)
 			)
 		)
-		(property "Description" "Unpolarized capacitor"
+		(property "Description" "Polarized capacitor"
 			(at 391.16 320.04 0)
 			(hide yes)
 			(effects
@@ -11979,7 +12165,7 @@
 				)
 			)
 		)
-		(property "LCSC" "TBD:220uF/16V SMD alu"
+		(property "LCSC" "TBD:150uF/16V SMD alu"
 			(at 391.16 320.04 0)
 			(hide yes)
 			(effects
@@ -13782,7 +13968,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C82227"
+		(property "LCSC" "C78284"
 			(at 469.9 111.76 0)
 			(hide yes)
 			(effects
@@ -14220,7 +14406,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C82227"
+		(property "LCSC" "C78284"
 			(at 516.89 111.76 0)
 			(hide yes)
 			(effects
@@ -14658,7 +14844,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C82227"
+		(property "LCSC" "C78284"
 			(at 563.88 111.76 0)
 			(hide yes)
 			(effects
@@ -15096,7 +15282,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C82227"
+		(property "LCSC" "C78284"
 			(at 610.87 111.76 0)
 			(hide yes)
 			(effects
@@ -15534,7 +15720,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C82227"
+		(property "LCSC" "C78284"
 			(at 657.86 111.76 0)
 			(hide yes)
 			(effects
@@ -15972,7 +16158,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C82227"
+		(property "LCSC" "C78284"
 			(at 469.9 177.8 0)
 			(hide yes)
 			(effects
@@ -16410,7 +16596,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C82227"
+		(property "LCSC" "C78284"
 			(at 516.89 177.8 0)
 			(hide yes)
 			(effects
@@ -16848,7 +17034,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C82227"
+		(property "LCSC" "C78284"
 			(at 563.88 177.8 0)
 			(hide yes)
 			(effects
@@ -17286,7 +17472,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C82227"
+		(property "LCSC" "C78284"
 			(at 610.87 177.8 0)
 			(hide yes)
 			(effects
@@ -17724,7 +17910,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C82227"
+		(property "LCSC" "C78284"
 			(at 657.86 177.8 0)
 			(hide yes)
 			(effects
@@ -18162,7 +18348,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C82227"
+		(property "LCSC" "C78284"
 			(at 469.9 243.84 0)
 			(hide yes)
 			(effects
@@ -18600,7 +18786,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C82227"
+		(property "LCSC" "C78284"
 			(at 516.89 243.84 0)
 			(hide yes)
 			(effects
@@ -19038,7 +19224,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C82227"
+		(property "LCSC" "C78284"
 			(at 563.88 243.84 0)
 			(hide yes)
 			(effects
@@ -19476,7 +19662,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C82227"
+		(property "LCSC" "C78284"
 			(at 610.87 243.84 0)
 			(hide yes)
 			(effects
@@ -19914,7 +20100,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C82227"
+		(property "LCSC" "C78284"
 			(at 657.86 243.84 0)
 			(hide yes)
 			(effects
@@ -20352,7 +20538,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C82227"
+		(property "LCSC" "C78284"
 			(at 469.9 309.88 0)
 			(hide yes)
 			(effects
@@ -20790,7 +20976,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C82227"
+		(property "LCSC" "C78284"
 			(at 516.89 309.88 0)
 			(hide yes)
 			(effects
@@ -21228,7 +21414,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C82227"
+		(property "LCSC" "C78284"
 			(at 563.88 309.88 0)
 			(hide yes)
 			(effects
@@ -21666,7 +21852,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C82227"
+		(property "LCSC" "C78284"
 			(at 610.87 309.88 0)
 			(hide yes)
 			(effects
@@ -22089,7 +22275,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-523"
+		(property "Footprint" "Diode_SMD:D_SOD-323"
 			(at 734.06 62.23 0)
 			(hide yes)
 			(effects
@@ -22098,7 +22284,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/PESD5V0S1BA_SER.pdf"
 			(at 734.06 62.23 0)
 			(hide yes)
 			(effects
@@ -22116,7 +22302,7 @@
 				)
 			)
 		)
-		(property "LCSC" "TBD:PESD5V0S1BA"
+		(property "LCSC" "C19224"
 			(at 734.06 62.23 0)
 			(hide yes)
 			(effects
@@ -22257,7 +22443,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-523"
+		(property "Footprint" "Diode_SMD:D_SOD-323"
 			(at 734.06 86.36 0)
 			(hide yes)
 			(effects
@@ -22266,7 +22452,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/PESD5V0S1BA_SER.pdf"
 			(at 734.06 86.36 0)
 			(hide yes)
 			(effects
@@ -22284,7 +22470,7 @@
 				)
 			)
 		)
-		(property "LCSC" "TBD:PESD5V0S1BA"
+		(property "LCSC" "C19224"
 			(at 734.06 86.36 0)
 			(hide yes)
 			(effects
@@ -22425,7 +22611,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-523"
+		(property "Footprint" "Diode_SMD:D_SOD-323"
 			(at 734.06 110.49 0)
 			(hide yes)
 			(effects
@@ -22434,7 +22620,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/PESD5V0S1BA_SER.pdf"
 			(at 734.06 110.49 0)
 			(hide yes)
 			(effects
@@ -22452,7 +22638,7 @@
 				)
 			)
 		)
-		(property "LCSC" "TBD:PESD5V0S1BA"
+		(property "LCSC" "C19224"
 			(at 734.06 110.49 0)
 			(hide yes)
 			(effects
@@ -22593,7 +22779,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-523"
+		(property "Footprint" "Diode_SMD:D_SOD-323"
 			(at 734.06 134.62 0)
 			(hide yes)
 			(effects
@@ -22602,7 +22788,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/PESD5V0S1BA_SER.pdf"
 			(at 734.06 134.62 0)
 			(hide yes)
 			(effects
@@ -22620,7 +22806,7 @@
 				)
 			)
 		)
-		(property "LCSC" "TBD:PESD5V0S1BA"
+		(property "LCSC" "C19224"
 			(at 734.06 134.62 0)
 			(hide yes)
 			(effects
@@ -22761,7 +22947,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-523"
+		(property "Footprint" "Diode_SMD:D_SOD-323"
 			(at 734.06 158.75 0)
 			(hide yes)
 			(effects
@@ -22770,7 +22956,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/PESD5V0S1BA_SER.pdf"
 			(at 734.06 158.75 0)
 			(hide yes)
 			(effects
@@ -22788,7 +22974,7 @@
 				)
 			)
 		)
-		(property "LCSC" "TBD:PESD5V0S1BA"
+		(property "LCSC" "C19224"
 			(at 734.06 158.75 0)
 			(hide yes)
 			(effects
@@ -22929,7 +23115,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-523"
+		(property "Footprint" "Diode_SMD:D_SOD-323"
 			(at 734.06 182.88 0)
 			(hide yes)
 			(effects
@@ -22938,7 +23124,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/PESD5V0S1BA_SER.pdf"
 			(at 734.06 182.88 0)
 			(hide yes)
 			(effects
@@ -22956,7 +23142,7 @@
 				)
 			)
 		)
-		(property "LCSC" "TBD:PESD5V0S1BA"
+		(property "LCSC" "C19224"
 			(at 734.06 182.88 0)
 			(hide yes)
 			(effects
@@ -23097,7 +23283,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-523"
+		(property "Footprint" "Diode_SMD:D_SOD-323"
 			(at 734.06 207.01 0)
 			(hide yes)
 			(effects
@@ -23106,7 +23292,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/PESD5V0S1BA_SER.pdf"
 			(at 734.06 207.01 0)
 			(hide yes)
 			(effects
@@ -23124,7 +23310,7 @@
 				)
 			)
 		)
-		(property "LCSC" "TBD:PESD5V0S1BA"
+		(property "LCSC" "C19224"
 			(at 734.06 207.01 0)
 			(hide yes)
 			(effects
@@ -23265,7 +23451,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-523"
+		(property "Footprint" "Diode_SMD:D_SOD-323"
 			(at 734.06 231.14 0)
 			(hide yes)
 			(effects
@@ -23274,7 +23460,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/PESD5V0S1BA_SER.pdf"
 			(at 734.06 231.14 0)
 			(hide yes)
 			(effects
@@ -23292,7 +23478,7 @@
 				)
 			)
 		)
-		(property "LCSC" "TBD:PESD5V0S1BA"
+		(property "LCSC" "C19224"
 			(at 734.06 231.14 0)
 			(hide yes)
 			(effects
@@ -23433,7 +23619,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-523"
+		(property "Footprint" "Diode_SMD:D_SOD-323"
 			(at 734.06 255.27 0)
 			(hide yes)
 			(effects
@@ -23442,7 +23628,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/PESD5V0S1BA_SER.pdf"
 			(at 734.06 255.27 0)
 			(hide yes)
 			(effects
@@ -23460,7 +23646,7 @@
 				)
 			)
 		)
-		(property "LCSC" "TBD:PESD5V0S1BA"
+		(property "LCSC" "C19224"
 			(at 734.06 255.27 0)
 			(hide yes)
 			(effects
@@ -23601,7 +23787,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-523"
+		(property "Footprint" "Diode_SMD:D_SOD-323"
 			(at 734.06 279.4 0)
 			(hide yes)
 			(effects
@@ -23610,7 +23796,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/PESD5V0S1BA_SER.pdf"
 			(at 734.06 279.4 0)
 			(hide yes)
 			(effects
@@ -23628,7 +23814,7 @@
 				)
 			)
 		)
-		(property "LCSC" "TBD:PESD5V0S1BA"
+		(property "LCSC" "C19224"
 			(at 734.06 279.4 0)
 			(hide yes)
 			(effects
@@ -23769,7 +23955,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-523"
+		(property "Footprint" "Diode_SMD:D_SOD-323"
 			(at 734.06 303.53 0)
 			(hide yes)
 			(effects
@@ -23778,7 +23964,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/PESD5V0S1BA_SER.pdf"
 			(at 734.06 303.53 0)
 			(hide yes)
 			(effects
@@ -23796,7 +23982,7 @@
 				)
 			)
 		)
-		(property "LCSC" "TBD:PESD5V0S1BA"
+		(property "LCSC" "C19224"
 			(at 734.06 303.53 0)
 			(hide yes)
 			(effects
@@ -23937,7 +24123,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-523"
+		(property "Footprint" "Diode_SMD:D_SOD-323"
 			(at 734.06 327.66 0)
 			(hide yes)
 			(effects
@@ -23946,7 +24132,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/PESD5V0S1BA_SER.pdf"
 			(at 734.06 327.66 0)
 			(hide yes)
 			(effects
@@ -23964,7 +24150,7 @@
 				)
 			)
 		)
-		(property "LCSC" "TBD:PESD5V0S1BA"
+		(property "LCSC" "C19224"
 			(at 734.06 327.66 0)
 			(hide yes)
 			(effects
@@ -24105,7 +24291,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-523"
+		(property "Footprint" "Diode_SMD:D_SOD-323"
 			(at 734.06 351.79 0)
 			(hide yes)
 			(effects
@@ -24114,7 +24300,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/PESD5V0S1BA_SER.pdf"
 			(at 734.06 351.79 0)
 			(hide yes)
 			(effects
@@ -24132,7 +24318,7 @@
 				)
 			)
 		)
-		(property "LCSC" "TBD:PESD5V0S1BA"
+		(property "LCSC" "C19224"
 			(at 734.06 351.79 0)
 			(hide yes)
 			(effects
@@ -24273,7 +24459,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-523"
+		(property "Footprint" "Diode_SMD:D_SOD-323"
 			(at 734.06 375.92 0)
 			(hide yes)
 			(effects
@@ -24282,7 +24468,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/PESD5V0S1BA_SER.pdf"
 			(at 734.06 375.92 0)
 			(hide yes)
 			(effects
@@ -24300,7 +24486,7 @@
 				)
 			)
 		)
-		(property "LCSC" "TBD:PESD5V0S1BA"
+		(property "LCSC" "C19224"
 			(at 734.06 375.92 0)
 			(hide yes)
 			(effects
@@ -24441,7 +24627,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-523"
+		(property "Footprint" "Diode_SMD:D_SOD-323"
 			(at 734.06 400.05 0)
 			(hide yes)
 			(effects
@@ -24450,7 +24636,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/PESD5V0S1BA_SER.pdf"
 			(at 734.06 400.05 0)
 			(hide yes)
 			(effects
@@ -24468,7 +24654,7 @@
 				)
 			)
 		)
-		(property "LCSC" "TBD:PESD5V0S1BA"
+		(property "LCSC" "C19224"
 			(at 734.06 400.05 0)
 			(hide yes)
 			(effects
@@ -24609,7 +24795,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-523"
+		(property "Footprint" "Diode_SMD:D_SOD-323"
 			(at 734.06 424.18 0)
 			(hide yes)
 			(effects
@@ -24618,7 +24804,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/PESD5V0S1BA_SER.pdf"
 			(at 734.06 424.18 0)
 			(hide yes)
 			(effects
@@ -24636,7 +24822,7 @@
 				)
 			)
 		)
-		(property "LCSC" "TBD:PESD5V0S1BA"
+		(property "LCSC" "C19224"
 			(at 734.06 424.18 0)
 			(hide yes)
 			(effects
@@ -24777,7 +24963,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-523"
+		(property "Footprint" "Diode_SMD:D_SOD-323"
 			(at 734.06 448.31 0)
 			(hide yes)
 			(effects
@@ -24786,7 +24972,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/PESD5V0S1BA_SER.pdf"
 			(at 734.06 448.31 0)
 			(hide yes)
 			(effects
@@ -24804,7 +24990,7 @@
 				)
 			)
 		)
-		(property "LCSC" "TBD:PESD5V0S1BA"
+		(property "LCSC" "C19224"
 			(at 734.06 448.31 0)
 			(hide yes)
 			(effects
@@ -24945,7 +25131,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-523"
+		(property "Footprint" "Diode_SMD:D_SOD-323"
 			(at 734.06 472.44 0)
 			(hide yes)
 			(effects
@@ -24954,7 +25140,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/PESD5V0S1BA_SER.pdf"
 			(at 734.06 472.44 0)
 			(hide yes)
 			(effects
@@ -24972,7 +25158,7 @@
 				)
 			)
 		)
-		(property "LCSC" "TBD:PESD5V0S1BA"
+		(property "LCSC" "C19224"
 			(at 734.06 472.44 0)
 			(hide yes)
 			(effects
@@ -25113,7 +25299,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-523"
+		(property "Footprint" "Diode_SMD:D_SOD-323"
 			(at 734.06 496.57 0)
 			(hide yes)
 			(effects
@@ -25122,7 +25308,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/PESD5V0S1BA_SER.pdf"
 			(at 734.06 496.57 0)
 			(hide yes)
 			(effects
@@ -25140,7 +25326,7 @@
 				)
 			)
 		)
-		(property "LCSC" "TBD:PESD5V0S1BA"
+		(property "LCSC" "C19224"
 			(at 734.06 496.57 0)
 			(hide yes)
 			(effects
@@ -25256,7 +25442,7 @@
 			(uuid "561a72b3-90bc-5f37-8bac-be4012429cb2")
 		)
 	)
-	(text "F1 sizing is provisional - confirm on the bench before fab (M5)."
+	(text "F1 is a PLACEHOLDER: measure full-stack current on the bench and re-size before fab (M4), not at bring-up. It must trip before any host-side fuse (A4000 keyboard port ~100 mA)."
 		(exclude_from_sim no)
 		(at 459.74 372.11 0)
 		(effects
@@ -25267,7 +25453,7 @@
 		)
 		(uuid "3c77908e-ffb2-5a95-8e2a-f43eee85eefc")
 	)
-	(text "LCSC codes marked TBD: polyfuses, bulk electrolytics and the TVS clamps are sourced at fab time (M4)."
+	(text "LCSC codes marked TBD: polyfuses and bulk electrolytics are sourced at fab time (M4). Everything else is pinned to a stocked part number."
 		(exclude_from_sim no)
 		(at 459.74 377.19 0)
 		(effects
@@ -25300,10 +25486,783 @@
 		)
 		(uuid "82fb159f-217f-5eff-b4dc-bcbc10a81ee8")
 	)
+	(text "JP1 is for STANDALONE use only - no amiga cabled to J1. R45 limits the strap to ~5 mA; the A500 drives kb_pwrled from its own side."
+		(exclude_from_sim no)
+		(at 459.74 392.43 0)
+		(effects
+			(font
+				(size 2 2)
+			)
+			(justify left bottom)
+		)
+		(uuid "c0de0900-1111-4222-8333-444455556666")
+	)
+	(text "Series drop on amiga power: SYS5V = AMIGA_5V - F1 (0.11-0.45 ohm) - D1 (SS34, ~0.35 V) ~= 4.5 V. USBA_5V is another F2 down: ~4.4-4.6 V at HID loads, under 4.4 V approaching 500 mA."
+		(exclude_from_sim no)
+		(at 459.74 397.51 0)
+		(effects
+			(font
+				(size 2 2)
+			)
+			(justify left bottom)
+		)
+		(uuid "c0de0901-1111-4222-8333-444455556666")
+	)
+	(text "=> USB-A is rated for low-power HID here. A powered hub or the J13 aux 5V input is REQUIRED for high-current devices. D1 stays an SS34: the LM66100 ideal-diode option was weighed and declined; revisit if M5 measures worse."
+		(exclude_from_sim no)
+		(at 459.74 402.59 0)
+		(effects
+			(font
+				(size 2 2)
+			)
+			(justify left bottom)
+		)
+		(uuid "c0de0902-1111-4222-8333-444455556666")
+	)
+	(text "Verify J9/J11 (DIN5), J10/J12 (mini-DIN6) and P1/P2 (DE9, EdgePinOffset4.94mm) against physical samples before fab - connector variant mismatch is the classic re-spin cause."
+		(exclude_from_sim no)
+		(at 459.74 407.67 0)
+		(effects
+			(font
+				(size 2 2)
+			)
+			(justify left bottom)
+		)
+		(uuid "c0de0903-1111-4222-8333-444455556666")
+	)
 	(sheet_instances
 		(path "/"
 			(page "1")
 		)
 	)
 	(embedded_fonts no)
+	(symbol
+		(lib_id "Device:R")
+		(at 406.4 168.91 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a11a0001-2222-4333-8444-555566667777")
+		(property "Reference" "R45"
+			(at 406.4 165.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "470"
+			(at 406.4 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 406.4 168.91 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 406.4 168.91 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 406.4 168.91 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C23179"
+			(at 406.4 168.91 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "a11a0001-2222-4333-8444-5555666677-p1")
+		)
+		(pin "2"
+			(uuid "a11a0001-2222-4333-8444-5555666677-p2")
+		)
+	)
+	(wire
+		(pts
+			(xy 410.21 168.91)
+			(xy 414.02 168.91)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a11a0002-2222-4333-8444-555566667777")
+	)
+	(symbol
+		(lib_id "Device:D_TVS")
+		(at 734.06 520.7 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a11a0010-2222-4333-8444-555566667777")
+		(property "Reference" "D29"
+			(at 734.06 514.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "PESD5V0S1BA"
+			(at 734.06 516.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Diode_SMD:D_SOD-323"
+			(at 734.06 520.7 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/PESD5V0S1BA_SER.pdf"
+			(at 734.06 520.7 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Bidirectional transient-voltage-suppression diode"
+			(at 734.06 520.7 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C19224"
+			(at 734.06 520.7 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "a11a0010-2222-4333-8444-5555666677-p1")
+		)
+		(pin "2"
+			(uuid "a11a0010-2222-4333-8444-5555666677-p2")
+		)
+	)
+	(wire
+		(pts
+			(xy 730.25 520.7)
+			(xy 725.17 520.7)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a11a0011-2222-4333-8444-555566667777")
+	)
+	(label "kb_pwrled"
+		(at 725.17 520.7 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "a11a0012-2222-4333-8444-555566667777")
+	)
+	(wire
+		(pts
+			(xy 737.87 520.7)
+			(xy 742.95 520.7)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a11a0013-2222-4333-8444-555566667777")
+	)
+	(wire
+		(pts
+			(xy 742.95 520.7)
+			(xy 742.95 525.78)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a11a0014-2222-4333-8444-555566667777")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 742.95 525.78 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a11a0015-2222-4333-8444-555566667777")
+		(property "Reference" "#PWR070"
+			(at 742.95 525.78 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 742.95 529.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 742.95 525.78 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 742.95 525.78 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 742.95 525.78 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "a11a0015-2222-4333-8444-5555666677-p1")
+		)
+	)
+	(symbol
+		(lib_id "Device:D_TVS")
+		(at 734.06 544.83 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a11a0020-2222-4333-8444-555566667777")
+		(property "Reference" "D30"
+			(at 734.06 538.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "PESD5V0S1BA"
+			(at 734.06 541.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Diode_SMD:D_SOD-323"
+			(at 734.06 544.83 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/PESD5V0S1BA_SER.pdf"
+			(at 734.06 544.83 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Bidirectional transient-voltage-suppression diode"
+			(at 734.06 544.83 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C19224"
+			(at 734.06 544.83 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "a11a0020-2222-4333-8444-5555666677-p1")
+		)
+		(pin "2"
+			(uuid "a11a0020-2222-4333-8444-5555666677-p2")
+		)
+	)
+	(wire
+		(pts
+			(xy 730.25 544.83)
+			(xy 725.17 544.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a11a0021-2222-4333-8444-555566667777")
+	)
+	(label "kb_drvled"
+		(at 725.17 544.83 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "a11a0022-2222-4333-8444-555566667777")
+	)
+	(wire
+		(pts
+			(xy 737.87 544.83)
+			(xy 742.95 544.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a11a0023-2222-4333-8444-555566667777")
+	)
+	(wire
+		(pts
+			(xy 742.95 544.83)
+			(xy 742.95 549.91)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a11a0024-2222-4333-8444-555566667777")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 742.95 549.91 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a11a0025-2222-4333-8444-555566667777")
+		(property "Reference" "#PWR071"
+			(at 742.95 549.91 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 742.95 553.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 742.95 549.91 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 742.95 549.91 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 742.95 549.91 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "a11a0025-2222-4333-8444-5555666677-p1")
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 431.8 320.04 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a11a0040-2222-4333-8444-555566667777")
+		(property "Reference" "C6"
+			(at 431.8 313.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10uF"
+			(at 431.8 326.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+			(at 431.8 320.04 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 431.8 320.04 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 431.8 320.04 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C15850"
+			(at 431.8 320.04 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "a11a0040-2222-4333-8444-5555666677-p1")
+		)
+		(pin "2"
+			(uuid "a11a0040-2222-4333-8444-5555666677-p2")
+		)
+	)
+	(wire
+		(pts
+			(xy 431.8 316.23)
+			(xy 431.8 308.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a11a0041-2222-4333-8444-555566667777")
+	)
+	(label "KBIN_5V"
+		(at 431.8 308.61 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "a11a0042-2222-4333-8444-555566667777")
+	)
+	(wire
+		(pts
+			(xy 431.8 323.85)
+			(xy 431.8 328.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a11a0043-2222-4333-8444-555566667777")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 431.8 328.93 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a11a0044-2222-4333-8444-555566667777")
+		(property "Reference" "#PWR072"
+			(at 431.8 328.93 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 431.8 332.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 431.8 328.93 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 431.8 328.93 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 431.8 328.93 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "a11a0044-2222-4333-8444-5555666677-p1")
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 447.04 320.04 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a11a0050-2222-4333-8444-555566667777")
+		(property "Reference" "C7"
+			(at 447.04 313.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "100nF"
+			(at 447.04 326.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+			(at 447.04 320.04 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 447.04 320.04 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 447.04 320.04 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C14663"
+			(at 447.04 320.04 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "a11a0050-2222-4333-8444-5555666677-p1")
+		)
+		(pin "2"
+			(uuid "a11a0050-2222-4333-8444-5555666677-p2")
+		)
+	)
+	(wire
+		(pts
+			(xy 447.04 316.23)
+			(xy 447.04 308.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a11a0051-2222-4333-8444-555566667777")
+	)
+	(label "KBIN_5V"
+		(at 447.04 308.61 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "a11a0052-2222-4333-8444-555566667777")
+	)
+	(wire
+		(pts
+			(xy 447.04 323.85)
+			(xy 447.04 328.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a11a0053-2222-4333-8444-555566667777")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 447.04 328.93 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a11a0054-2222-4333-8444-555566667777")
+		(property "Reference" "#PWR073"
+			(at 447.04 328.93 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 447.04 332.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 447.04 328.93 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 447.04 328.93 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 447.04 328.93 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "a11a0054-2222-4333-8444-5555666677-p1")
+		)
+	)
 )
