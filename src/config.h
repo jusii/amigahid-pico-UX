@@ -13,11 +13,6 @@
 #ifndef _CONFIG_H
 #define _CONFIG_H
 
-// the pico has an onboard led on gp25; use this as a default indicator
-#ifndef INDICATOR_LED
-#  define INDICATOR_LED PICO_DEFAULT_LED_PIN
-#endif
-
 #if defined(BOARD_HIDPICO_REV2)
 #  define HAS_SCREEN
 #  define HAS_KEYBOARD
@@ -71,8 +66,44 @@
 // controller port 2 is repurposed as a real amiga keyboard input. these are
 // the existing port 2 'h' and 'v' gpios (kicad nets: lcont2 h / lcont2 v),
 // reusing their bss138 level shifters. wired to a real keyboard, not the amiga.
+#    define HAS_KBD_IN
 #    define KBD_REAL_CLK 26 // port 2 'h' line -> real keyboard kclk (pico input)
 #    define KBD_REAL_DAT 27 // port 2 'v' line -> real keyboard kdat (bidirectional)
+#  endif
+#elif defined(BOARD_HIDPICO_REV6)
+#  define HAS_SCREEN
+#  define HAS_KEYBOARD
+#  define HAS_PORT1
+#  define HAS_PORT2
+
+#  define I2C_PORT      i2c1
+#  define I2C_PIN_SDA   2
+#  define I2C_PIN_SCL   3
+
+#  define KBD_AMIGA_RST 4
+#  define KBD_AMIGA_DAT 5
+#  define KBD_AMIGA_CLK 6
+
+#  define QM1_AMIGA_HQ  7
+#  define QM1_AMIGA_VQ  8
+#  define QM1_AMIGA_H   9
+#  define QM1_AMIGA_V   10
+#  define QM1_AMIGA_B1  11
+#  define QM1_AMIGA_B2  12
+#  define QM1_AMIGA_B3  13
+
+// rev6 has a dedicated real amiga keyboard input on its own level shifters,
+// so controller port 2 is left free for (future) joystick emulation.
+#  define HAS_KBD_IN
+#  define KBD_REAL_CLK  14 // real keyboard kclk (pico input)
+#  define KBD_REAL_DAT  15 // real keyboard kdat (bidirectional)
+
+#  define HAS_STATUS_LEDS
+#  define LED_STATUS1   16
+#  define LED_STATUS2   17
+
+#  ifdef PORT2_ROLE_KEYBOARD
+#    error PORT2_ROLE=KEYBOARD is not applicable to REV6 (keyboard input is dedicated)
 #  endif
 #else
 #  error Board type has not been defined; check cmake command line
