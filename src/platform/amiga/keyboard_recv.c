@@ -25,6 +25,12 @@
  * least 500ms, which on big-box machines (a2000/3000/4000) is the only reset
  * signalling there is. the state machine just sees silence, so the hold is
  * detected here by polling the line and forwarded with amiga_kbdin_reset().
+ *
+ * the hold also strands a sampled bit in the state machine, so the receiver is
+ * resynchronised after every reset. that is deliberately not tied to observing
+ * the hold: a ctrl-amiga-amiga typed on the real keyboard is recognised from the
+ * key events first, and asserting reset blocks the main loop for 500ms, so the
+ * hold can begin and end without a single poll landing on it.
  */
 
 #include "config.h"
@@ -52,6 +58,27 @@
 #  define KBDIN_RESET_HOLD_MS 250
 #endif
 
+// a keyboard which never lets go of kclk is unplugged, unpowered or broken
+// rather than asking for a reset. give up after this long: a reset also mutes
+// the usb and bluetooth paths, so an unbounded hold would take the whole adapter
+// down until it was power cycled.
+#ifndef KBDIN_RESET_HOLD_MAX_MS
+#  define KBDIN_RESET_HOLD_MAX_MS 3000
+#endif
+
+// the poll below runs from the main loop, which blocks for milliseconds at a
+// time whilst it clocks a keycode out to the amiga - and for half a second
+// whilst it asserts reset. two low samples either side of such a gap say nothing
+// about the line in between (kclk is low a third of the time whilst a keyboard
+// transmits), so only samples close enough together to count as one continuous
+// observation may extend a hold.
+#define KBDIN_POLL_GAP_MAX_MS 10
+
+// how long the wire must have been quiet before a pending resynchronisation is
+// safe to perform. restarting mid-byte would only move the misalignment, so wait
+// until nothing can be in flight; a byte plus its handshake is well under 1ms.
+#define KBDIN_RESYNC_IDLE_MS 5
+
 // pio is otherwise unused on this platform, so pio0 is ours to take
 static PIO recv_pio = pio0;
 static uint recv_sm;
@@ -64,7 +91,15 @@ static uint recv_offset;
 static bool clk_was_low = false;
 static bool clk_seen_idle = false;
 static uint32_t clk_low_since = 0;
+static uint32_t clk_last_poll = 0;
 static bool kbd_reset_held = false;
+static bool kbd_reset_abandoned = false;
+
+// resynchronisation tracking: armed when a reset begins, performed once the wire
+// has been quiet for long enough that restarting cannot eat a byte in flight.
+static bool reset_was_active = false;
+static bool resync_pending = false;
+static uint32_t recv_last_active = 0;
 
 void amiga_keyboard_recv_init(void)
 {
@@ -76,9 +111,11 @@ void amiga_keyboard_recv_init(void)
 
 /**
  * bring the receiver back to a known idle state. a kclk hold leaves a single
- * sampled bit stranded in the isr, so the frame that follows the hold would be
- * assembled from one stale bit plus seven new ones. restarting discards the
- * partial frame (and anything queued behind it) rather than injecting garbage.
+ * sampled bit stranded in the isr, so every frame after the hold would be
+ * assembled from one stale bit plus seven new ones, permanently one bit out.
+ * restarting discards the partial frame and realigns on the next byte - which is
+ * only true if nothing is on the wire at the time, hence the idle check in
+ * amiga_keyboard_recv_resync_task().
  */
 static void amiga_keyboard_recv_restart(void)
 {
@@ -94,41 +131,99 @@ static void amiga_keyboard_recv_restart(void)
 }
 
 /**
+ * perform a resynchronisation armed by a reset, once it is safe to do so.
+ */
+static void amiga_keyboard_recv_resync_task(uint32_t now)
+{
+    if (!resync_pending)
+        return;
+
+    if ((uint32_t)(now - recv_last_active) < (KBDIN_RESYNC_IDLE_MS * 1000u))
+        return;
+
+    if (!pio_sm_is_rx_fifo_empty(recv_pio, recv_sm))
+        return;
+
+    resync_pending = false;
+    amiga_keyboard_recv_restart();
+    amiga_kbdin_restarted();
+    ahprintf("[akb] real keyboard receiver resynchronised\n");
+}
+
+/**
  * watch kclk for the long low the keyboard uses to demand a hard reset.
  */
 static void amiga_keyboard_recv_reset_task(void)
 {
+    uint32_t now = time_us_32();
     bool clk_low = gpio_get(KBD_REAL_CLK) == 0;
+    bool continuous = (uint32_t)(now - clk_last_poll) <= (KBDIN_POLL_GAP_MAX_MS * 1000u);
+    bool reset_active = amiga_in_reset();
+
+    clk_last_poll = now;
+
+    // every hard reset ends with the keyboard holding kclk low and restarting
+    // itself, which strands a sampled bit in the state machine. arm the
+    // resynchronisation on the assertion edge rather than on seeing the hold
+    // end: whoever asserted, the hold can pass entirely inside the half second
+    // amiga_assert_reset() blocks the main loop for.
+    if (reset_active && !reset_was_active)
+        resync_pending = true;
+    reset_was_active = reset_active;
+
+    if (clk_low)
+        recv_last_active = now;
 
     if (!clk_low) {
         clk_was_low = false;
         clk_seen_idle = true;
 
-        if (!kbd_reset_held)
-            return;
+        if (kbd_reset_held) {
+            // keyboard has let go of kclk: bring the amiga back out of reset
+            kbd_reset_held = false;
+            kbd_reset_abandoned = false;
+            amiga_kbdin_reset(false);
+            ahprintf("[akb] real keyboard released reset\n");
+        }
 
-        // keyboard has let go of kclk: bring the amiga back out of reset and
-        // resynchronise the receiver before the keyboard resumes sending
-        kbd_reset_held = false;
-        amiga_kbdin_reset(false);
-        amiga_keyboard_recv_restart();
-        ahprintf("[akb] real keyboard released reset\n");
+        amiga_keyboard_recv_resync_task(now);
         return;
     }
 
-    if (!clk_was_low) {
+    if (kbd_reset_held) {
+        if (kbd_reset_abandoned)
+            return;
+
+        // nothing legitimate holds the line down this long; let the amiga run
+        // rather than leaving every input source muted behind a keyboard which
+        // is never going to let go
+        if ((uint32_t)(now - clk_low_since) >= (KBDIN_RESET_HOLD_MAX_MS * 1000u)) {
+            kbd_reset_abandoned = true;
+            amiga_kbdin_reset(false);
+            ahprintf("[akb] kclk still low; giving up on the reset\n");
+            return;
+        }
+
+        // re-offer the assert: it does nothing whilst another source owns the
+        // reset, but takes it over the moment that source lets go, so the amiga
+        // cannot come back up whilst the keyboard is still demanding a reset
+        amiga_kbdin_reset(true);
+        return;
+    }
+
+    if (!clk_was_low || !continuous) {
         clk_was_low = true;
-        clk_low_since = time_us_32();
+        clk_low_since = now;
         return;
     }
 
     // a line that has been low ever since boot is an unconnected or unpowered
     // input, not a reset request; holding the amiga down forever over that would
     // be a poor failure mode, so wait until we have seen the bus idle once
-    if (kbd_reset_held || !clk_seen_idle)
+    if (!clk_seen_idle)
         return;
 
-    if ((uint32_t)(time_us_32() - clk_low_since) < (KBDIN_RESET_HOLD_MS * 1000u))
+    if ((uint32_t)(now - clk_low_since) < (KBDIN_RESET_HOLD_MS * 1000u))
         return;
 
     kbd_reset_held = true;
@@ -140,6 +235,9 @@ void amiga_keyboard_recv_task(void)
 {
     while (!pio_sm_is_rx_fifo_empty(recv_pio, recv_sm)) {
         uint32_t word = pio_sm_get(recv_pio, recv_sm);
+
+        // the wire is busy; a resynchronisation has to wait for a gap
+        recv_last_active = time_us_32();
 
         // undo active-low sampling, then rotate right by one to recover the
         // original amiga code (bit 7 = up/down, bits 6..0 = keycode).

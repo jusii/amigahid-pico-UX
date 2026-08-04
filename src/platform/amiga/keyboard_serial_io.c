@@ -372,6 +372,47 @@ void amiga_send_rawkey(uint8_t keycode, bool up)
         amiga_queue_event(&event, false);
 }
 
+bool amiga_in_reset(void)
+{
+    return in_reset;
+}
+
+void amiga_kbdin_restarted(void)
+{
+    bool combo_held = rkb_ctrl && rkb_lamiga && rkb_ramiga;
+
+    /*
+     * The receiver has resynchronised, which only happens on the far side of a
+     * hard reset: partial frames were discarded, and a real keyboard resets its
+     * own mcu when it holds kclk low, coming back with an empty key state.
+     * Either way our idea of which keys are down is no longer trustworthy.
+     */
+    rkb_ctrl = false;
+    rkb_lamiga = false;
+    rkb_ramiga = false;
+
+    /*
+     * A ctrl-amiga-amiga tracked from the real keyboard holds the reset until
+     * the combo breaks, but a keyboard which has just restarted will never send
+     * the up codes for the keys it forgot. Release here or the amiga stays in
+     * reset - and with it every other input source - until the adapter is power
+     * cycled.
+     */
+    if (!combo_held || !local_reset_active)
+        return;
+
+    local_reset_active = false;
+    in_reset = false;
+
+    amiga_keyboard_event_t event = {
+        .type = AKB_EVENT_RELEASE_RESET,
+        .keycode = 0,
+        .up = false,
+    };
+
+    amiga_queue_event(&event, true);
+}
+
 void amiga_kbdin_reset(bool asserted)
 {
     amiga_keyboard_event_t event = {
@@ -383,7 +424,9 @@ void amiga_kbdin_reset(bool asserted)
     if (asserted) {
         // somebody is already holding the amiga in reset - the combo tracking
         // above (a real keyboard signals both ways for ctrl-amiga-amiga), or
-        // the amiga itself. one assert is enough; leave it to its owner.
+        // the amiga itself. one assert is enough; leave it to its owner. the
+        // caller re-offers for as long as the keyboard holds its clock line, so
+        // ownership still transfers here if that owner lets go first.
         if (in_reset)
             return;
 

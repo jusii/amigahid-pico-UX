@@ -69,6 +69,29 @@ void amiga_send(uint8_t keycode, bool up);
 void amiga_send_rawkey(uint8_t keycode, bool up);
 
 /**
+ * @brief Is the Amiga currently being held in reset?
+ *
+ * True whilst any source owns the reset: a ctrl-amiga-amiga from USB, Bluetooth
+ * or the real keyboard, a hold forwarded by amiga_kbdin_reset(), or a reset the
+ * Amiga asserted itself. Keycodes are discarded whilst this is true.
+ *
+ * @return true     A reset is in progress
+ * @return false    Normal operation
+ */
+bool amiga_in_reset(void);
+
+/**
+ * @brief Note that the real keyboard's receiver has been resynchronised
+ *
+ * Called once per reset, after keyboard_recv.c restarts its state machine. The
+ * keyboard resets its own mcu when it demands a hard reset, and the restart
+ * discards whatever was mid-flight, so the real keyboard's tracked key state is
+ * dropped here. A ctrl-amiga-amiga held from that keyboard is released too: the
+ * up codes which would otherwise end it are never going to arrive.
+ */
+void amiga_kbdin_restarted(void);
+
+/**
  * @brief Forward a hard reset demanded by a real Amiga keyboard
  *
  * A real keyboard asks for a hard reset by holding its clock line low for at
@@ -79,7 +102,9 @@ void amiga_send_rawkey(uint8_t keycode, bool up);
  * neither this nor the combo path can release the other's.
  *
  * Idempotent: asserting whilst any reset is already in progress does nothing,
- * and releasing does nothing unless this path is the one holding it.
+ * and releasing does nothing unless this path is the one holding it. The caller
+ * therefore keeps offering the assert for as long as the clock line is held, so
+ * that ownership transfers if the other source releases first.
  *
  * @param asserted  true to hold the Amiga in reset, false to release it
  */
