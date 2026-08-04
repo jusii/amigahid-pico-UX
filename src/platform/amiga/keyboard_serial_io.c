@@ -46,6 +46,12 @@ static bool rkb_ctrl = false;
 static bool rkb_lamiga = false;
 static bool rkb_ramiga = false;
 
+// a real keyboard also demands a hard reset out of band, by holding its clock
+// line low (see keyboard_recv.c). ownership of that reset is tracked apart from
+// local_reset_active so the combo path and the hold path cannot release each
+// other's reset; whichever got there first also holds it.
+static bool kbdin_reset_active = false;
+
 enum _keyboard_pin_state { LOW, HIGH };
 
 #define AKB_EVENT_QUEUE_DEPTH 64
@@ -357,6 +363,39 @@ void amiga_send_rawkey(uint8_t keycode, bool up)
         amiga_queue_event(&event, false);
 }
 
+void amiga_kbdin_reset(bool asserted)
+{
+    amiga_keyboard_event_t event = {
+        .type = AKB_EVENT_ASSERT_RESET,
+        .keycode = 0,
+        .up = false,
+    };
+
+    if (asserted) {
+        // somebody is already holding the amiga in reset - the combo tracking
+        // above (a real keyboard signals both ways for ctrl-amiga-amiga), or
+        // the amiga itself. one assert is enough; leave it to its owner.
+        if (in_reset)
+            return;
+
+        kbdin_reset_active = true;
+        in_reset = true;
+        amiga_clear_queued_events();
+        amiga_reset_stateful_flags();
+        amiga_queue_event(&event, true);
+        return;
+    }
+
+    // only release what we asserted
+    if (!kbdin_reset_active)
+        return;
+
+    kbdin_reset_active = false;
+    in_reset = false;
+    event.type = AKB_EVENT_RELEASE_RESET;
+    amiga_queue_event(&event, true);
+}
+
 void amiga_assert_reset()
 {
     // ahprintf("[akb] *** RESET BEING ASSERTED ***\n");
@@ -384,8 +423,10 @@ void amiga_service()
      * On A500-style hookups the reset line can be observed from the Pico
      * side when the Amiga asserts a hard reset externally. Big-box systems
      * generally do not wire this line, so this path is best-effort only.
+     * Skip it whilst we are driving the line ourselves, or we would mistake
+     * our own assertion for the amiga's.
      */
-    if (!local_reset_active) {
+    if (!local_reset_active && !kbdin_reset_active) {
         if (reset_line_low && !reset_line_was_low) {
             external_reset_active = true;
             in_reset = true;

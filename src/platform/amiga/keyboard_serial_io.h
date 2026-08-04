@@ -69,6 +69,23 @@ void amiga_send(uint8_t keycode, bool up);
 void amiga_send_rawkey(uint8_t keycode, bool up);
 
 /**
+ * @brief Forward a hard reset demanded by a real Amiga keyboard
+ *
+ * A real keyboard asks for a hard reset by holding its clock line low for at
+ * least 500ms; on big-box machines that is the only reset signalling there is,
+ * so keyboard_recv.c watches for the hold and calls this. Drives exactly what a
+ * held ctrl-amiga-amiga drives (/rst low plus the outgoing clock held low, which
+ * covers A500-style and big-box targets alike) but owns its reset separately, so
+ * neither this nor the combo path can release the other's.
+ *
+ * Idempotent: asserting whilst any reset is already in progress does nothing,
+ * and releasing does nothing unless this path is the one holding it.
+ *
+ * @param asserted  true to hold the Amiga in reset, false to release it
+ */
+void amiga_kbdin_reset(bool asserted);
+
+/**
  * @brief Assert the reset signal - Amiga will hold in reset until released
  */
 void amiga_assert_reset();
