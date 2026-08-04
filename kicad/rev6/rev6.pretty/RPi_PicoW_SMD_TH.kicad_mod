@@ -3,7 +3,7 @@
 	(generator "pcbnew")
 	(generator_version "10.0")
 	(layer "F.Cu")
-	(descr "Raspberry Pi Pico W / Pico 2 W dual-mount carrier footprint for amigahid-pico rev6: all 40 edge pads are BOTH plated through-holes on the 2x20 2.54 mm grid (x=+-8.89) AND elongated castellation pads (x=+-9.69, 3.2x1.6, overhanging the module edge at +-10.5) - socket the module on 2x20 female headers for proto, or solder it flat by its castellations for final builds. TP1..TP6 test points, 3-pin mid-board debug port as through-holes 41/42/43 (SWCLK/GND/SWDIO), 4 USB shell ground pads (SH), 2.4 GHz antenna + RF copper keep-out zones retained from the official land pattern. Edge/castellation/test-point/keep-out geometry from https://datasheets.raspberrypi.com/picow/pico-w-datasheet.pdf (via KiCad 10 Module:RaspberryPi_Pico_W_SMD); through-hole grid from KiCad 10 Module:RaspberryPi_Pico_Common_Unspecified. Reflow paste apertures deleted - the module is hand-soldered or socketed.")
+	(descr "Raspberry Pi Pico W / Pico 2 W dual-mount carrier footprint for amigahid-pico rev6: all 40 edge pads are BOTH plated through-holes on the 2x20 2.54 mm grid (x=+-8.89) AND elongated castellation pads (x=+-9.69, 3.2x1.6, overhanging the module edge at +-10.5) - socket the module on 2x20 female headers for proto, or solder it flat by its castellations for final builds. USB test points TP2 (USB_DM) / TP3 (USB_DP) at the module's stock coordinates (+-1.0, -24.3) but built as rev5's proven USB tap: 1.6 mm pads on 1.3 mm drills bisected by a 2.0 x 3.81 mm Edge.Cuts slot, giving two castellated half-vias you can solder to the module's underside test pads once it is mounted flat (the tap is non-functional when the module is socketed for proto - use a micro-USB OTG dongle then). Expect a copper-to-edge DRC exception on those two pads: that is what a castellation is. TP1/TP4/TP5/TP6 are deliberately ABSENT - the carrier has no net for them and netless copper trapped under a flat-soldered module cannot be reworked. 3-pin mid-board debug port as through-holes 41/42/43 (SWCLK/GND/SWDIO), 4 USB shell ground pads (SH), 2.4 GHz antenna + RF copper keep-out zones retained from the official land pattern. Edge/castellation/test-point/keep-out geometry from https://datasheets.raspberrypi.com/picow/pico-w-datasheet.pdf (via KiCad 10 Module:RaspberryPi_Pico_W_SMD); through-hole grid from KiCad 10 Module:RaspberryPi_Pico_Common_Unspecified. Reflow paste apertures deleted - the module is hand-soldered or socketed.")
 	(tags "module raspberry pi pico picow pico2w usb pcb swd antenna castellated tht smd dual-mount amigahid rev6")
 	(property "Reference" "REF**"
 		(at 11.7475 24.765 0)
@@ -893,6 +893,58 @@
 			)
 		)
 	)
+	(fp_line
+		(start -1.0 -26.97)
+		(end 1.0 -26.97)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "Edge.Cuts")
+		(uuid "3f1a0c21-9d0e-4f7a-8c11-5b1d4a7e6001")
+	)
+	(fp_line
+		(start 1.0 -26.97)
+		(end 1.0 -23.16)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "Edge.Cuts")
+		(uuid "3f1a0c21-9d0e-4f7a-8c11-5b1d4a7e6002")
+	)
+	(fp_line
+		(start 1.0 -23.16)
+		(end -1.0 -23.16)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "Edge.Cuts")
+		(uuid "3f1a0c21-9d0e-4f7a-8c11-5b1d4a7e6003")
+	)
+	(fp_line
+		(start -1.0 -23.16)
+		(end -1.0 -26.97)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "Edge.Cuts")
+		(uuid "3f1a0c21-9d0e-4f7a-8c11-5b1d4a7e6004")
+	)
+	(fp_text user "USB D+/D-"
+		(at 0 -28.4 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "3f1a0c21-9d0e-4f7a-8c11-5b1d4a7e6005")
+		(effects
+			(font
+				(size 0.8 0.8)
+				(thickness 0.12)
+			)
+		)
+	)
 	(pad "SH" smd oval
 		(at -2.725 -24)
 		(size 1.1 1.8)
@@ -1488,47 +1540,21 @@
 		(layers "*.Cu" "*.Mask")
 		(remove_unused_layers no)
 	)
-	(pad "TP1" smd roundrect
-		(at 0 -21)
-		(size 1.5 1.5)
-		(layers "F.Cu" "F.Mask" "F.Paste")
-		(roundrect_rratio 0.2)
-		(uuid "e25e8c15-3365-4273-acc4-42782bccaa80")
-	)
-	(pad "TP2" smd roundrect
+	(pad "TP2" thru_hole circle
 		(at 1 -24.3)
-		(size 1.5 1.5)
-		(layers "F.Cu" "F.Mask" "F.Paste")
-		(roundrect_rratio 0.2)
+		(size 1.6 1.6)
+		(drill 1.3)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
 		(uuid "1e91c76b-2561-4be0-8b94-e1928aa86129")
 	)
-	(pad "TP3" smd roundrect
+	(pad "TP3" thru_hole circle
 		(at -1 -24.3)
-		(size 1.5 1.5)
-		(layers "F.Cu" "F.Mask" "F.Paste")
-		(roundrect_rratio 0.2)
+		(size 1.6 1.6)
+		(drill 1.3)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
 		(uuid "97389c8b-aaa7-4834-a9af-ed0145ae6f3a")
-	)
-	(pad "TP4" smd roundrect
-		(at -2.5 -16)
-		(size 1.5 1.5)
-		(layers "F.Cu" "F.Mask" "F.Paste")
-		(roundrect_rratio 0.2)
-		(uuid "74dd815b-f5e8-482a-a457-e341e7e2739f")
-	)
-	(pad "TP5" smd roundrect
-		(at -2.5 -13.5)
-		(size 1.5 1.5)
-		(layers "F.Cu" "F.Mask" "F.Paste")
-		(roundrect_rratio 0.2)
-		(uuid "1d176dfc-1b65-4722-9b6e-92484b2d2b27")
-	)
-	(pad "TP6" smd roundrect
-		(at -2.5 -11)
-		(size 1.5 1.5)
-		(layers "F.Cu" "F.Mask" "F.Paste")
-		(roundrect_rratio 0.2)
-		(uuid "464b5738-8f9a-4a58-8fa2-18b436f5525a")
 	)
 (pad "1" thru_hole roundrect
 		(at -8.89 -24.13)
