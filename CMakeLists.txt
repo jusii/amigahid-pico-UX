@@ -10,11 +10,16 @@ if (NOT BOARD_TYPE)
 endif ()
 
 # which chip/pico board version is being used; unfortunately this can't be driven by config.h so needs to be set here
-if (NOT PICO_PLATFORM)
-	set(PICO_PLATFORM rp2040)
-endif ()
 if (NOT PICO_BOARD)
 	set(PICO_BOARD pico)
+endif ()
+if (NOT PICO_PLATFORM)
+	# the pico 2 family is rp2350; everything else defaults to rp2040
+	if (PICO_BOARD STREQUAL "pico2" OR PICO_BOARD STREQUAL "pico2_w")
+		set(PICO_PLATFORM rp2350-arm-s)
+	else ()
+		set(PICO_PLATFORM rp2040)
+	endif ()
 endif ()
 
 # DISPLAY_SSD1306 (0.96" panels, default) or
