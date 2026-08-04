@@ -7,9 +7,10 @@
  *
  * real amiga keyboard receive path.
  *
- * when built with PORT2_ROLE=KEYBOARD, controller port 2 is repurposed as an
- * input for a physically attached amiga keyboard (rather than the amiga). the
- * pico acts as the host: a real keyboard is the clock master and clocks out
+ * on boards with a keyboard input (HAS_KBD_IN: a dedicated pin pair on rev6, or
+ * controller port 2 repurposed on rev4 with PORT2_ROLE=KEYBOARD), a physically
+ * attached amiga keyboard can drive the amiga alongside the usb/bluetooth path.
+ * the pico acts as the host: a real keyboard is the clock master and clocks out
  * keycodes; a pio state machine samples them and drives the ~85us handshake
  * back autonomously. decoded keycodes are pushed into the same output queue the
  * usb/bluetooth path feeds, so the amiga-facing transmitter cannot tell a real
@@ -24,7 +25,7 @@
 #include "config.h"
 #include "keyboard_recv.h"
 
-#ifdef PORT2_ROLE_KEYBOARD
+#ifdef HAS_KBD_IN
 
 #include "keyboard.h"
 #include "keyboard_serial_io.h"
@@ -88,9 +89,9 @@ void amiga_keyboard_recv_task(void)
     }
 }
 
-#else // !PORT2_ROLE_KEYBOARD
+#else // !HAS_KBD_IN
 
 void amiga_keyboard_recv_init(void) {}
 void amiga_keyboard_recv_task(void) {}
 
-#endif // PORT2_ROLE_KEYBOARD
+#endif // HAS_KBD_IN

@@ -51,8 +51,8 @@ int main(void)
     // start amiga mouse emulation
     amiga_quad_mouse_init();
 
-#ifdef PORT2_ROLE_KEYBOARD
-    // start receiving from a real amiga keyboard attached to port 2
+#ifdef HAS_KBD_IN
+    // start receiving from a physically attached real amiga keyboard
     amiga_keyboard_recv_init();
 #endif
 
@@ -68,7 +68,7 @@ int main(void)
         bt_hid_task();
 #endif
 
-#ifdef PORT2_ROLE_KEYBOARD
+#ifdef HAS_KBD_IN
         // drain + inject any keycodes from the real amiga keyboard
         amiga_keyboard_recv_task();
 #endif
