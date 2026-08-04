@@ -18,6 +18,7 @@
 #include "platform/amiga/quad_mouse.h"
 #include "util/debug_cons.h"
 #include "util/output.h"
+#include "util/status_led.h"
 
 #include "config.h"
 #include "tusb_config.h"
@@ -34,6 +35,10 @@ int main(void)
 {
     // tinyusb board init; led, uart, button, usb
     board_init();
+
+    // status indicators come up first so a board with no display still shows
+    // signs of life whilst the rest of the stack initialises
+    status_led_init();
 
     // initialise the i2c controller and send the init sequence to the display
     disp_ssd_init();
@@ -75,6 +80,9 @@ int main(void)
 
         // amiga keyboard service routine
         amiga_service();
+
+        // advance the status indicators
+        status_led_task();
     }
 
     return 0;

@@ -1,1 +1,1 @@
-target_sources(amigahid-pico PRIVATE debug_cons.c output.c)
+target_sources(amigahid-pico PRIVATE debug_cons.c output.c status_led.c)

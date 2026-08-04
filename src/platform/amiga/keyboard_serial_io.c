@@ -15,6 +15,7 @@
 #include "usb_hid.h"
 #include "util/output.h"
 #include "util/debug_cons.h"
+#include "util/status_led.h"
 
 #include <stdint.h>
 #include <stdbool.h>
@@ -90,6 +91,14 @@ static void amiga_clear_queued_events(void)
 
 static bool amiga_queue_event(amiga_keyboard_event_t const *event, bool critical)
 {
+    /*
+     * Every keyboard-side event bound for the amiga passes through here - usb,
+     * bluetooth and the real keyboard alike - so this is where the activity
+     * indicator gets its pulse. Callers are all on core0; the queue is drained
+     * on core0 too, by amiga_service().
+     */
+    status_led_activity();
+
     if (queue_try_add(&keyboard_event_queue, event))
         return true;
 

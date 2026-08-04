@@ -24,6 +24,7 @@
 #include "tusb_config.h"
 #include "util/output.h"
 #include "util/debug_cons.h"
+#include "util/status_led.h"
 #include "usb_hid.h"
 
 // maximum number of reports per hid device
@@ -51,6 +52,7 @@ static usb_hid_slot_t hid_info[CFG_TUH_HID];
 
 static int8_t usb_hid_find_slot(uint8_t dev_addr, uint8_t instance);
 static int8_t usb_hid_allocate_slot(uint8_t dev_addr, uint8_t instance);
+static void usb_hid_update_status_leds(void);
 static void usb_hid_set_keyboard_leds(void *ctx, uint8_t led_report);
 static void process_report(uint8_t slot, uint8_t dev_addr, uint8_t instance, uint8_t const *report, uint16_t len);
 static void handle_event_keyboard(uint8_t slot, uint8_t dev_addr, uint8_t instance,
@@ -111,6 +113,23 @@ static int8_t usb_hid_allocate_slot(uint8_t dev_addr, uint8_t instance)
     return -1;
 }
 
+/**
+ * Tell the status indicators whether usb still has anything mounted.
+ */
+static void usb_hid_update_status_leds(void)
+{
+    bool present = false;
+
+    for (uint8_t slot = 0; slot < CFG_TUH_HID; slot++) {
+        if (hid_info[slot].mounted) {
+            present = true;
+            break;
+        }
+    }
+
+    status_led_source(STATUS_LED_SOURCE_USB, present);
+}
+
 static void usb_hid_set_keyboard_leds(void *ctx, uint8_t led_report)
 {
     usb_keyboard_led_ctx_t *led_ctx = (usb_keyboard_led_ctx_t *)ctx;
@@ -136,6 +155,7 @@ void tuh_hid_mount_cb(uint8_t dev_addr, uint8_t instance, uint8_t const *desc_re
     bool receive_ok;
 
     dbgcons_plug(hid_protocol_type[hid_protocol]);
+    usb_hid_update_status_leds();
 
     if (slot < 0)
         return;
@@ -176,6 +196,8 @@ void tuh_hid_umount_cb(uint8_t dev_addr, uint8_t instance)
         hid_info[slot].mounted = false;
         hid_info[slot].report_count = 0;
     }
+
+    usb_hid_update_status_leds();
 }
 
 /**

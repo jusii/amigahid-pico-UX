@@ -23,6 +23,7 @@
 #include "input_bridge_bt.h"
 #include "util/debug_cons.h"
 #include "util/output.h"
+#include "util/status_led.h"
 
 #define BT_HID_QUEUE_DEPTH 64
 #define BT_CLASSIC_DESCRIPTOR_STORAGE_SIZE 512
@@ -160,10 +161,15 @@ static char const *bt_le_state_name(bt_le_state_t state)
 static void bt_hid_update_status(void)
 {
     char linebuf[32] = "";
+    bool usable = (bt_classic_connected_count() > 0) || (bt_le_state == BT_LE_STATE_READY);
 
     snprintf(linebuf, sizeof(linebuf), "bt c%u le:%s",
         bt_classic_connected_count(), bt_le_state_name(bt_le_state));
     dbgcons_bt_status(linebuf);
+
+    // a link half way through pairing or service discovery cannot deliver
+    // keystrokes yet, so only count devices which are actually reporting
+    status_led_source(STATUS_LED_SOURCE_BT, usable);
 }
 
 static void bt_le_set_state(bt_le_state_t state)
@@ -172,12 +178,28 @@ static void bt_le_set_state(bt_le_state_t state)
     bt_hid_update_status();
 }
 
+/**
+ * Put a pairing prompt on display; the status leds follow it, so every prompt
+ * and every dismissal goes through this pair of helpers.
+ */
+static void bt_hid_passkey_prompt(char const *message)
+{
+    dbgcons_bt_passkey(message);
+    status_led_pairing(true);
+}
+
+static void bt_hid_passkey_done(void)
+{
+    dbgcons_bt_passkey_clear();
+    status_led_pairing(false);
+}
+
 static void bt_hid_show_passkey(char const *label, uint32_t passkey)
 {
     char linebuf[32] = "";
 
     snprintf(linebuf, sizeof(linebuf), "bt %s %06lu", label, (unsigned long)passkey);
-    dbgcons_bt_passkey(linebuf);
+    bt_hid_passkey_prompt(linebuf);
 }
 
 static inline uint8_t bt_classic_input_slot(uint8_t classic_slot)
@@ -394,7 +416,7 @@ static void bt_classic_packet_handler(uint8_t packet_type, uint16_t channel, uin
             bd_addr_t event_addr;
 
             hci_event_pin_code_request_get_bd_addr(packet, event_addr);
-            dbgcons_bt_passkey("bt pin 0000");
+            bt_hid_passkey_prompt("bt pin 0000");
             gap_pin_code_response(event_addr, "0000");
             break;
         }
@@ -425,7 +447,7 @@ static void bt_classic_packet_handler(uint8_t packet_type, uint16_t channel, uin
 
                     if (status != ERROR_CODE_SUCCESS) {
                         ahprintf("[bt] classic hid connect failed: 0x%02x\n", status);
-                        dbgcons_bt_passkey_clear();
+                        bt_hid_passkey_done();
                         break;
                     }
 
@@ -438,7 +460,7 @@ static void bt_classic_packet_handler(uint8_t packet_type, uint16_t channel, uin
                     bt_classic_connections[slot].in_use = true;
                     bt_classic_connections[slot].hid_cid = hid_cid;
                     bt_classic_connections[slot].protocol_mode = HID_PROTOCOL_MODE_REPORT;
-                    dbgcons_bt_passkey_clear();
+                    bt_hid_passkey_done();
                     bt_hid_update_status();
                     break;
                 }
@@ -466,7 +488,7 @@ static void bt_classic_packet_handler(uint8_t packet_type, uint16_t channel, uin
                 case HID_SUBEVENT_CONNECTION_CLOSED: {
                     int8_t slot = bt_classic_find_slot(hid_subevent_connection_closed_get_hid_cid(packet));
 
-                    dbgcons_bt_passkey_clear();
+                    bt_hid_passkey_done();
 
                     if (slot >= 0)
                         bt_classic_disconnect_slot((uint8_t)slot);
@@ -510,7 +532,7 @@ static void bt_le_start_scan(void)
         return;
 
     bt_le_clear_characteristics();
-    dbgcons_bt_passkey_clear();
+    bt_hid_passkey_done();
     bt_le_set_state(BT_LE_STATE_SCANNING);
     gap_set_scan_parameters(0, 48, 48);
     gap_start_scan();
@@ -519,7 +541,7 @@ static void bt_le_start_scan(void)
 static void bt_le_restart_scan(void)
 {
     bt_le_connection_handle = HCI_CON_HANDLE_INVALID;
-    dbgcons_bt_passkey_clear();
+    bt_hid_passkey_done();
     bt_le_set_state(BT_LE_STATE_OFF);
     bt_le_start_scan();
 }
@@ -541,7 +563,7 @@ static void bt_le_ready(void)
             bt_le_protocol_mode_characteristic.value_handle, 1, &boot_protocol_mode);
     }
 
-    dbgcons_bt_passkey_clear();
+    bt_hid_passkey_done();
     bt_le_set_state(BT_LE_STATE_READY);
 }
 

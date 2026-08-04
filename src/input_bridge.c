@@ -16,6 +16,7 @@
 #include "platform/amiga/keyboard_serial_io.h"
 #include "platform/amiga/quad_mouse.h"
 #include "util/debug_cons.h"
+#include "util/status_led.h"
 
 typedef struct
 {
@@ -165,6 +166,12 @@ void input_bridge_handle_mouse(uint8_t slot, hid_mouse_report_t const *report)
 
     if (report->wheel)
         amiga_quad_mouse_wheel(report->wheel);
+
+    // the keyboard path pulses the activity indicator as it queues; do the same
+    // for anything the mouse actually handed to the amiga (an idle report which
+    // moved nothing and changed no button is not activity)
+    if (report->x || report->y || report->wheel || (report->buttons != state->mouse.buttons))
+        status_led_activity();
 
     state->mouse = *report;
 }
