@@ -8,13 +8,6 @@ on:
       - 'rev6-firmware'
       - 'port2-real-keyboard'
       - 'board-rev6'
-  pull_request:
-    branches:
-      - 'development'
-      - 'devel/*'
-      - 'rev6-firmware'
-      - 'port2-real-keyboard'
-      - 'board-rev6'
   workflow_dispatch:
 
 jobs:
