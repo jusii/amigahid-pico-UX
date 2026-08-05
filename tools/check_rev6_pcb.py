@@ -1750,6 +1750,112 @@ def check_i_zones(rep: Report, model: Model, ol: Outline) -> None:
         "found %d GND vias" % len(vias),
     )
 
+    stranded = gnd_stranded(model)
+    rep.add(
+        "I5",
+        "every GND pad reaches the main ground island",
+        not stranded,
+        [
+            "%s is on a ground island of its own - the pour around it is not tied "
+            "to the plane by any via" % s
+            for s in stranded[:20]
+        ]
+        + (["... %d more" % (len(stranded) - 20)] if len(stranded) > 20 else []),
+    )
+
+
+class _UF:
+    def __init__(self) -> None:
+        self.p: Dict[object, object] = {}
+
+    def find(self, a: object) -> object:
+        self.p.setdefault(a, a)
+        while self.p[a] != a:
+            self.p[a] = self.p[self.p[a]]
+            a = self.p[a]
+        return a
+
+    def union(self, a: object, b: object) -> None:
+        ra, rb = self.find(a), self.find(b)
+        if ra != rb:
+            self.p[ra] = rb
+
+
+def gnd_stranded(model: Model) -> List[str]:
+    """GND pads that do not share an electrical island with the main plane.
+
+    I1-I4 only prove a pour exists, is filled, is big and has vias.  none of them
+    notices a fill region that missed its via: with a pour-only ground (this board
+    has no GND tracks at all) such a region is a dead node, and DRC reports it as an
+    anonymous 'Zone GND F.Cu <-> Zone GND B.Cu' line that names no part.  D23/D25/
+    D26/D29 shipped that way once already."""
+    items: List[Tuple[object, List[str], List[Poly], BBox, bool]] = []
+    # (key, layers, polygons, bbox, bridges_layers)
+    for z in model.zones:
+        if z.is_rule or z.net != GND_NET:
+            continue
+        for ln, polys in z.fills.items():
+            if ln not in model.copper_layers:
+                continue
+            for i, poly in enumerate(polys):
+                if len(poly) < 3:
+                    continue
+                items.append(
+                    (("fill", z.name, ln, i), [ln], [poly], poly_bbox(poly), False)
+                )
+    pad_keys: Dict[object, str] = {}
+    for f in model.fps:
+        for p in f.pads:
+            if p.net != GND_NET or not p.polys or not p.on_copper:
+                continue
+            key = ("pad", f.ref, p.number, id(p))
+            layers = [ln for ln in model.copper_layers]
+            if p.drill <= 0.0:
+                layers = ["B.Cu" if f.side == "bottom" else "F.Cu"]
+            items.append((key, layers, p.polys, bbox_union([poly_bbox(q) for q in p.polys]), p.drill > 0.0))
+            pad_keys[key] = "%s pad %s" % (f.ref, p.number)
+    for i, t in enumerate(model.tracks):
+        if t.net != GND_NET or not t.polys:
+            continue
+        layers = list(model.copper_layers) if t.is_via else [t.layer]
+        items.append((("trk", i), layers, t.polys, bbox_union([poly_bbox(q) for q in t.polys]), t.is_via))
+
+    uf = _UF()
+    # bucket by a coarse grid so this stays linear in practice
+    cell = 4.0
+    buckets: Dict[Tuple[str, int, int], List[int]] = {}
+    for idx, (_key, layers, _polys, box, _br) in enumerate(items):
+        for ln in layers:
+            for gx in range(int(box[0] // cell), int(box[2] // cell) + 1):
+                for gy in range(int(box[1] // cell), int(box[3] // cell) + 1):
+                    buckets.setdefault((ln, gx, gy), []).append(idx)
+    seen: set = set()
+    for members in buckets.values():
+        for a in range(len(members)):
+            for b in range(a + 1, len(members)):
+                ia, ib = members[a], members[b]
+                if ia == ib or (ia, ib) in seen:
+                    continue
+                seen.add((ia, ib))
+                ka, la, pa, ba, _ = items[ia]
+                kb, lb, pb, bb, _ = items[ib]
+                if not set(la) & set(lb):
+                    continue
+                if not bbox_overlap(ba, bb):
+                    continue
+                if any(polys_overlap(qa, qb) for qa in pa for qb in pb):
+                    uf.union(ka, kb)
+
+    sizes: Dict[object, float] = {}
+    for key, _layers, polys, _box, _br in items:
+        if key[0] != "fill":
+            continue
+        sizes[uf.find(key)] = sizes.get(uf.find(key), 0.0) + sum(poly_area(q) for q in polys)
+    if not sizes:
+        return []
+    main = max(sizes, key=lambda k: sizes[k])
+    return sorted(name for key, name in pad_keys.items() if uf.find(key) != main)
+
 
 def _git(root: str, *args: str) -> Tuple[int, str]:
     try:
