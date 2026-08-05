@@ -45,9 +45,19 @@ Follow `Machine/Coding Standards.md`. Load-bearing rule: **never mention AI tool
 
 - **rev5 KiCad files are never modified.** `kicad/amigahid-pico.*`, `kicad/fp-*`, `kicad/*.net` and `kicad/*.lib` stay byte-identical. The rev5 gerbers and JLCPCB fab outputs in the working tree stay uncommitted. `tools/check_rev6_netlist.py` enforces the rev5 guard (section I).
 - **rev6 board work IS committed**, on the `board-rev6` branch, entirely under `kicad/rev6/`. This supersedes the earlier "firmware only, never commit KiCad" rule, which applied before rev6 existed.
-- Before committing any rev6 schematic change, both gates must pass:
+- Before committing any rev6 **schematic** change, both gates must pass:
   - `kicad-cli sch erc kicad/rev6/amigahid-pico-rev6.kicad_sch --exit-code-violations` (zero violations)
   - `python3 tools/check_rev6_netlist.py` (RESULT: PASS)
+- Before committing any rev6 **board** change, all three gates must pass, in this order, after refilling zones:
+  - `kicad-cli pcb drc kicad/rev6/amigahid-pico-rev6.kicad_pcb --schematic-parity --severity-all --refill-zones --save-board --exit-code-violations` (zero violations **and** zero unconnected items)
+  - `python3 tools/check_rev6_pcb.py` (full PASS)
+  - `python3 tools/check_rev6_netlist.py` (RESULT: PASS)
+  A board commit that leaves any of these red must say so in the commit message and say why.
   Never relax a checker assertion to make it pass — re-target it to the new intended design instead, in the same commit.
+- `pcbnew.BOARD.Save()` silently drops `net_settings.netclass_patterns` from
+  `kicad/rev6/amigahid-pico-rev6.kicad_pro`, which loses the Power netclass and makes later DRC
+  runs measure against weaker defaults. After **any** pcbnew-scripted save, run
+  `git checkout -- kicad/rev6/amigahid-pico-rev6.kicad_pro` before running a gate; the file must
+  stay byte-identical to HEAD.
 - **Git: local commits only.** Never push, never open a PR, never touch remotes on this project without being asked in the same turn.
 

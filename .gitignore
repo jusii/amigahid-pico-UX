@@ -5,3 +5,4 @@
 /gerbers/
 kicad/amigahid-pico-backups/
 __pycache__/
+*.rpt
