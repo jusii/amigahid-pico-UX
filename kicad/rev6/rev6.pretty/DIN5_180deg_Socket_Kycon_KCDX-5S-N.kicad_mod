@@ -59,10 +59,10 @@
 	(attr through_hole)
 	(duplicate_pad_numbers_are_jumpers no)
 	(fp_line
-		(start -10.36 0.21)
+		(start -10.36 0.24)
 		(end -10.36 15.61)
 		(stroke
-			(width 0.12)
+			(width 0.15)
 			(type solid)
 		)
 		(layer "F.SilkS")
@@ -72,7 +72,7 @@
 		(start -10.36 15.61)
 		(end -6.4 15.61)
 		(stroke
-			(width 0.12)
+			(width 0.15)
 			(type solid)
 		)
 		(layer "F.SilkS")
@@ -82,7 +82,7 @@
 		(start -3.6 15.61)
 		(end 3.6 15.61)
 		(stroke
-			(width 0.12)
+			(width 0.15)
 			(type solid)
 		)
 		(layer "F.SilkS")
@@ -92,17 +92,17 @@
 		(start 6.4 15.61)
 		(end 10.36 15.61)
 		(stroke
-			(width 0.12)
+			(width 0.15)
 			(type solid)
 		)
 		(layer "F.SilkS")
 		(uuid "e535a9f6-1ae3-4de9-bb25-af5ac291365f")
 	)
 	(fp_line
-		(start 10.36 0.21)
+		(start 10.36 0.24)
 		(end 10.36 15.61)
 		(stroke
-			(width 0.12)
+			(width 0.15)
 			(type solid)
 		)
 		(layer "F.SilkS")

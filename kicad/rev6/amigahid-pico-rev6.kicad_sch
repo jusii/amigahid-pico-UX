@@ -11244,7 +11244,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C84140"
+		(property "Sourcing" "PLACEHOLDER - do not order assembled. Size F1 from a bench measurement of the full stack (plan predicts 350-500 mA), then hand-fit the 1812 part; MF-MSMF035/050/075 all share this land."
 			(at 314.96 264.16 0)
 			(hide yes)
 			(effects
@@ -25616,7 +25616,7 @@
 		)
 		(uuid "3c77908e-ffb2-5a95-8e2a-f43eee85eefc")
 	)
-	(text "LCSC codes marked TBD: polyfuses and bulk electrolytics are sourced at fab time (M4). Everything else is pinned to a stocked part number."
+	(text "Every part is pinned to a stocked LCSC code EXCEPT F1, which carries a Sourcing note instead of a code so it cannot be ordered assembled while its value is still a placeholder."
 		(exclude_from_sim no)
 		(at 459.74 377.19 0)
 		(effects

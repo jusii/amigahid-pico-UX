@@ -382,6 +382,11 @@ class Netlist(object):
             if not ref:
                 continue
             libsource = sx_child(comp, "libsource")
+            props = {}
+            for prop in sx_children(comp, "property"):
+                pname = sx_val(prop, "name")
+                if pname:
+                    props[pname] = sx_val(prop, "value", "") or ""
             self.comps[ref] = {
                 "ref": ref,
                 "value": sx_val(comp, "value", "") or "",
@@ -389,6 +394,7 @@ class Netlist(object):
                 "lib": (sx_val(libsource, "lib", "") if libsource else "") or "",
                 "part": (sx_val(libsource, "part", "") if libsource else "") or "",
                 "descr": (sx_val(libsource, "description", "") if libsource else "") or "",
+                "props": props,
             }
 
         self.aliases = {}        # normalised net -> {raw names}
@@ -435,6 +441,10 @@ class Netlist(object):
 
     def value(self, ref):
         return self.comps.get(ref, {}).get("value", "")
+
+    def field(self, ref, name):
+        """a schematic field (LCSC, MPN, Sourcing, ...) as exported into the netlist."""
+        return self.comps.get(ref, {}).get("props", {}).get(name, "")
 
     def find_pad(self, ref, want):
         """resolve a spec pin id to an actual pad name on ref."""
@@ -944,8 +954,20 @@ def check_power(rep, nl, low_nets):
         mid1 = next(iter(nets - {"amiga_5v"}), None) if "amiga_5v" in nets else None
         if "polyfuse" not in nl.desc("F1") and "fuse" not in nl.desc("F1"):
             rep.warn("F1 value %r does not look like a polyfuse" % nl.value("F1"))
-        if not re.search(r"750\s*ma|0\.?75\s*a", nl.value("F1"), re.I):
-            rep.warn("F1 value %r does not state the 750 mA hold current" % nl.value("F1"))
+        # F1 is the one part the design gates on a bench measurement: the schematic
+        # note requires it to trip before any host-side fuse, and the plan predicts
+        # 350-500 mA rather than the drafted 750 mA. So while the draft value is
+        # still in place F1 must NOT carry an LCSC code - without that, a placeholder
+        # ships as an assembled part. Re-size it and this check retires itself.
+        draft = bool(re.search(r"750\s*ma|0\.?75\s*a", nl.value("F1"), re.I))
+        lcsc = nl.field("F1", "LCSC")
+        sourcing = nl.field("F1", "Sourcing")
+        rep.chk("F.F1.placeholder",
+                (not draft) or (not lcsc and "placeholder" in sourcing.lower()),
+                "F1 still holds the draft %r value, so it must not be orderable as an "
+                "assembled part: either re-size it from the bench measurement, or drop "
+                "its LCSC code and mark it a PLACEHOLDER in Sourcing "
+                "(LCSC=%r Sourcing=%r)" % (nl.value("F1"), lcsc, sourcing))
 
     if not nl.has("D1"):
         rep.chk("F.D1", False, "D1 (SS34 schottky from the amiga rail) missing")
