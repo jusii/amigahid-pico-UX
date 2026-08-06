@@ -21,14 +21,18 @@ This project:
 
 ## Goals
 
-- Track local firmware changes vs upstream (`borb/amigahid-pico` on GitHub): what the `pr44` branch adds (Pico W Bluetooth HID host, TankMouse wheel support, OLED debug), what upstream `main` has.
+- Track local firmware changes vs upstream (`borb/amigahid-pico` on GitHub): what this fork adds on top of upstream PR #44 (Pico W Bluetooth HID host, TankMouse wheel support, OLED debug), what upstream `main` has.
 - Track the real Amiga keyboard passthrough work (`keyboard_recv` PIO module, `realkbd` firmware variant) so the physical Amiga keyboard can coexist with USB/BT input.
 - Know at any time what is local-only, what came from upstream PRs, and what might be worth sending upstream.
 
 ## Tooling and approach
 
 - **Firmware:** C on the pico-sdk (vendored at `./pico-sdk`), CMake build. Output is `.uf2` images flashed to the board over USB (BOOTSEL mass-storage mode).
-- **Hardware:** RP2040 carrier board (KiCad sources in `./kicad`, gerbers generated for JLCPCB). Bluetooth work requires a Pico W.
+- **Hardware:** RP2040 carrier board, gerbers generated for JLCPCB. rev5 KiCad sources are in `./kicad`
+  (frozen); the rev6 board lives in `./kicad/rev6/` with its own footprint library `rev6.pretty`.
+  Bluetooth work requires a Pico W.
+- **Board checkers:** `tools/check_rev6_netlist.py` (schematic/netlist + rev5 guard),
+  `tools/check_rev6_pcb.py` (board structure), `tools/check_rev6_style.py` (routing style).
 - **Target:** a real Commodore Amiga — keyboard connector and controller ports.
 
 ## Writing new information
@@ -52,6 +56,10 @@ Follow `Machine/Coding Standards.md`. Load-bearing rule: **never mention AI tool
   - `kicad-cli pcb drc kicad/rev6/amigahid-pico-rev6.kicad_pcb --schematic-parity --severity-all --refill-zones --save-board --exit-code-violations` (zero violations **and** zero unconnected items)
   - `python3 tools/check_rev6_pcb.py` (full PASS)
   - `python3 tools/check_rev6_netlist.py` (RESULT: PASS)
+  - `python3 tools/check_rev6_style.py` (S1-S3 hold) — **known red**: S1 (45-degree discipline) and
+    S2 (staircases) fail on the copper inherited from the rev6 re-lays; S3 (duplicate copper) is
+    green. Treat S1/S2 as advisory until the board is re-routed; every board commit must still
+    state their status.
   A board commit that leaves any of these red must say so in the commit message and say why.
   Never relax a checker assertion to make it pass — re-target it to the new intended design instead, in the same commit.
 - `pcbnew.BOARD.Save()` silently drops `net_settings.netclass_patterns` from
