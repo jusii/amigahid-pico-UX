@@ -2,9 +2,11 @@
 """structural checks for the rev6 board layout.
 
 these are the facts DRC cannot check: which edge a connector sits on, which
-side of the board a part is on, whether the antenna keep-out is really empty,
-whether the power nets got wide copper, whether the silkscreen says what it
-has to say, and whether the rev5 files are still untouched.
+side of the board a part is on, whether the usb-host bulk can is still parked
+against its connector, whether the antenna keep-out is really empty, whether
+the power nets got wide copper, whether the silkscreen says what it has to
+say, whether the rev5 files are still untouched - and whether DRC itself is
+still being run under the fab's rules rather than a rewritten project file.
 
 usage (/nas is mounted noexec, so always via the interpreter):
 
@@ -20,6 +22,7 @@ exit code 0 only when every assertion passes.
 
 from __future__ import annotations
 
+import json
 import math
 import os
 import re
@@ -85,6 +88,36 @@ BOTTOM_LOW_PROFILE = [
     r"LED_0603",
 ]
 
+# E5: the usb-host bulk can belongs at the connector it feeds.  the layout
+# brief wants C4's USBA_5V pad within 6 mm of J4 pin 1; the board is at
+# 10.29 mm and nothing here pretends otherwise - the measured distance is
+# printed on every run so the deviation cannot go unnoticed again.
+#
+# it is not a placement slip.  sweeping every courtyard-legal top-side
+# position for C4 - 0.05 mm grid, all four rotations, against all 31 top-side
+# courtyards - the 6.3 x 7.7 mm can gets no closer than 9.94 mm.  vacating U2's
+# spot buys 8.31 mm.  the ~4.8 mm the 6 mm figure implies needs the can at
+# x 46.8 turned 90 deg, which lands inside U1's courtyard: the pico module
+# would have to move about 4 mm north and take C1, J2, J3 and J7 with it, i.e.
+# re-lay the north half of the board.  a 6 mm assertion here could therefore
+# only ever be a red gate, so what is asserted instead is the part of the rule
+# the packages can actually honour, tightly:
+#
+#   - the can hugs the connector's north face and the USBLC6's east face,
+#     which is what "as close as it goes" means once the courtyards are fixed;
+#   - its + pad stays inside the sweep floor plus half a millimetre of slack.
+#
+# either half fails the moment someone drifts C4 back out into the board.
+BULK_REF = "C4"
+BULK_NET = "USBA_5V"
+BULK_HOST_REF = "J4"
+BULK_HOST_PAD = "1"
+BULK_BRIEF_DIST = 6.0      # what the layout brief asks for
+BULK_SWEEP_FLOOR = 9.94    # closest courtyard-legal top-side placement there is
+BULK_MAX_DIST = 10.5       # sweep floor + placement slack
+BULK_HUG_REFS = ["J4", "U2"]
+BULK_MAX_HUG = 0.5
+
 # F: power copper.  the four nets the layout brief names, plus the two other
 # members of the Power netclass that carry the same current (AMIGA_5V_FUSED is
 # the link between F1 and D1, AUX_5V the link between J13 and D2).  +3V3 is in
@@ -117,6 +150,60 @@ NETLIST_CHECKER = "tools/check_rev6_netlist.py"
 NETLIST_CHECKER_M2_COMMIT = "a8157a1488b7f999f503b56bbcc3e8b43e3758e2"
 NETLIST_CHECKER_M2_BLOB = "25e898a522b3b4de9b984858250184fa0d3b4604"
 
+# K: the rev6 project settings.  every scripted pcbnew save rewrites this file
+# behind our back - it drops the netclass patterns and resets constraints to
+# pcbnew's own defaults - so it has been restored by hand after each one, which
+# is exactly the sort of thing that survives right up until the once it does
+# not.  J4 catches the rewrite, K1-K3 catch the damage.
+#
+# the file deliberately no longer matches its M2 blob: f5677cb replaced rev5's
+# copied-over settings with jlcpcb's, before any routing, and every constraint
+# it touched moved in the tighter direction (min_copper_edge_clearance
+# 0.025 -> 0.3 being the one the brief names).  reverting to M2 would hand the
+# fab a board checked at 0.025 mm edge clearance, so what is pinned here is the
+# floor rather than the byte pattern: settings may be tightened, never loosened,
+# and the DRC gate may not be quietly defanged with exclusions or downgraded
+# severities.
+REV6_PROJECT = "kicad/rev6/amigahid-pico-rev6.kicad_pro"
+JLC_MIN_CONSTRAINTS = {
+    "min_clearance": 0.2,
+    "min_copper_edge_clearance": 0.3,
+    "min_hole_clearance": 0.5,
+    "min_hole_to_hole": 0.5,
+    "min_silk_clearance": 0.15,
+    "min_through_hole_diameter": 0.3,
+    "min_track_width": 0.2,
+    "min_via_annular_width": 0.13,
+    "min_via_diameter": 0.6,
+}
+POWER_NETCLASS = "Power"
+POWER_NETCLASS_MIN_WIDTH = 1.0
+POWER_NETCLASS_PATTERNS = [
+    "/AMIGA_5V", "/AMIGA_5V_FUSED", "/SYS5V", "/USBA_5V", "/KBIN_5V", "/AUX_5V", "+3V3",
+]
+# the violations this board is signed off on never having.  a "0 violations"
+# DRC run means nothing if any of these has been turned down to warning or
+# ignore, so the gate reads the severities rather than trusting the count.
+NEVER_DOWNGRADE = [
+    "annular_width",
+    "clearance",
+    "copper_edge_clearance",
+    "courtyards_overlap",
+    "drill_out_of_range",
+    "hole_clearance",
+    "hole_near_hole",
+    "invalid_outline",
+    "items_not_allowed",
+    "malformed_courtyard",
+    "padstack",
+    "shorting_items",
+    "through_hole_pad_without_hole",
+    "track_width",
+    "tracks_crossing",
+    "unconnected_items",
+    "zones_intersect",
+]
+
 # --------------------------------------------------------------------------
 # geometry
 # --------------------------------------------------------------------------
@@ -141,6 +228,13 @@ def bbox_overlap(a: BBox, b: BBox, slack: float = 0.0) -> bool:
     return not (
         a[2] + slack < b[0] or b[2] + slack < a[0] or a[3] + slack < b[1] or b[3] + slack < a[1]
     )
+
+
+def bbox_gap(a: BBox, b: BBox) -> float:
+    """closest approach of two boxes; 0 when they touch or overlap."""
+    dx = max(0.0, a[0] - b[2], b[0] - a[2])
+    dy = max(0.0, a[1] - b[3], b[1] - a[3])
+    return math.hypot(dx, dy)
 
 
 def bbox_inside(inner: BBox, outer: BBox, slack: float = 1e-6) -> bool:
@@ -1615,6 +1709,70 @@ def check_e_sides(rep: Report, model: Model) -> None:
         sorted(bad),
     )
 
+    check_e5_bulk(rep, model)
+
+
+def check_e5_bulk(rep: Report, model: Model) -> None:
+    """the usb-host bulk can sits as close to the VBUS pin as the packages allow."""
+    title = "%s (usb-host bulk) is pinned to %s pin %s" % (BULK_REF, BULK_HOST_REF, BULK_HOST_PAD)
+    cap = model.by_ref(BULK_REF)
+    host = model.by_ref(BULK_HOST_REF)
+    missing = [r for r, f in ((BULK_REF, cap), (BULK_HOST_REF, host)) if f is None]
+    if missing:
+        rep.check("E5", title, False, "%s missing from the board" % ", ".join(missing))
+        return
+
+    plus = [p for p in cap.pads if p.net == BULK_NET]
+    vbus = [p for p in host.pads if p.number == BULK_HOST_PAD]
+    if not plus or not vbus:
+        rep.check(
+            "E5", title, False,
+            "%s has no %s pad" % (BULK_REF, BULK_NET) if not plus
+            else "%s has no pad %s" % (BULK_HOST_REF, BULK_HOST_PAD),
+        )
+        return
+    if vbus[0].net != BULK_NET:
+        rep.check(
+            "E5", title, False,
+            "%s pin %s is on %s, not %s - the bulk cap is measured against the wrong pin"
+            % (BULK_HOST_REF, BULK_HOST_PAD, vbus[0].net or "no net", BULK_NET),
+        )
+        return
+
+    dist = min(math.dist(p.pos, vbus[0].pos) for p in plus)
+    bad = []
+    if dist > BULK_MAX_DIST + 1e-6:
+        bad.append(
+            "%s pad is %.2f mm from %s pin %s, past the %g mm ceiling - the sweep floor is "
+            "%.2f mm, so this is drift, not geometry"
+            % (BULK_NET, dist, BULK_HOST_REF, BULK_HOST_PAD, BULK_MAX_DIST, BULK_SWEEP_FLOOR)
+        )
+
+    # hugging: with the courtyards fixed, "as close as it goes" is measurable
+    # as the can touching the two parts that box it in.
+    for ref in BULK_HUG_REFS:
+        other = model.by_ref(ref)
+        if other is None:
+            bad.append("%s is missing, so %s has nothing to hug" % (ref, BULK_REF))
+            continue
+        if cap.courtyard is None or other.courtyard is None:
+            bad.append("%s or %s has no courtyard to measure against" % (BULK_REF, ref))
+            continue
+        gap = bbox_gap(cap.courtyard, other.courtyard)
+        if gap > BULK_MAX_HUG + 1e-6:
+            bad.append(
+                "%s stands %.2f mm off %s (limit %g mm) - it has been let drift off the "
+                "connector corner" % (BULK_REF, gap, ref, BULK_MAX_HUG)
+            )
+
+    rep.add(
+        "E5",
+        "%s: %s pad %.2f mm from pin %s (brief asks %g, closest legal is %.2f)"
+        % (title, BULK_NET, dist, BULK_HOST_PAD, BULK_BRIEF_DIST, BULK_SWEEP_FLOOR),
+        not bad,
+        bad,
+    )
+
 
 def net_tracks(model: Model, net: str) -> List[Track]:
     return [t for t in model.tracks if t.net == net]
@@ -1912,6 +2070,7 @@ def check_j_untouched(rep: Report, root: str) -> None:
         rep.check("J1", "rev5 KiCad files unmodified in the working tree", False, "not a git checkout: %s" % out)
         rep.check("J2", "rev5 KiCad files unchanged since the fork point", False, "not a git checkout")
         rep.check("J3", "%s unmodified since M2" % NETLIST_CHECKER, False, "not a git checkout")
+        rep.check("J4", "%s unmodified in the working tree" % REV6_PROJECT, False, "not a git checkout")
         return
 
     rc, out = _git(root, "ls-files", "-m", "-o", "--exclude-standard", "--", "kicad/")
@@ -1962,6 +2121,92 @@ def check_j_untouched(rep: Report, root: str) -> None:
         )
     rep.add("J3", "%s unmodified since M2" % NETLIST_CHECKER, not bad, bad)
 
+    # every scripted pcbnew save rewrites the project file, so a dirty .kicad_pro
+    # here means the gates below are being run against settings nobody chose.
+    rc, out = _git(root, "ls-files", "-m", "--", REV6_PROJECT)
+    dirty = [l for l in out.splitlines() if l.strip()]
+    rc, staged = _git(root, "diff", "--cached", "--name-only", "--", REV6_PROJECT)
+    dirty += [l for l in staged.splitlines() if l.strip()]
+    rep.add(
+        "J4",
+        "%s unmodified in the working tree" % REV6_PROJECT,
+        not dirty,
+        ["%s differs from HEAD - a scripted save has rewritten it; restore it before "
+         "trusting DRC" % d for d in sorted(set(dirty))],
+    )
+
+
+def check_k_project(rep: Report, root: str) -> None:
+    """the fab rules and the DRC severities the board was signed off under."""
+    path = os.path.join(root, REV6_PROJECT)
+    try:
+        with open(path) as fh:
+            proj = json.load(fh)
+    except (OSError, ValueError) as exc:
+        for ident, what in (
+            ("K1", "rev6 constraints meet the jlcpcb floors"),
+            ("K2", "the %s netclass carries the supply rails" % POWER_NETCLASS),
+            ("K3", "no DRC rule is excluded or downgraded"),
+        ):
+            rep.check(ident, what, False, "cannot read %s: %s" % (REV6_PROJECT, exc))
+        return
+
+    board = proj.get("board") or {}
+    rules = (board.get("design_settings") or {}).get("rules") or {}
+    bad = []
+    for key in sorted(JLC_MIN_CONSTRAINTS):
+        floor = JLC_MIN_CONSTRAINTS[key]
+        val = rules.get(key)
+        if val is None:
+            bad.append("%s is unset - pcbnew has rewritten the constraints" % key)
+        elif float(val) < floor - 1e-9:
+            bad.append("%s is %g mm, under the %g mm fab floor" % (key, float(val), floor))
+    rep.add(
+        "K1",
+        "rev6 constraints meet the jlcpcb floors (%s)"
+        % ", ".join("%s>=%g" % (k, JLC_MIN_CONSTRAINTS[k]) for k in sorted(JLC_MIN_CONSTRAINTS)),
+        not bad,
+        bad,
+    )
+
+    nets = proj.get("net_settings") or {}
+    classes = {c.get("name"): c for c in (nets.get("classes") or [])}
+    bad = []
+    pcls = classes.get(POWER_NETCLASS)
+    if pcls is None:
+        bad.append("no %r netclass - the supply rails are back on Default" % POWER_NETCLASS)
+    else:
+        width = float(pcls.get("track_width") or 0.0)
+        if width < POWER_NETCLASS_MIN_WIDTH - 1e-9:
+            bad.append(
+                "%s track_width is %g mm, under the %g mm the brief asks of the rails"
+                % (POWER_NETCLASS, width, POWER_NETCLASS_MIN_WIDTH)
+            )
+    assigned = {
+        p.get("pattern") for p in (nets.get("netclass_patterns") or [])
+        if p.get("netclass") == POWER_NETCLASS
+    }
+    orphans = [p for p in POWER_NETCLASS_PATTERNS if p not in assigned]
+    if orphans:
+        bad.append("%s is not assigned to %s" % (POWER_NETCLASS, ", ".join(orphans)))
+    rep.add("K2", "the %s netclass carries the supply rails" % POWER_NETCLASS, not bad, bad)
+
+    bad = []
+    excluded = board.get("drc_exclusions") or []
+    if excluded:
+        bad.append(
+            "%d DRC exclusion(s) - a clean run means nothing while violations are being "
+            "waived: %s" % (len(excluded), "; ".join(str(e) for e in excluded[:5]))
+        )
+    severities = (board.get("design_settings") or {}).get("rule_severities") or {}
+    for rule in NEVER_DOWNGRADE:
+        sev = severities.get(rule)
+        if sev is None:
+            bad.append("%s has no severity set" % rule)
+        elif sev != "error":
+            bad.append("%s is %r, and has to stay an error" % (rule, sev))
+    rep.add("K3", "no DRC rule is excluded or downgraded", not bad, bad)
+
 
 # --------------------------------------------------------------------------
 # main
@@ -2011,6 +2256,7 @@ def main(argv: List[str]) -> int:
         rep.add("J0", "git checks skipped by REV6_SKIP_GIT", True)
     else:
         check_j_untouched(rep, root)
+    check_k_project(rep, root)
 
     rep.emit()
     print()
