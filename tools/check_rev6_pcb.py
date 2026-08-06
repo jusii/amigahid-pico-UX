@@ -147,8 +147,14 @@ GND_MIN_VIAS = 15
 REV5_GLOB_PREFIX = "kicad/amigahid-pico."
 REV5_BASELINE_COMMIT = "d159951afc386a7c4ad0004cd801c12b701aa219"
 NETLIST_CHECKER = "tools/check_rev6_netlist.py"
-NETLIST_CHECKER_M2_COMMIT = "a8157a1488b7f999f503b56bbcc3e8b43e3758e2"
-NETLIST_CHECKER_M2_BLOB = "25e898a522b3b4de9b984858250184fa0d3b4604"
+# re-baselined once, at 84f25982: the netlist checker's F1 rule was
+# RE-TARGETED, not relaxed.  it used to warn when F1's value was *not* 750 mA -
+# which blessed the placeholder the design gates on - and now asserts that while
+# the draft value stands F1 must carry no LCSC code, so the placeholder cannot be
+# ordered as an assembled part.  that is one assertion more than before (356 -> 357).
+# any further move of this pin has to come with the same kind of justification.
+NETLIST_CHECKER_M2_COMMIT = "84f2598220b00b59e1f444ac4af5ddd74ca22a57"
+NETLIST_CHECKER_M2_BLOB = "7fe30582ad568d91c186f5d4ae4fe57f10339c6d"
 
 # K: the rev6 project settings.  every scripted pcbnew save rewrites this file
 # behind our back - it drops the netclass patterns and resets constraints to
