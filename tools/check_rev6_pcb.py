@@ -70,6 +70,20 @@ TOP_REFS = [
 ]
 BOTTOM_REFS = ["Q%d" % n for n in range(1, 20)] + ["R%d" % n for n in range(1, 39)]
 EXPECTED_BSS138 = 19
+# the board has to sit near-flat on its bottom, so the bottom side may only
+# carry packages that stand about a millimetre off the copper.  this is a
+# whitelist on purpose: a can, a radial, anything through-hole or any bigger
+# chip land is taller than the standoff and has to fail even though nobody
+# thought to name it here.  matched against the footprint name, library
+# prefix stripped.
+BOTTOM_LOW_PROFILE = [
+    r"SOT-23",    # Package_TO_SOT_SMD:SOT-23, SOT-23-6
+    r"SOD-",      # Diode_SMD:D_SOD-323
+    r"R_0603",
+    r"C_0603",
+    r"C_0805",
+    r"LED_0603",
+]
 
 # F: power copper.  the four nets the layout brief names, plus the two other
 # members of the Power netclass that carry the same current (AMIGA_5V_FUSED is
@@ -358,6 +372,7 @@ class Fp:
     courtyard: Optional[BBox]
     body: BBox  # pads + graphics, no text
     pads: List[Pad] = field(default_factory=list)
+    fpid: str = ""  # "Library:Footprint" - names the package, so its height
 
     def extent(self) -> BBox:
         return self.courtyard if self.courtyard else self.body
@@ -624,6 +639,7 @@ def load_pcbnew(path: str) -> Model:
                 cy,
                 body,
                 pads,
+                f.GetFPIDAsString(),
             )
         )
 
@@ -973,6 +989,7 @@ def load_sexpr(path: str) -> Model:
         elif kind == "footprint":
             fx, fy, frot = _at(node)
             side = "bottom" if (_layers_of(node) and _layers_of(node)[0] == "B.Cu") else "top"
+            fpid = str(node[1]) if len(node) > 1 and not isinstance(node[1], list) else ""
             ref, value = "", ""
             for prop in sxall(node, "property"):
                 if len(prop) > 2 and prop[1] == "Reference":
@@ -1070,6 +1087,7 @@ def load_sexpr(path: str) -> Model:
                     bbox_union(cy_boxes) if cy_boxes else None,
                     body,
                     pads,
+                    fpid,
                 )
             )
 
@@ -1574,6 +1592,27 @@ def check_e_sides(rep: Report, model: Model) -> None:
         "exactly %d level shifter FETs" % EXPECTED_BSS138,
         len(qs) == EXPECTED_BSS138,
         "found %d Q* footprints" % len(qs),
+    )
+
+    # the bottom is the face the board rests on, so it may only carry packages
+    # that stand about a millimetre proud of the copper.  anything else - a can,
+    # a radial, a through-hole part - props the board up and gets caught here,
+    # whether or not anyone remembered to list that package as tall.
+    bad = []
+    for f in model.fps:
+        if f.side != "bottom":
+            continue
+        name = f.fpid.rsplit(":", 1)[-1]
+        if not any(re.search(p, name) for p in BOTTOM_LOW_PROFILE):
+            bad.append(
+                "%s is a %s on B.Cu - too tall for the side the board sits on"
+                % (f.ref, f.fpid or "(footprint with no name)")
+            )
+    rep.add(
+        "E4",
+        "every bottom-side part is low profile (%s)" % ", ".join(BOTTOM_LOW_PROFILE),
+        not bad,
+        sorted(bad),
     )
 
 
