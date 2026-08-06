@@ -6775,6 +6775,15 @@
 				)
 			)
 		)
+		(property "Sourcing" "Raspberry Pi Pico W or Pico 2 W module - hand-solder by castellations or fit on 2x20 sockets, not JLC-assembled"
+			(at 210.82 200.66 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "7f5547be-6132-5c85-9e75-f99bd8397f03")
 		)
@@ -7876,6 +7885,15 @@
 				)
 			)
 		)
+		(property "Sourcing" "generic 2.54 mm pin header, 1x8 vertical - hand-solder, not JLC-assembled"
+			(at 74.93 60.96 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "030cd5e4-ca04-59e3-80f2-7763989e2699")
 		)
@@ -8104,6 +8122,15 @@
 				)
 			)
 		)
+		(property "Sourcing" "Kycon KCDX-5S-N (DIN 41524 5-pin 180 deg socket, right-angle THT) - hand-solder, not JLC-assembled"
+			(at 74.93 121.92 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "365a049a-953e-5846-9e51-9c4b00d2b766")
 		)
@@ -8276,6 +8303,15 @@
 			)
 		)
 		(property "Description" "mini-DIN 6 (PS/2) female socket (A4000 keyboard port); SH = shell/earth tab"
+			(at 74.93 168.91 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Sourcing" "Same Sky (CUI Devices) MD-60S (mini-DIN 6 socket, right-angle THT; Kycon KMDGX-6S-N shares the grid) - hand-solder, not JLC-assembled"
 			(at 74.93 168.91 0)
 			(hide yes)
 			(effects
@@ -8475,6 +8511,15 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x08, script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 74.93 241.3 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Sourcing" "generic 2.54 mm pin header, 1x8 vertical - hand-solder, not JLC-assembled"
 			(at 74.93 241.3 0)
 			(hide yes)
 			(effects
@@ -8711,6 +8756,15 @@
 				)
 			)
 		)
+		(property "Sourcing" "Kycon KCDX-5S-N (DIN 41524 5-pin 180 deg socket, right-angle THT) - hand-solder, not JLC-assembled"
+			(at 74.93 302.26 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "35262083-ecf0-5642-979e-31768866413e")
 		)
@@ -8883,6 +8937,15 @@
 			)
 		)
 		(property "Description" "mini-DIN 6 (PS/2) female socket (A4000 keyboard port); SH = shell/earth tab"
+			(at 74.93 349.25 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Sourcing" "Same Sky (CUI Devices) MD-60S (mini-DIN 6 socket, right-angle THT; Kycon KMDGX-6S-N shares the grid) - hand-solder, not JLC-assembled"
 			(at 74.93 349.25 0)
 			(hide yes)
 			(effects
@@ -9082,6 +9145,15 @@
 			)
 		)
 		(property "Description" "9-pin D-SUB connector, pins (male), Mounting Hole"
+			(at 74.93 434.34 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Sourcing" "Power Dynamics PDI-09S-5 (DE9 male, right-angle THT, 5.0 mm footprint: near pin row 4.94 mm from the board edge, 2 x 3.2 mm holes on 25.0 mm centres; 7.2 mm / 0.318 in parts do NOT fit) - hand-solder, not JLC-assembled"
 			(at 74.93 434.34 0)
 			(hide yes)
 			(effects
@@ -9358,6 +9430,15 @@
 			)
 		)
 		(property "Description" "9-pin D-SUB connector, pins (male), Mounting Hole"
+			(at 74.93 504.19 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Sourcing" "Power Dynamics PDI-09S-5 (DE9 male, right-angle THT, 5.0 mm footprint: near pin row 4.94 mm from the board edge, 2 x 3.2 mm holes on 25.0 mm centres; 7.2 mm / 0.318 in parts do NOT fit) - hand-solder, not JLC-assembled"
 			(at 74.93 504.19 0)
 			(hide yes)
 			(effects
@@ -9654,6 +9735,15 @@
 				)
 			)
 		)
+		(property "Sourcing" "generic 2.54 mm pin header, 1x6 vertical - hand-solder, not JLC-assembled"
+			(at 320.04 59.69 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "c2cbc881-9e4a-5e89-8b28-0bd38ec64f35")
 		)
@@ -9851,6 +9941,15 @@
 				)
 			)
 		)
+		(property "Sourcing" "generic 2.54 mm pin header, 1x4 vertical - hand-solder, not JLC-assembled"
+			(at 320.04 105.41 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "5a330f04-32a1-54d3-89cd-9792092e2bd2")
 		)
@@ -9992,6 +10091,15 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 320.04 143.51 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Sourcing" "generic 2.54 mm pin header, 1x3 vertical - hand-solder, not JLC-assembled"
 			(at 320.04 143.51 0)
 			(hide yes)
 			(effects
@@ -11004,6 +11112,15 @@
 				)
 			)
 		)
+		(property "Sourcing" "none - solder bridge, no part to buy"
+			(at 393.7 168.91 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "f76accb8-620b-581f-b72d-a3d43c9ac6e9")
 		)
@@ -11127,7 +11244,7 @@
 				)
 			)
 		)
-		(property "LCSC" "TBD:MF-MSMF series"
+		(property "LCSC" "C84140"
 			(at 314.96 264.16 0)
 			(hide yes)
 			(effects
@@ -11466,7 +11583,7 @@
 				)
 			)
 		)
-		(property "LCSC" "TBD:MF-MSMF series"
+		(property "LCSC" "C17313"
 			(at 391.16 264.16 0)
 			(hide yes)
 			(effects
@@ -11585,7 +11702,7 @@
 				)
 			)
 		)
-		(property "LCSC" "TBD:MF-MSMF series"
+		(property "LCSC" "C17313"
 			(at 419.1 264.16 0)
 			(hide yes)
 			(effects
@@ -11704,7 +11821,16 @@
 				)
 			)
 		)
-		(property "LCSC" "TBD:220uF/16V SMD alu"
+		(property "LCSC" "C128533"
+			(at 314.96 320.04 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "EEE-FK1C221XP"
 			(at 314.96 320.04 0)
 			(hide yes)
 			(effects
@@ -12175,7 +12301,16 @@
 				)
 			)
 		)
-		(property "LCSC" "TBD:150uF/16V SMD alu"
+		(property "LCSC" "C413656"
+			(at 391.16 320.04 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "EEE-FKC151XAP"
 			(at 391.16 320.04 0)
 			(hide yes)
 			(effects
@@ -13094,6 +13229,15 @@
 				)
 			)
 		)
+		(property "Sourcing" "Molex 67643-3910 (USB-A receptacle, right-angle THT; 67643-0910 is the same land) - hand-solder, not JLC-assembled"
+			(at 320.04 424.18 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "d296640e-63f5-5071-b53d-015121b77a94")
 		)
@@ -13465,6 +13609,15 @@
 			)
 		)
 		(property "Description" "USB Power-Only 6P Type-C Receptacle connector"
+			(at 320.04 490.22 0)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Sourcing" "GCT USB4135-GF-A (USB-C 6P power-only receptacle, top-mount horizontal) - hand-solder, not JLC-assembled"
 			(at 320.04 490.22 0)
 			(hide yes)
 			(effects

@@ -151,7 +151,7 @@
 				)
 			)
 		)
-		(property "LCSC" "TBD:MF-MSMF series"
+		(property "LCSC" "C17313"
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -310,6 +310,19 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "711d7a91-07e1-407a-ad0e-bf68f174b79a")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Sourcing" "Kycon KCDX-5S-N (DIN 41524 5-pin 180 deg socket, right-angle THT) - hand-solder, not JLC-assembled"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "9f647147-ff19-47e7-8340-9b87c4bfbf09")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -733,6 +746,18 @@
 				)
 			)
 		)
+		(property "Sourcing" "Power Dynamics PDI-09S-5 (DE9 male, right-angle THT, 5.0 mm footprint: near pin row 4.94 mm from the board edge, 2 x 3.2 mm holes on 25.0 mm centres; 7.2 mm / 0.318 in parts do NOT fit) - hand-solder, not JLC-assembled"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "45aeb900-4fab-4843-b95b-5abfca5acc67")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
 		(path "/6e3bb398-5a50-5f7d-90dc-de2e7b89efb5")
 		(attr through_hole)
 		(duplicate_pad_numbers_are_jumpers no)
@@ -1117,11 +1142,23 @@
 				)
 			)
 		)
-		(property "LCSC" "TBD:150uF/16V SMD alu"
+		(property "LCSC" "C413656"
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "e01719ae-c48b-4438-9e54-1b408e593fa3")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "EEE-FKC151XAP"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "5d362650-71f3-4bcd-9fe9-e16e570b356f")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1566,11 +1603,23 @@
 				)
 			)
 		)
-		(property "LCSC" "TBD:220uF/16V SMD alu"
+		(property "LCSC" "C128533"
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "b57e0db7-dc29-4a87-bc93-2a03665e0fa9")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "MPN" "EEE-FK1C221XP"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "4e105886-d876-4bfe-9dfa-a5b42093e594")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2015,7 +2064,7 @@
 				)
 			)
 		)
-		(property "LCSC" "TBD:MF-MSMF series"
+		(property "LCSC" "C84140"
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -2695,6 +2744,19 @@
 				)
 			)
 		)
+		(property "Sourcing" "GCT USB4135-GF-A (USB-C 6P power-only receptacle, top-mount horizontal) - hand-solder, not JLC-assembled"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "beb52823-8feb-4e36-9fb9-683318929ed2")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
 		(path "/f5692d2b-ad79-554c-93b0-489bb1b907e6")
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
@@ -3249,6 +3311,18 @@
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "5205c3e7-59a1-445b-b4bf-f5c4976dd182")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Sourcing" "Raspberry Pi Pico W or Pico 2 W module - hand-solder by castellations or fit on 2x20 sockets, not JLC-assembled"
+			(at 0 0 270)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "ac204bc4-aa2b-4254-9f29-3f2e8401a509")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6513,6 +6587,18 @@
 				)
 			)
 		)
+		(property "Sourcing" "generic 2.54 mm pin header, 1x3 vertical - hand-solder, not JLC-assembled"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "501cf163-4a1f-40a2-bb40-68fc6b492829")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
 		(path "/514433a6-e101-561f-9063-0bcc7e034dde")
 		(attr through_hole)
 		(duplicate_pad_numbers_are_jumpers no)
@@ -6747,6 +6833,18 @@
 			(effects
 				(font
 					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Sourcing" "Power Dynamics PDI-09S-5 (DE9 male, right-angle THT, 5.0 mm footprint: near pin row 4.94 mm from the board edge, 2 x 3.2 mm holes on 25.0 mm centres; 7.2 mm / 0.318 in parts do NOT fit) - hand-solder, not JLC-assembled"
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "672e84b8-0cde-4548-a738-465d79a0aac4")
+			(effects
+				(font
+					(size 1.27 1.27)
 					(thickness 0.15)
 				)
 			)
@@ -7135,6 +7233,18 @@
 				)
 			)
 		)
+		(property "Sourcing" "generic 2.54 mm pin header, 1x8 vertical - hand-solder, not JLC-assembled"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "d8c7989f-7483-4e9b-98ee-7c8edc0572bf")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
 		(path "/7a2e6191-0415-5900-a6a3-271184880015")
 		(attr through_hole)
 		(duplicate_pad_numbers_are_jumpers no)
@@ -7417,7 +7527,7 @@
 				)
 			)
 		)
-		(property "LCSC" "TBD:MF-MSMF series"
+		(property "LCSC" "C17313"
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
@@ -7574,6 +7684,19 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "8c4debfd-30cc-45a8-bf91-934205c4a569")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Sourcing" "none - solder bridge, no part to buy"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "53b5cdf7-210e-45eb-992b-8a36bac5856f")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7853,6 +7976,18 @@
 				)
 			)
 		)
+		(property "Sourcing" "generic 2.54 mm pin header, 1x4 vertical - hand-solder, not JLC-assembled"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "0a97593b-2d29-4d57-b480-3c302cfd9c96")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
 		(path "/725dba3d-9b71-55d9-9418-421db31b9c62")
 		(attr through_hole)
 		(duplicate_pad_numbers_are_jumpers no)
@@ -8096,6 +8231,18 @@
 			(effects
 				(font
 					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Sourcing" "generic 2.54 mm pin header, 1x8 vertical - hand-solder, not JLC-assembled"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "c33d92ca-6193-4511-8b58-4e4be828803d")
+			(effects
+				(font
+					(size 1.27 1.27)
 					(thickness 0.15)
 				)
 			)
@@ -8865,6 +9012,19 @@
 				)
 			)
 		)
+		(property "Sourcing" "Same Sky (CUI Devices) MD-60S (mini-DIN 6 socket, right-angle THT; Kycon KMDGX-6S-N shares the grid) - hand-solder, not JLC-assembled"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "1ef8877f-83e8-418b-93dd-eec0a425731d")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
 		(path "/ddb13676-f716-5c60-8d54-21e6cac8bad0")
 		(attr through_hole)
 		(duplicate_pad_numbers_are_jumpers no)
@@ -9096,6 +9256,18 @@
 			(effects
 				(font
 					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Sourcing" "generic 2.54 mm pin header, 1x6 vertical - hand-solder, not JLC-assembled"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "71567245-2d3d-4426-adbc-9a5a94137137")
+			(effects
+				(font
+					(size 1.27 1.27)
 					(thickness 0.15)
 				)
 			)
@@ -9351,6 +9523,19 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "7e407277-7c3e-42fb-a263-b1fb7f81d4bf")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Sourcing" "Molex 67643-3910 (USB-A receptacle, right-angle THT; 67643-0910 is the same land) - hand-solder, not JLC-assembled"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "8657bf52-27f1-4260-915d-7bdf9ee5271f")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9790,6 +9975,19 @@
 				)
 			)
 		)
+		(property "Sourcing" "Kycon KCDX-5S-N (DIN 41524 5-pin 180 deg socket, right-angle THT) - hand-solder, not JLC-assembled"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "cf6722e4-87a9-4bdc-a888-6b7320359aec")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
 		(path "/425d803d-5bfb-567f-a059-c58b31a41591")
 		(attr through_hole)
 		(duplicate_pad_numbers_are_jumpers no)
@@ -10033,6 +10231,19 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "c0790842-2df3-44fc-aa3b-ddb949363909")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Sourcing" "Same Sky (CUI Devices) MD-60S (mini-DIN 6 socket, right-angle THT; Kycon KMDGX-6S-N shares the grid) - hand-solder, not JLC-assembled"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "73a40a59-dbb3-4629-a9e0-61d847b0018a")
 			(effects
 				(font
 					(size 1.27 1.27)
