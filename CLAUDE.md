@@ -66,6 +66,17 @@ Follow `Machine/Coding Standards.md`. Load-bearing rule: **never mention AI tool
   `kicad/rev6/amigahid-pico-rev6.kicad_pro`, which loses the Power netclass and makes later DRC
   runs measure against weaker defaults. After **any** pcbnew-scripted save, run
   `git checkout -- kicad/rev6/amigahid-pico-rev6.kicad_pro` before running a gate; the file must
-  stay byte-identical to HEAD.
+  stay byte-identical to HEAD. `kicad-cli pcb drc --save-board` does **not** touch the project
+  file, only the board.
+- `net_settings.meta.version` in that same file must stay at 3 or above. `netclass_patterns` is a
+  v3 construct; at v2 KiCad's migration builds netclass membership from `classes[*].nets` instead
+  and throws the patterns away, so the Power netclass loads empty and every supply rail is checked
+  against Default. The patterns are still all there in the file when this happens, which is why
+  reading the file cannot detect it — K2 in `tools/check_rev6_pcb.py` asks pcbnew which netclass
+  each rail resolved to, and fails closed if it cannot ask. That is the assertion to trust; do not
+  reduce it to a file read.
+- The Power netclass holds the six 5 V supply rails only. `+3V3` is a logic rail off the pico's own
+  regulator, routed at 0.5 mm, and belongs on Default — putting it back in Power reintroduces a
+  netclass that claims 1.0 mm copper for a net nothing measures.
 - **Git: local commits only.** Never push, never open a PR, never touch remotes on this project without being asked in the same turn.
 

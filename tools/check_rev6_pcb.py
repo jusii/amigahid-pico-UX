@@ -14,7 +14,9 @@ usage (/nas is mounted noexec, so always via the interpreter):
 
 environment:
 
-    REV6_FORCE_SEXPR=1   ignore pcbnew and use the s-expression reader
+    REV6_FORCE_SEXPR=1   ignore pcbnew and use the s-expression reader for the
+                         geometry; K2 still loads the board through pcbnew,
+                         because only kicad can say which netclass a net is in
     REV6_SKIP_GIT=1      skip section J (for use outside a git checkout)
 
 exit code 0 only when every assertion passes.
@@ -120,8 +122,13 @@ BULK_MAX_HUG = 0.5
 
 # F: power copper.  the four nets the layout brief names, plus the two other
 # members of the Power netclass that carry the same current (AMIGA_5V_FUSED is
-# the link between F1 and D1, AUX_5V the link between J13 and D2).  +3V3 is in
-# the netclass too but is a logic rail and is deliberately not checked here.
+# the link between F1 and D1, AUX_5V the link between J13 and D2).  this list
+# and POWER_NETCLASS_PATTERNS below now name the same six rails: +3V3 used to be
+# in the netclass and excepted here, which was a contradiction - a class whose
+# whole point is 1.0 mm copper and 0.9 mm vias cannot also hold the one rail
+# that is exempt from being measured.  +3V3 is a logic rail off the pico's own
+# regulator, carries tens of milliamps, is routed at 0.5 mm throughout, and is
+# on Default.
 POWER_NETS = ["AMIGA_5V", "AMIGA_5V_FUSED", "SYS5V", "USBA_5V", "KBIN_5V", "AUX_5V"]
 POWER_MIN_WIDTH = 0.8
 NECKDOWN_PAD_DIST = 2.0
@@ -170,6 +177,18 @@ NETLIST_CHECKER_M2_BLOB = "7fe30582ad568d91c186f5d4ae4fe57f10339c6d"
 # floor rather than the byte pattern: settings may be tightened, never loosened,
 # and the DRC gate may not be quietly defanged with exclusions or downgraded
 # severities.
+#
+# K2 used to read this file and nothing else: a class called Power exists, its
+# track_width is wide enough, the seven pattern strings are present - pass.  it
+# was a false green for the whole life of the netclass.  netclass_patterns is a
+# net_settings schema v3 construct; net_settings.meta.version said 2, so on load
+# kicad ran its v2 -> v3 migration, which builds membership from classes[*].nets
+# (absent here) and overwrites the hand-written patterns with the empty result.
+# every rail resolved to Default and every rev6 DRC run before this one measured
+# the supply copper at Default's 0.20 mm rather than Power's 0.25 mm.  a file
+# read can never see that, because the patterns are all present in the file and
+# merely inert at load time - so K2 now asks kicad which netclass each rail
+# actually lands in, and fails closed when it cannot ask.
 REV6_PROJECT = "kicad/rev6/amigahid-pico-rev6.kicad_pro"
 JLC_MIN_CONSTRAINTS = {
     "min_clearance": 0.2,
@@ -184,9 +203,14 @@ JLC_MIN_CONSTRAINTS = {
 }
 POWER_NETCLASS = "Power"
 POWER_NETCLASS_MIN_WIDTH = 1.0
+POWER_NETCLASS_MIN_CLEARANCE = 0.25   # the board is routed and poured to this
 POWER_NETCLASS_PATTERNS = [
-    "/AMIGA_5V", "/AMIGA_5V_FUSED", "/SYS5V", "/USBA_5V", "/KBIN_5V", "/AUX_5V", "+3V3",
+    "/AMIGA_5V", "/AMIGA_5V_FUSED", "/SYS5V", "/USBA_5V", "/KBIN_5V", "/AUX_5V",
 ]
+# netclass_patterns is only honoured from net_settings schema v3 on; at v2 kicad
+# throws the patterns away while migrating.  the version is therefore part of the
+# rule, not bookkeeping.
+NET_SETTINGS_MIN_VERSION = 3
 # the violations this board is signed off on never having.  a "0 violations"
 # DRC run means nothing if any of these has been turned down to warning or
 # ignore, so the gate reads the severities rather than trusting the count.
@@ -529,6 +553,9 @@ class Model:
     zones: List[ZoneM]
     texts: List[TextM]
     copper_gfx: List[Tuple[str, Poly]]
+    # the live pcbnew BOARD, when that backend was used.  K2 needs it: the only
+    # authority on which netclass a net is really in is kicad's own loader.
+    native: object = None
 
     def by_ref(self, ref: str) -> Optional[Fp]:
         for f in self.fps:
@@ -819,7 +846,7 @@ def load_pcbnew(path: str) -> Model:
         for z in fzones:
             add_zone(z, f.GetReference())
 
-    return Model("pcbnew", copper, edges, fps, tracks, zones, texts, copper_gfx)
+    return Model("pcbnew", copper, edges, fps, tracks, zones, texts, copper_gfx, board)
 
 
 # --------------------------------------------------------------------------
@@ -2142,7 +2169,35 @@ def check_j_untouched(rep: Report, root: str) -> None:
     )
 
 
-def check_k_project(rep: Report, root: str) -> None:
+def resolved_netclasses(board_path: str, native: object) -> Dict[str, str]:
+    """which netclass kicad actually puts each net in, as opposed to which one
+    the project file appears to ask for.
+
+    the two differ whenever net_settings.meta.version and the way membership is
+    expressed disagree, and the project file cannot be read to find that out -
+    only the loader knows.  raises if there is no loader to ask; K2 turns that
+    into a failure rather than a skip.
+    """
+    board = native
+    if board is None:
+        import pcbnew
+
+        board = pcbnew.LoadBoard(board_path)
+    if board is None:
+        raise RuntimeError("pcbnew could not load %s" % board_path)
+    info = board.GetNetInfo()
+    out: Dict[str, str] = {}
+    for code in range(info.GetNetCount()):
+        item = info.GetNetItem(code)
+        if item is None:
+            continue
+        name = item.GetNetname()
+        if name:
+            out[name] = item.GetNetClassName()
+    return out
+
+
+def check_k_project(rep: Report, root: str, board_path: str, native: object) -> None:
     """the fab rules and the DRC severities the board was signed off under."""
     path = os.path.join(root, REV6_PROJECT)
     try:
@@ -2188,6 +2243,12 @@ def check_k_project(rep: Report, root: str) -> None:
                 "%s track_width is %g mm, under the %g mm the brief asks of the rails"
                 % (POWER_NETCLASS, width, POWER_NETCLASS_MIN_WIDTH)
             )
+        gap = float(pcls.get("clearance") or 0.0)
+        if gap < POWER_NETCLASS_MIN_CLEARANCE - 1e-9:
+            bad.append(
+                "%s clearance is %g mm, under the %g mm the rails are routed and poured to"
+                % (POWER_NETCLASS, gap, POWER_NETCLASS_MIN_CLEARANCE)
+            )
     assigned = {
         p.get("pattern") for p in (nets.get("netclass_patterns") or [])
         if p.get("netclass") == POWER_NETCLASS
@@ -2195,6 +2256,43 @@ def check_k_project(rep: Report, root: str) -> None:
     orphans = [p for p in POWER_NETCLASS_PATTERNS if p not in assigned]
     if orphans:
         bad.append("%s is not assigned to %s" % (POWER_NETCLASS, ", ".join(orphans)))
+    strays = sorted(assigned - set(POWER_NETCLASS_PATTERNS))
+    if strays:
+        bad.append(
+            "%s also claims %s - a rail in this class is asserted to be 1.0 mm copper"
+            % (POWER_NETCLASS, ", ".join(strays))
+        )
+    version = (nets.get("meta") or {}).get("version")
+    try:
+        too_old = int(version) < NET_SETTINGS_MIN_VERSION
+    except (TypeError, ValueError):
+        too_old = True
+    if too_old:
+        bad.append(
+            "net_settings.meta.version is %r; netclass_patterns is a v%d construct and kicad "
+            "discards it below that, putting every rail back on Default"
+            % (version, NET_SETTINGS_MIN_VERSION)
+        )
+
+    # and the part no file read can do: ask kicad where the rails really landed.
+    try:
+        live = resolved_netclasses(board_path, native)
+    except Exception as exc:  # noqa: BLE001 - no loader, no verdict
+        bad.append(
+            "cannot ask kicad to resolve the netclasses (%s) - K2 will not pass on a file "
+            "read alone, that is exactly how the netclass stayed inert" % exc
+        )
+    else:
+        for pattern in POWER_NETCLASS_PATTERNS:
+            got = live.get(pattern)
+            if got is None:
+                bad.append("%s carries no copper and no net - it is not on the board" % pattern)
+            elif got != POWER_NETCLASS:
+                bad.append(
+                    "kicad resolves %s to netclass %r, not %r - the project file says one "
+                    "thing and the loader does another"
+                    % (pattern, got, POWER_NETCLASS)
+                )
     rep.add("K2", "the %s netclass carries the supply rails" % POWER_NETCLASS, not bad, bad)
 
     bad = []
@@ -2262,7 +2360,7 @@ def main(argv: List[str]) -> int:
         rep.add("J0", "git checks skipped by REV6_SKIP_GIT", True)
     else:
         check_j_untouched(rep, root)
-    check_k_project(rep, root)
+    check_k_project(rep, root, board_path, model.native)
 
     rep.emit()
     print()
