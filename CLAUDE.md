@@ -56,10 +56,10 @@ Follow `Machine/Coding Standards.md`. Load-bearing rule: **never mention AI tool
   - `kicad-cli pcb drc kicad/rev6/amigahid-pico-rev6.kicad_pcb --schematic-parity --severity-all --refill-zones --save-board --exit-code-violations` (zero violations **and** zero unconnected items)
   - `python3 tools/check_rev6_pcb.py` (full PASS)
   - `python3 tools/check_rev6_netlist.py` (RESULT: PASS)
-  - `python3 tools/check_rev6_style.py` (S1-S3 hold) — **known red**: S1 (45-degree discipline) and
-    S2 (staircases) fail on the copper inherited from the rev6 re-lays; S3 (duplicate copper) is
-    green. Treat S1/S2 as advisory until the board is re-routed; every board commit must still
-    state their status.
+  - `python3 tools/check_rev6_style.py` (S1-S3 hold) — green since the copper was re-laid on
+    45-degree runs, and no longer advisory: S1 (45-degree discipline) must stay at or above 99.0%,
+    S2 (staircases) at zero, S3 (debris and duplicate copper) clear. Anything that puts copper on
+    the board has to keep them there.
   A board commit that leaves any of these red must say so in the commit message and say why.
   Never relax a checker assertion to make it pass — re-target it to the new intended design instead, in the same commit.
 - `pcbnew.BOARD.Save()` silently drops `net_settings.netclass_patterns` from
