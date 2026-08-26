@@ -10,3 +10,4 @@ __pycache__/
 *_autosave-*
 kicad/rev6/amigahid-pico-rev6-backups/
 /amigahid-pico-rev6-*.rpt
+.~lock.*#
