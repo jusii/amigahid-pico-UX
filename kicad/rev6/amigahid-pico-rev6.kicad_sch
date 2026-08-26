@@ -9126,7 +9126,7 @@
 				)
 			)
 		)
-		(property "Footprint" "rev6:DSUB-9_Pins_Horizontal_P2.77x2.84mm_EdgePinOffset4.94mm_Housed_MountingHolesOffset4.94mm"
+		(property "Footprint" "rev6:DSUB-9_Pins_Horizontal_P2.77x2.84mm_EdgePinOffset7.70mm_Housed_MountingHolesOffset9.12mm"
 			(at 74.93 434.34 0)
 			(hide yes)
 			(effects
@@ -9153,7 +9153,7 @@
 				)
 			)
 		)
-		(property "Sourcing" "Power Dynamics PDI-09S-5 (DE9 male, right-angle THT, 5.34 mm footprint family: flange-screw holes 2 x 3.2 mm on 25.0 mm centres THROUGH the pcb at 4.94 mm from the board edge, near pin row 7.78 mm from the edge; 9.4 mm European-footprint and 7.2/8.08 mm parts do NOT fit) - hand-solder, not JLC-assembled"
+		(property "Sourcing" "Kycon K22X-E9P-N (DE9 male, right-angle THT, .318in/8.08mm footprint family: boardlock holes 2 x 3.2mm on 25.0mm centres MIDWAY between the pin rows, 1.42mm behind the near row; pin drills 1.1mm). Equivalents: NorComp 182-009-113R531, TE 5747840-x, Wurth 618009231221. The 5.34mm PDI family, 9.4mm European family and backset-alone matches do NOT fit - hole position vs the pin rows is the discriminator. - hand-solder, not JLC-assembled"
 			(at 74.93 434.34 0)
 			(hide yes)
 			(effects
@@ -9411,7 +9411,7 @@
 				)
 			)
 		)
-		(property "Footprint" "rev6:DSUB-9_Pins_Horizontal_P2.77x2.84mm_EdgePinOffset4.94mm_Housed_MountingHolesOffset4.94mm"
+		(property "Footprint" "rev6:DSUB-9_Pins_Horizontal_P2.77x2.84mm_EdgePinOffset7.70mm_Housed_MountingHolesOffset9.12mm"
 			(at 74.93 504.19 0)
 			(hide yes)
 			(effects
@@ -9438,7 +9438,7 @@
 				)
 			)
 		)
-		(property "Sourcing" "Power Dynamics PDI-09S-5 (DE9 male, right-angle THT, 5.34 mm footprint family: flange-screw holes 2 x 3.2 mm on 25.0 mm centres THROUGH the pcb at 4.94 mm from the board edge, near pin row 7.78 mm from the edge; 9.4 mm European-footprint and 7.2/8.08 mm parts do NOT fit) - hand-solder, not JLC-assembled"
+		(property "Sourcing" "Kycon K22X-E9P-N (DE9 male, right-angle THT, .318in/8.08mm footprint family: boardlock holes 2 x 3.2mm on 25.0mm centres MIDWAY between the pin rows, 1.42mm behind the near row; pin drills 1.1mm). Equivalents: NorComp 182-009-113R531, TE 5747840-x, Wurth 618009231221. The 5.34mm PDI family, 9.4mm European family and backset-alone matches do NOT fit - hole position vs the pin rows is the discriminator. - hand-solder, not JLC-assembled"
 			(at 74.93 504.19 0)
 			(hide yes)
 			(effects
@@ -25682,7 +25682,7 @@
 		)
 		(uuid "c0de0902-1111-4222-8333-444455556666")
 	)
-	(text "Verify J9/J11 (DIN5), J10/J12 (mini-DIN6) and P1/P2 (DE9, EdgePinOffset4.94mm) against physical samples before fab - connector variant mismatch is the classic re-spin cause."
+	(text "Verify J9/J11 (DIN5), J10/J12 (mini-DIN6) and P1/P2 (DE9, EdgePinOffset7.70mm / MountingHolesOffset9.12mm) against physical samples before fab - connector variant mismatch is the classic re-spin cause."
 		(exclude_from_sim no)
 		(at 459.74 407.67 0)
 		(effects
