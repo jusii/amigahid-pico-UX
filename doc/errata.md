@@ -61,18 +61,40 @@ identical on all three modules; only tp4/tp5/tp6 shift by 1.5 mm. the usb tap th
 milled slot therefore works unchanged on a plain pico — the only thing a plain pico
 actually loses is swd, because it has no mid-board debug pads for u1 pads 41/42/43.
 
+**the de9 land is the .318in family now.** the land revision 6 started with fitted exactly
+one part — power dynamics pdi-09s-5 — because its two boardlock holes sat on the same line
+as the near pin row, which is a pdi trait rather than an industry one. that part is dead
+and unobtainable, so p1/p2 were retargeted to the industry .318in / 8.08 mm family. the
+pin coordinates did not move (every d-sub family shares them); what moved is the boardlock
+holes, from the near pin row to midway between the two rows, 1.42 mm behind the near row,
+and the south board edge, so the near row sits the family's 7.70 mm behind it. the board
+is 100 x 82.76 mm as a result, 2.76 mm deeper than it was, and the pin drills opened
+1.0 -> 1.1 mm for the 1.09 mm pin.
+
+buy kycon k22x-e9p-n. norcomp 182-009-113r531, te 5747840-x, wurth 618009231221 and
+amphenol l717 code 33e are the same land. **hole position against the pin rows is the only
+discriminator that matters** — a datasheet quoting the right backset can still be the wrong
+family, which is how the pdi land got picked in the first place. and this land is drawn
+from datasheets, not measured off a sample: put a real connector on a printout before
+ordering boards.
+
 **f1 is a placeholder.** it carries no lcsc code on purpose: the 750 ma draft has to be
 re-sized from a bench measurement of the full stack before the board is ordered, and it
 must trip before the host's own fuse. do not let it go out as an assembled part.
 
-**usb-a socket overhang.** j4's mating face sits about 4 mm proud of the south board edge
+**usb-a socket overhang.** j4's mating face now sits about 1.2 mm proud of the south board
+edge — it was about 4 mm until the de9 retarget moved the edge 2.76 mm south past it
 (revision 5 had it flush). it is retained by four 1.0 mm pins and two 2.3 mm shield legs,
-the nearest of which is 6.3 mm back from the edge, so support the front of the connector —
-a fillet of epoxy under the overhang — before it takes any downward load from a cable.
+the nearest of which is 9.1 mm back from the edge, so the socket is far better supported
+than it was: a fillet of epoxy under the front is now belt-and-braces rather than
+necessary. it still takes cable load through its pins, so a bead against the board edge is
+cheap insurance if the port will be plugged and unplugged often.
 
 **south edge cable clearance.** the usb-a opening has only 3.68 mm to each de9 flange. a
 slim d-sub hood plus a normal usb plug fits; a full-size moulded hood plus a fat plug or a
-usb stick does not. use slim hoods, or a short usb extension.
+usb stick does not. use slim hoods, or a short usb extension. the lateral gap is unchanged
+by the de9 retarget; the usb plug now simply sits closer to the board edge, where the d-sub
+hoods are at their narrowest.
 
 **power the keyboard connector first — but know that f1 ships empty.** the nineteen
 high-side pull-ups tie every amiga-facing line to sys5v, and sys5v is fed only from the

@@ -1,6 +1,6 @@
 # amigahid-pico rev6 — complete Mouser BOM (final-check copy)
 
-Generated from the schematic's own sourcing fields (`board-rev6` @ `3d6f485`). Two ways to build:
+Generated from the schematic's own sourcing fields (`board-rev6` @ `700f727`). Two ways to build:
 **(A) JLC-assembled SMD** — everything in the "SMD" section is already pinned to in-stock LCSC parts and placed by JLCPCB; you then hand-solder only the "Hand-solder" section.
 **(B) Full hand-build from Mouser** — order both sections.
 
@@ -11,7 +11,7 @@ Links are Mouser part-number searches (`mouser.fi/c/?q=…`) so they can't rot; 
 | Ref | Part | Qty/board | Order | Mouser |
 |---|---|---|---|---|
 | U1 | Raspberry Pi Pico W (SC0918) — or Pico 2 W | 1 | 2 | [SC0918](https://www.mouser.fi/c/?q=SC0918) |
-| P1, P2 | DE9 male, right-angle THT, **5.34 mm footprint family** — Power Dynamics PDI-09S-5 (per schematic). Flange screws bolt THROUGH the pcb: 2× 3.2 mm plated holes, 25 mm apart, 4.94 mm from edge; near pin row 7.78 mm from edge. | 2 | 3 | PDI-09S-5 via TME/Farnell; Mouser-verified equivalents being confirmed — see sourcing note. **CORRECTION: the 9.4 mm "European footprint" family (incl. L717SDE09P, Assmann A-DS 09, Triopak XYDB9RP94) does NOT fit this board — earlier revisions of this BOM were wrong.** |
+| P1, P2 | DE9 male, right-angle THT, **.318″ / 8.08 mm footprint family** — Kycon K22X-E9P-N (per schematic). Boardlock screws bolt THROUGH the pcb: 2× 3.2 mm plated holes, 25 mm apart, sitting **midway between the two pin rows**, 1.42 mm behind the near row; near pin row 7.70 mm from edge; pin holes 1.1 mm. | 2 | 3 | [K22X-E9P-N](https://www.mouser.fi/c/?q=K22X-E9P-N) — Mouser 806-K22X-E9P-N. Digi-Key FI fallback: 9990172, ~€1.79, deep stock. Same land: NorComp 182-009-113R531, TE 5747840-x, Würth 618009231221, Amphenol L717 code 33E. **The discriminator is where the boardlock holes sit relative to the pin rows — not the backset on its own.** |
 | J9, J11 | DIN5 180° socket (A2000/A3000 kbd) — Kycon KCDX-5S-N | 2 | 3 | [KCDX-5S-N](https://www.mouser.fi/ProductDetail/Kycon/KCDX-5S-N) |
 | J10, J12 | Mini-DIN6 / PS-2 socket (A4000 kbd) — Same Sky MD-60S | 2 | 3 | [MD-60S](https://www.mouser.fi/c/?q=MD-60S) (exactly MD-60S, not MD-60SM) |
 | J4 | USB-A receptacle, RA THT — Molex 67643-3910 | 1 | 2 | [67643-3910](https://www.mouser.fi/c/?q=67643-3910) (67643-0910 = same land) |
@@ -56,5 +56,6 @@ Links are Mouser part-number searches (`mouser.fi/c/?q=…`) so they can't rot; 
 1. Every SMD line's LCSC part was stock-verified at pin time; the Mouser column is a functional equivalent, not necessarily the identical brand.
 2. C4's exact Panasonic suffix is worth one look on the Mouser page (150 µF/16 V, case 6.3×7.7 mm is what matters).
 3. F1 ships unfitted — bench measurement picks 035/050/075.
-4. The DE9 rule for any substitution: **5.34 mm footprint family only** (flange holes through the pcb at 4.94 mm from edge, 25 mm centres; pin rows 7.78 mm from edge). Neither the 9.4 mm "European" family nor .318″/8.08 mm parts fit. F1's schematic draft value is 750 mA (MF-MSMF075-2) — it ships unfitted; final value chosen at bench (see doc/errata.md "first power").
-5. Physical sample check against the footprints (DIN5, mini-DIN6, DE9 especially) remains the gate before ordering boards.
+4. The DE9 rule for any substitution: **.318″ / 8.08 mm footprint family only** — the two 3.2 mm boardlock holes must sit midway between the pin rows (1.42 mm behind the near row) on 25 mm centres, with the near pin row 7.70 mm from the board edge. Neither the 5.34 mm family (Power Dynamics PDI-09S-5, which the land targeted until the rev6 retarget, and which is discontinued) nor the 9.4 mm "European" family (L717SDE09P, Assmann A-DS 09, Triopak XYDB9RP94) fits. Judge a candidate by the hole position against the pin rows, never by the backset alone — that is exactly how the dead PDI part got picked. F1's schematic draft value is 750 mA (MF-MSMF075-2) — it ships unfitted; final value chosen at bench (see doc/errata.md "first power").
+5. Any Triopak RP94-series DE9s already on the shelf are the 9.4 mm European family: **keep them as spares, do not fit them**.
+6. Physical sample check against the footprints (DIN5, mini-DIN6, DE9 especially) remains the gate before ordering boards.
