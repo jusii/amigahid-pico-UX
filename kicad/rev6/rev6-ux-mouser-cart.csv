@@ -26,5 +26,3 @@ AmigahidUX F1 cand,"Polyfuse 750mA hold, 1812 (F1 bench candidate)",Bourns,MF-MS
 AmigahidUX LED1,LED red 0603,Lite-On,LTST-C190KRKT,859-LTST-C190KRKT,5
 AmigahidUX LED2,LED yellow-green 0603 Vf~2.0V,Lite-On,LTST-C190GKT,859-LTST-C190GKT,5
 AmigahidUX U2,"USBLC6-2SC6 USB ESD array, SOT-23-6",STMicroelectronics,USBLC6-2SC6,511-USBLC6-2SC6,2
-AmigahidUX solder-fine,"Solder wire Kester 44 Sn63/Pb37 rosin core, 0.51mm (0.020in), 1lb spool",Kester,24-6337-0010,533-24-6337-0010,1
-AmigahidUX solder-tht,"Solder wire Kester 44 Sn63/Pb37 rosin core, 0.79mm (0.031in), 1lb spool",Kester,24-6337-0027,533-24-6337-0027,1
