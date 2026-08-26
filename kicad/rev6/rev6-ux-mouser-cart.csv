@@ -1,28 +1,30 @@
 Customer Part Number,Description,Manufacturer,Manufacturer Part Number,Mouser Part Number,Quantity
-P1 P2,"DE9 male right-angle THT, .318in/8.08mm footprint, boardlocks",Kycon,K22X-E9P-N,806-K22X-E9P-N,3
-J9 J11,"DIN5 180deg female socket, right-angle THT (A2000/A3000 kbd)",Kycon,KCDX-5S-N,806-KCDX-5S-N,3
-J10 J12,"Mini-DIN6 PS/2 female socket, right-angle THT (A4000 kbd)",Same Sky (CUI),MD-60S,490-MD-60S,3
-J4,"USB-A 2.0 receptacle, right-angle THT, shielded",Molex,67643-3910,538-67643-3910,2
-J13,"USB-C receptacle 6P power-only, horizontal SMT",GCT,USB4135-GF-A,640-USB4135-GF-A,2
-U1,Raspberry Pi Pico W module,Raspberry Pi,SC0918,358-SC0918,1
-U1 alt,Raspberry Pi Pico 2 W module,Raspberry Pi,SC1633,358-SC1633,1
-J1-J3 J7 J8,"Pin header 1x40 breakaway, 2.54mm vertical (cut to 8+8+6+4+3)",Harwin,M20-9994046,855-M20-9994046,1
-U1 socket,"Female header 1x20, 2.54mm (proto socketing of Pico W)",Harwin,M20-7822046,855-M20-7822046,2
-Q1-Q19,"BSS138 N-ch MOSFET, SOT-23",onsemi,BSS138,512-BSS138,25
-R1-R38,Resistor 10k 0603 1%,Yageo,RC0603FR-0710KL,603-RC0603FR-0710KL,100
-R39 R40,Resistor 1k 0603 1%,Yageo,RC0603FR-071KL,603-RC0603FR-071KL,10
-R41 R42,Resistor 4.7k 0603 1% (I2C pull-ups),Yageo,RC0603FR-074K7L,603-RC0603FR-074K7L,10
-R43 R44,Resistor 5.1k 0603 1% (USB-C CC),Yageo,RC0603FR-075K1L,603-RC0603FR-075K1L,10
-R45,Resistor 470R 0603 1% (JP1 LED ballast),Yageo,RC0603FR-07470RL,603-RC0603FR-07470RL,10
-C1,"Alu-electrolytic SMD 220uF 16V, 6.3x7.7mm",Panasonic,EEE-FK1C221XP,667-EEE-FK1C221XP,2
-C4,"Alu-electrolytic SMD 150uF 16V, 6.3x7.7mm",Panasonic,EEE-FKC151XAP,667-EEE-FKC151XAP,2
-C2 C6,MLCC 10uF 0805 X5R 25V,Samsung Electro-Mechanics,CL21A106KAYNNNE,187-CL21A106KAYNNNE,10
-C3 C5 C7,MLCC 100nF 0603 X7R 50V,Samsung Electro-Mechanics,CL10B104KB8NNNC,187-CL10B104KB8NNNC,10
-D1 D2,"Schottky diode 3A 40V, SMA (any SS34 brand ok)",Taiwan Semiconductor,SS34,821-SS34,5
-D10-D30,"ESD clamp PESD5V0S1BA, SOD-323",Nexperia,"PESD5V0S1BA,115",771-PESD5V0S1BA115,30
-F2 F3 +F1cand,"Polyfuse 500mA hold, 1812 (F2,F3 fitted; +1 as F1 candidate)",Bourns,MF-MSMF050-2,652-MF-MSMF050-2,5
-F1 cand,"Polyfuse 350mA hold, 1812 (F1 bench candidate)",Bourns,MF-MSMF035-2,652-MF-MSMF035-2,1
-F1 cand,"Polyfuse 750mA hold, 1812 (F1 bench candidate)",Bourns,MF-MSMF075-2,652-MF-MSMF075-2,1
-LED1,LED red 0603,Lite-On,LTST-C190KRKT,859-LTST-C190KRKT,5
-LED2,LED yellow-green 0603 Vf~2.0V,Lite-On,LTST-C190GKT,859-LTST-C190GKT,5
-U2,"USBLC6-2SC6 USB ESD array, SOT-23-6",STMicroelectronics,USBLC6-2SC6,511-USBLC6-2SC6,2
+AmigahidUX P1 P2,"DE9 male right-angle THT, .318in/8.08mm footprint, boardlocks",Kycon,K22X-E9P-N,806-K22X-E9P-N,3
+AmigahidUX J9 J11,"DIN5 180deg female socket, right-angle THT (A2000/A3000 kbd)",Kycon,KCDX-5S-N,806-KCDX-5S-N,3
+AmigahidUX J10 J12,"Mini-DIN6 PS/2 female socket, right-angle THT (A4000 kbd)",Same Sky (CUI),MD-60S,490-MD-60S,3
+AmigahidUX J4,"USB-A 2.0 receptacle, right-angle THT, shielded",Molex,67643-3910,538-67643-3910,2
+AmigahidUX J13,"USB-C receptacle 6P power-only, horizontal SMT",GCT,USB4135-GF-A,640-USB4135-GF-A,2
+AmigahidUX U1,Raspberry Pi Pico W module,Raspberry Pi,SC0918,358-SC0918,1
+AmigahidUX U1 alt,Raspberry Pi Pico 2 W module,Raspberry Pi,SC1633,358-SC1633,1
+AmigahidUX J1-J3 J7 J8,"Pin header 1x40 breakaway, 2.54mm vertical (cut to 8+8+6+4+3)",Harwin,M20-9994046,855-M20-9994046,1
+AmigahidUX U1 socket,"Female header 1x20, 2.54mm (proto socketing of Pico W)",Harwin,M20-7822046,855-M20-7822046,2
+AmigahidUX Q1-Q19,"BSS138 N-ch MOSFET, SOT-23",onsemi,BSS138,512-BSS138,25
+AmigahidUX R1-R38,Resistor 10k 0603 1%,Yageo,RC0603FR-0710KL,603-RC0603FR-0710KL,100
+AmigahidUX R39 R40,Resistor 1k 0603 1%,Yageo,RC0603FR-071KL,603-RC0603FR-071KL,10
+AmigahidUX R41 R42,Resistor 4.7k 0603 1% (I2C pull-ups),Yageo,RC0603FR-074K7L,603-RC0603FR-074K7L,10
+AmigahidUX R43 R44,Resistor 5.1k 0603 1% (USB-C CC),Panasonic,ERJ-3EKF5101V,667-ERJ-3EKF5101V,10
+AmigahidUX R45,Resistor 470R 0603 1% (JP1 LED ballast),Yageo,RC0603FR-07470RL,603-RC0603FR-07470RL,10
+AmigahidUX C1,"Alu-electrolytic SMD 220uF 16V, 6.3x7.7mm",Panasonic,EEE-FK1C221XP,667-EEE-FK1C221XP,2
+AmigahidUX C4,"Alu-electrolytic SMD 150uF 16V, 6.3x7.7mm",Panasonic,EEE-FKC151XAP,667-EEE-FKC151XAP,2
+AmigahidUX C2 C6,MLCC 10uF 0805 X5R 25V,Murata,GRM21BR61E106KA73L,81-GRM21BR61E106KA73L,10
+AmigahidUX C3 C5 C7,MLCC 100nF 0603 X7R 50V,KEMET,C0603C104K5RACTU,80-C0603C104K5RACTU,10
+AmigahidUX D1 D2,"Schottky diode 3A 40V, SMA (SS34 equivalent)",Diodes Incorporated,B340A-13-F,621-B340A-13-F,5
+AmigahidUX D10-D30,"ESD TVS 5V bidirectional, SOD-323 (PESD5V0S1BA equiv)",Bourns,CDSOD323-T05C,652-CDSOD323-T05C,30
+AmigahidUX F2 F3 +F1cand,"Polyfuse 500mA hold, 1812 (F2,F3 fitted; +1 as F1 candidate)",Bourns,MF-MSMF050-2,652-MF-MSMF050-2,5
+AmigahidUX F1 cand,"Polyfuse 300mA hold, 1812 (F1 bench candidate; 035 does not exist)",Bourns,MF-MSMF030-2,652-MF-MSMF030-2,1
+AmigahidUX F1 cand,"Polyfuse 750mA hold, 1812 (F1 bench candidate)",Bourns,MF-MSMF075-2,652-MF-MSMF075-2,1
+AmigahidUX LED1,LED red 0603,Lite-On,LTST-C190KRKT,859-LTST-C190KRKT,5
+AmigahidUX LED2,LED yellow-green 0603 Vf~2.0V,Lite-On,LTST-C190GKT,859-LTST-C190GKT,5
+AmigahidUX U2,"USBLC6-2SC6 USB ESD array, SOT-23-6",STMicroelectronics,USBLC6-2SC6,511-USBLC6-2SC6,2
+AmigahidUX solder-fine,"Solder wire Kester 44 Sn63/Pb37 rosin core, 0.51mm (0.020in), 1lb spool",Kester,24-6337-0010,533-24-6337-0010,1
+AmigahidUX solder-tht,"Solder wire Kester 44 Sn63/Pb37 rosin core, 0.79mm (0.031in), 1lb spool",Kester,24-6337-0027,533-24-6337-0027,1

@@ -23,16 +23,16 @@ One order covers everything on the board. Links are exact Mouser product pages (
 | R1–R38 | 10 kΩ 0603 1% — Yageo RC0603FR-0710KL | 100 | (p) [mouser.fi/en/ProductDetail/YAGEO/RC0603FR-0710KL](https://www.mouser.fi/en/ProductDetail/YAGEO/RC0603FR-0710KL) |
 | R39,R40 | 1 kΩ 0603 — RC0603FR-071KL | 10 | (p) [link](https://www.mouser.fi/en/ProductDetail/YAGEO/RC0603FR-071KL) |
 | R41,R42 | 4.7 kΩ 0603 — RC0603FR-074K7L | 10 | (p) [link](https://www.mouser.fi/en/ProductDetail/YAGEO/RC0603FR-074K7L) |
-| R43,R44 | 5.1 kΩ 0603 — RC0603FR-075K1L | 10 | (p) [link](https://www.mouser.fi/en/ProductDetail/YAGEO/RC0603FR-075K1L) |
+| R43,R44 | 5.1 kΩ 0603 — Panasonic ERJ-3EKF5101V | 10 | (p) [link](https://www.mouser.fi/en/ProductDetail/Panasonic/ERJ-3EKF5101V) |
 | R45 | 470 Ω 0603 — RC0603FR-07470RL | 10 | (p) [link](https://www.mouser.fi/en/ProductDetail/YAGEO/RC0603FR-07470RL) |
 | C1 | 220 µF 16 V alu SMD 6.3×7.7 — Panasonic EEE-FK1C221XP | 2 | (p) [link](https://www.mouser.fi/en/ProductDetail/Panasonic/EEE-FK1C221XP) |
 | C4 | 150 µF 16 V alu SMD 6.3×7.7 — Panasonic EEE-FKC151XAP | 2 | (p) [link](https://www.mouser.fi/en/ProductDetail/Panasonic/EEE-FKC151XAP) — any FK 150 µF/16 V in 6.3×7.7 fits |
-| C2,C6 | 10 µF 0805 X5R — Samsung CL21A106KAYNNNE | 10 | (p) [link](https://www.mouser.fi/en/ProductDetail/Samsung-Electro-Mechanics/CL21A106KAYNNNE) |
-| C3,C5,C7 | 100 nF 0603 X7R — Samsung CL10B104KB8NNNC | 10 | (p) [link](https://www.mouser.fi/en/ProductDetail/Samsung-Electro-Mechanics/CL10B104KB8NNNC) |
-| D1,D2 | SS34 Schottky 3 A 40 V, SMA — any brand | 5 | [search: SS34 SMA](https://www.mouser.fi/en/c/?q=SS34%20SMA) (multi-brand; pick cheapest stocked) |
-| D10–D30 | PESD5V0S1BA, SOD-323 — Nexperia | 30 | [search: PESD5V0S1BA](https://www.mouser.fi/en/c/?q=PESD5V0S1BA) (Mouser lists it with a `,115` packing suffix) |
+| C2,C6 | 10 µF 0805 X5R — Murata GRM21BR61E106KA73L | 10 | (p) [link](https://www.mouser.fi/en/ProductDetail/Murata-Electronics/GRM21BR61E106KA73L) |
+| C3,C5,C7 | 100 nF 0603 X7R — KEMET C0603C104K5RACTU | 10 | (p) [link](https://www.mouser.fi/en/ProductDetail/KEMET/C0603C104K5RACTU) |
+| D1,D2 | SS34 Schottky 3 A 40 V, SMA — any brand | 5 | [B340A-13-F](https://www.mouser.fi/en/c/?q=B340A-13-F) (Diodes Inc, SS34 equivalent; any SS34-class 3A/40V SMA works) |
+| D10–D30 | PESD5V0S1BA, SOD-323 — Nexperia | 30 | [CDSOD323-T05C](https://www.mouser.fi/en/c/?q=CDSOD323-T05C) (Bourns, 5V bidirectional SOD-323; or Nexperia PESD5V0S1BA `,135` packing if stocked) |
 | F2,F3 | Polyfuse 500 mA 1812 — Bourns MF-MSMF050-2 | 4 | ✔ [mouser.fi/en/ProductDetail/Bourns/MF-MSMF050-2](https://www.mouser.fi/en/ProductDetail/Bourns/MF-MSMF050-2) |
-| F1 | **Unfitted at first power!** Buy all three, fit after bench measurement | 1+1+1 | ✔ [MF-MSMF050-2](https://www.mouser.fi/en/ProductDetail/Bourns/MF-MSMF050-2) + (p) [MF-MSMF035-2](https://www.mouser.fi/en/ProductDetail/Bourns/MF-MSMF035-2) + (p) [MF-MSMF075-2](https://www.mouser.fi/en/ProductDetail/Bourns/MF-MSMF075-2) |
+| F1 | **Unfitted at first power!** Buy all three, fit after bench measurement | 1+1+1 | ✔ [MF-MSMF050-2](https://www.mouser.fi/en/ProductDetail/Bourns/MF-MSMF050-2) + (p) [MF-MSMF030-2](https://www.mouser.fi/en/ProductDetail/Bourns/MF-MSMF030-2) + (p) [MF-MSMF075-2](https://www.mouser.fi/en/ProductDetail/Bourns/MF-MSMF075-2) |
 | LED1 | Red 0603 — Lite-On LTST-C190KRKT | 5 | (p) [link](https://www.mouser.fi/en/ProductDetail/Lite-On/LTST-C190KRKT) |
 | LED2 | Yellow-green 0603 (Vf ≈ 2 V!) — Lite-On LTST-C190GKT | 5 | (p) [link](https://www.mouser.fi/en/ProductDetail/Lite-On/LTST-C190GKT) |
 | U2 | USBLC6-2SC6, SOT-23-6 — ST | 2 | (p) [link](https://www.mouser.fi/en/ProductDetail/STMicroelectronics/USBLC6-2SC6) |

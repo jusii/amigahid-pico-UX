@@ -22,7 +22,7 @@ Links are Mouser part-number searches (`mouser.fi/c/?q=…`) so they can't rot; 
 | J7 | Pin header 1×3 | 1 | — | (from the same breakaway) |
 | — | Female header 1×20, 2.54 mm (proto socketing of U1) | 2 | 2 | [M20-7822046](https://www.mouser.fi/en/c/?q=M20-7822046) or any 1×20 female |
 | JP1 | Solder jumper — no part | — | — | — |
-| F1 | **PLACEHOLDER — hand-fit after bench measurement.** Order all three: | 1 | 1+1+1 | [MF-MSMF035-2](https://www.mouser.fi/en/c/?q=MF-MSMF035-2) + [MF-MSMF050-2](https://www.mouser.fi/en/c/?q=MF-MSMF050-2) + [MF-MSMF075-2](https://www.mouser.fi/en/c/?q=MF-MSMF075-2) — same 1812 land |
+| F1 | **PLACEHOLDER — hand-fit after bench measurement.** Order all three: | 1 | 1+1+1 | [MF-MSMF030-2](https://www.mouser.fi/en/c/?q=MF-MSMF030-2) + [MF-MSMF050-2](https://www.mouser.fi/en/c/?q=MF-MSMF050-2) + [MF-MSMF075-2](https://www.mouser.fi/en/c/?q=MF-MSMF075-2) — same 1812 land |
 
 ## SMD parts (JLC-assembled in route A; order from Mouser only for hand-build route B)
 
@@ -32,14 +32,14 @@ Links are Mouser part-number searches (`mouser.fi/c/?q=…`) so they can't rot; 
 | R1–R38 | 10 kΩ 0603 1% | 38 | 100 | C25804 | [RC0603FR-0710KL](https://www.mouser.fi/en/c/?q=RC0603FR-0710KL) |
 | R39, R40 | 1 kΩ 0603 | 2 | 10 | C21190 | [RC0603FR-071KL](https://www.mouser.fi/en/c/?q=RC0603FR-071KL) |
 | R41, R42 | 4.7 kΩ 0603 (I²C pull-ups) | 2 | 10 | C23162 | [RC0603FR-074K7L](https://www.mouser.fi/en/c/?q=RC0603FR-074K7L) |
-| R43, R44 | 5.1 kΩ 0603 (USB-C CC) | 2 | 10 | C23186 | [RC0603FR-075K1L](https://www.mouser.fi/en/c/?q=RC0603FR-075K1L) |
+| R43, R44 | 5.1 kΩ 0603 (USB-C CC) | 2 | 10 | C23186 | [ERJ-3EKF5101V](https://www.mouser.fi/en/c/?q=ERJ-3EKF5101V) (Panasonic) |
 | R45 | 470 Ω 0603 (JP1 LED ballast) | 1 | 10 | C23179 | [RC0603FR-07470RL](https://www.mouser.fi/en/c/?q=RC0603FR-07470RL) |
 | C1 | 220 µF 16 V SMD alu, D6.3×7.7 — Panasonic EEE-FK1C221XP | 1 | 2 | C128533 | [EEE-FK1C221XP](https://www.mouser.fi/en/c/?q=EEE-FK1C221XP) |
 | C4 | 150 µF 16 V SMD alu, D6.3×7.7 — Panasonic EEE-FKC151XAP | 1 | 2 | C413656 | [EEE-FKC151XAP](https://www.mouser.fi/en/c/?q=EEE-FKC151XAP) (any FK-series 150 µF/16 V in 6.3×7.7 fits) |
-| C2, C6 | 10 µF 0805 X5R ≥16 V | 2 | 10 | C15850 | [CL21A106KAYNNNE](https://www.mouser.fi/en/c/?q=CL21A106KAYNNNE) or equiv |
-| C3, C5, C7 | 100 nF 0603 X7R 50 V | 3 | 10 | C14663 | [CL10B104KB8NNNC](https://www.mouser.fi/en/c/?q=CL10B104KB8NNNC) or equiv |
-| D1, D2 | SS34 Schottky 3 A 40 V, SMA | 2 | 5 | C8678 | [SS34 (SMA)](https://www.mouser.fi/en/c/?q=SS34%20SMA) — any brand |
-| D10–D30 | PESD5V0S1BA ESD clamp, SOD-323 | 21 | 30 | C19224 | [PESD5V0S1BA](https://www.mouser.fi/en/c/?q=PESD5V0S1BA) (Nexperia) |
+| C2, C6 | 10 µF 0805 X5R ≥16 V | 2 | 10 | C15850 | [GRM21BR61E106KA73L](https://www.mouser.fi/en/c/?q=GRM21BR61E106KA73L) or equiv |
+| C3, C5, C7 | 100 nF 0603 X7R 50 V | 3 | 10 | C14663 | [C0603C104K5RACTU](https://www.mouser.fi/en/c/?q=C0603C104K5RACTU) or equiv |
+| D1, D2 | SS34 Schottky 3 A 40 V, SMA | 2 | 5 | C8678 | [B340A-13-F](https://www.mouser.fi/en/c/?q=B340A-13-F) (Diodes Inc) or any SS34-class 3A/40V SMA |
+| D10–D30 | PESD5V0S1BA ESD clamp, SOD-323 | 21 | 30 | C19224 | [CDSOD323-T05C](https://www.mouser.fi/en/c/?q=CDSOD323-T05C) (Bourns; or Nexperia PESD5V0S1BA ,135 packing if stocked) |
 | F2, F3 | Polyfuse 500 mA hold, 1812 — Bourns MF-MSMF050-2 | 2 | 4 | C17313 | [MF-MSMF050-2](https://www.mouser.fi/en/c/?q=MF-MSMF050-2) |
 | LED1 | Red 0603 | 1 | 5 | C2286 | [LTST-C190KRKT](https://www.mouser.fi/en/c/?q=LTST-C190KRKT) or equiv red 0603 |
 | LED2 | Yellow-green 0603, **Vf ≈ 2.0–2.2 V** (not blue/white-class InGaN) | 1 | 5 | C2289 (KT-0603YG) | [LTST-C190GKT](https://www.mouser.fi/en/c/?q=LTST-C190GKT) or equiv |

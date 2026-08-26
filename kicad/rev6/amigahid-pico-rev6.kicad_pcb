@@ -2064,7 +2064,7 @@
 				)
 			)
 		)
-		(property "Sourcing" "PLACEHOLDER - do not order assembled. Size F1 from a bench measurement of the full stack (plan predicts 350-500 mA), then hand-fit the 1812 part; MF-MSMF035/050/075 all share this land."
+		(property "Sourcing" "PLACEHOLDER - do not order assembled. Size F1 from a bench measurement of the full stack (plan predicts 350-500 mA), then hand-fit the 1812 part; MF-MSMF030/050/075 all share this land."
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)

@@ -107,7 +107,7 @@ keyboard-connector leg is an OPEN CIRCUIT and only the aux input (or the pico's 
 powers the board.
 
 **first power / bring-up order (f1 is unfitted by design).** f1's final value is a bench
-decision (mf-msmf035/050/075 share the land), so a fresh board has an open fuse position
+decision (mf-msmf030/050/075 share the land), so a fresh board has an open fuse position
 and the amiga/keyboard-connector 5 v leg is dead. do NOT begin by feeding bench 5 v into
 the din-out/kbd 5 v pin — through the empty fuse it proves nothing on a perfectly good
 board. instead:
