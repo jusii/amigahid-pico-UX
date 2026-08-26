@@ -27,7 +27,7 @@ One order covers everything on the board. Links are exact Mouser product pages (
 | R45 | 470 Ω 0603 — RC0603FR-07470RL | 10 | (p) [link](https://www.mouser.fi/en/ProductDetail/YAGEO/RC0603FR-07470RL) |
 | C1 | 220 µF 16 V alu SMD 6.3×7.7 — Panasonic EEE-FK1C221XP | 2 | (p) [link](https://www.mouser.fi/en/ProductDetail/Panasonic/EEE-FK1C221XP) |
 | C4 | 150 µF 16 V alu SMD 6.3×7.7 — Panasonic EEE-FKC151XAP | 2 | (p) [link](https://www.mouser.fi/en/ProductDetail/Panasonic/EEE-FKC151XAP) — any FK 150 µF/16 V in 6.3×7.7 fits |
-| C2,C6 | 10 µF 0805 X5R — Murata GRM21BR61E106KA73L | 10 | (p) [link](https://www.mouser.fi/en/ProductDetail/Murata-Electronics/GRM21BR61E106KA73L) |
+| C2,C6 | 10 µF 0805 X5R — TDK C2012X5R1V106K125AC | 10 | (p) [link](https://www.mouser.fi/en/ProductDetail/TDK/C2012X5R1V106K125AC) |
 | C3,C5,C7 | 100 nF 0603 X7R — KEMET C0603C104K5RACTU | 10 | (p) [link](https://www.mouser.fi/en/ProductDetail/KEMET/C0603C104K5RACTU) |
 | D1,D2 | SS34 Schottky 3 A 40 V, SMA — any brand | 5 | [B340A-13-F](https://www.mouser.fi/en/c/?q=B340A-13-F) (Diodes Inc, SS34 equivalent; any SS34-class 3A/40V SMA works) |
 | D10–D30 | PESD5V0S1BA, SOD-323 — Nexperia | 30 | [CDSOD323-T05C](https://www.mouser.fi/en/c/?q=CDSOD323-T05C) (Bourns, 5V bidirectional SOD-323; or Nexperia PESD5V0S1BA `,135` packing if stocked) |
