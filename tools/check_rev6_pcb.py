@@ -140,7 +140,9 @@ USB_MAX_SKEW = 5.0
 
 # H: silkscreen
 SILK_STRINGS = ["TO AMIGA", "FROM KEYBOARD", "ONE Amiga", "JLCJLCJLCJLC"]
-SILK_REVISION_RE = re.compile(r"\br\s*6\b", re.IGNORECASE)
+# the board's product name is "UX" (rev 1); "rev6" remains the internal engineering
+# codename only and no longer appears on the silkscreen (renamed at the user's request).
+SILK_REVISION_RE = re.compile(r"\bUX\s+rev\s*\d+\b", re.IGNORECASE)
 REFDES_MUST_SHOW = SOUTH_CONNECTORS + NORTH_CONNECTORS + [
     "J1", "J2", "J3", "J4", "J7", "J8", "J13", "JP1", "U1",
 ]
@@ -1909,9 +1911,9 @@ def check_h_silk(rep: Report, model: Model) -> None:
 
     rep.check(
         "H2",
-        "silkscreen carries a board revision marker matching /r\\s*6/",
+        "silkscreen carries the product name + revision marker matching /UX rev N/",
         any(SILK_REVISION_RE.search(t) for t in user_texts),
-        "no board-level silkscreen text contains an 'r6' revision marker",
+        "no board-level silkscreen text contains a 'UX rev N' product/revision marker",
     )
 
     bad = []

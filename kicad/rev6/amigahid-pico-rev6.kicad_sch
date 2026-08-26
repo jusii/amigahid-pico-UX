@@ -9153,7 +9153,7 @@
 				)
 			)
 		)
-		(property "Sourcing" "Power Dynamics PDI-09S-5 (DE9 male, right-angle THT, 5.0 mm footprint: near pin row 4.94 mm from the board edge, 2 x 3.2 mm holes on 25.0 mm centres; 7.2 mm / 0.318 in parts do NOT fit) - hand-solder, not JLC-assembled"
+		(property "Sourcing" "Power Dynamics PDI-09S-5 (DE9 male, right-angle THT, 5.34 mm footprint family: flange-screw holes 2 x 3.2 mm on 25.0 mm centres THROUGH the pcb at 4.94 mm from the board edge, near pin row 7.78 mm from the edge; 9.4 mm European-footprint and 7.2/8.08 mm parts do NOT fit) - hand-solder, not JLC-assembled"
 			(at 74.93 434.34 0)
 			(hide yes)
 			(effects
@@ -9438,7 +9438,7 @@
 				)
 			)
 		)
-		(property "Sourcing" "Power Dynamics PDI-09S-5 (DE9 male, right-angle THT, 5.0 mm footprint: near pin row 4.94 mm from the board edge, 2 x 3.2 mm holes on 25.0 mm centres; 7.2 mm / 0.318 in parts do NOT fit) - hand-solder, not JLC-assembled"
+		(property "Sourcing" "Power Dynamics PDI-09S-5 (DE9 male, right-angle THT, 5.34 mm footprint family: flange-screw holes 2 x 3.2 mm on 25.0 mm centres THROUGH the pcb at 4.94 mm from the board edge, near pin row 7.78 mm from the edge; 9.4 mm European-footprint and 7.2/8.08 mm parts do NOT fit) - hand-solder, not JLC-assembled"
 			(at 74.93 504.19 0)
 			(hide yes)
 			(effects

@@ -746,7 +746,7 @@
 				)
 			)
 		)
-		(property "Sourcing" "Power Dynamics PDI-09S-5 (DE9 male, right-angle THT, 5.0 mm footprint: near pin row 4.94 mm from the board edge, 2 x 3.2 mm holes on 25.0 mm centres; 7.2 mm / 0.318 in parts do NOT fit) - hand-solder, not JLC-assembled"
+		(property "Sourcing" "Power Dynamics PDI-09S-5 (DE9 male, right-angle THT, 5.34 mm footprint family: flange-screw holes 2 x 3.2 mm on 25.0 mm centres THROUGH the pcb at 4.94 mm from the board edge, near pin row 7.78 mm from the edge; 9.4 mm European-footprint and 7.2/8.08 mm parts do NOT fit) - hand-solder, not JLC-assembled"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -6837,7 +6837,7 @@
 				)
 			)
 		)
-		(property "Sourcing" "Power Dynamics PDI-09S-5 (DE9 male, right-angle THT, 5.0 mm footprint: near pin row 4.94 mm from the board edge, 2 x 3.2 mm holes on 25.0 mm centres; 7.2 mm / 0.318 in parts do NOT fit) - hand-solder, not JLC-assembled"
+		(property "Sourcing" "Power Dynamics PDI-09S-5 (DE9 male, right-angle THT, 5.34 mm footprint family: flange-screw holes 2 x 3.2 mm on 25.0 mm centres THROUGH the pcb at 4.94 mm from the board edge, near pin row 7.78 mm from the edge; 9.4 mm European-footprint and 7.2/8.08 mm parts do NOT fit) - hand-solder, not JLC-assembled"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -31408,7 +31408,7 @@
 			)
 		)
 	)
-	(gr_text "r6 by Jusii"
+	(gr_text "UX rev 1 - by Jusii"
 		(at 76 49.8 0)
 		(layer "F.SilkS")
 		(uuid "5fec46fe-e8c2-4832-8836-9375019c6f25")
@@ -31445,17 +31445,6 @@
 		(at 76 56.7 0)
 		(layer "F.SilkS")
 		(uuid "9c41af2e-70d3-4b8a-a1c5-2f6e8d0b3a17")
-		(effects
-			(font
-				(size 1.2 1.2)
-				(thickness 0.2)
-			)
-		)
-	)
-	(gr_text "non-commercial license - see URLs above"
-		(at 76 59 0)
-		(layer "F.SilkS")
-		(uuid "e83b52d9-16fa-4c07-9b2e-74a1c5d68f30")
 		(effects
 			(font
 				(size 1.2 1.2)
@@ -31542,7 +31531,7 @@
 			)
 		)
 	)
-	(gr_text "hid-pico Amiga r6"
+	(gr_text "hid-pico Amiga UX"
 		(at 76 46.5 0)
 		(layer "F.SilkS")
 		(uuid "98948415-97da-4172-8e54-87792f834c56")

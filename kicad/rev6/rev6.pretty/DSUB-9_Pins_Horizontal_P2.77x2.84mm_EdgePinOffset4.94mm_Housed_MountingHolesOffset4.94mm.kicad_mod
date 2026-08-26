@@ -3,7 +3,7 @@
 	(generator "pcbnew")
 	(generator_version "10.0")
 	(layer "F.Cu")
-	(descr "9-pin D-Sub connector, horizontal/angled (90 deg), THT-mount, pins (male), pitch 2.77x2.84mm, pin-PCB-offset 4.94mm, distance of mounting holes 25mm, distance of mounting holes to PCB edge 4.94mm, see https://disti-assets.s3.amazonaws.com/tonar/files/datasheets/16730.pdf")
+	(descr "9-pin D-Sub connector, horizontal/angled (90 deg), THT-mount, pins (male), pitch 2.77x2.84mm, pin-PCB-offset 4.94mm, distance of mounting holes 25mm, distance of mounting holes to PCB edge 4.94mm. VERIFY AGAINST A PHYSICAL SAMPLE BEFORE FAB: 5.34mm-footprint family (Power Dynamics PDI-09S-5 class); 9.4mm European and 7.2/8.08mm parts do NOT fit this land. See https://disti-assets.s3.amazonaws.com/tonar/files/datasheets/16730.pdf")
 	(tags "9-pin D-Sub connector horizontal angled 90deg THT pins pitch 2.77x2.84mm pin-PCB-offset 4.94mm mounting-holes-distance 25mm mounting-hole-offset 4.94mm")
 	(property "Reference" "P2"
 		(at 5.54 -2.8 0)
