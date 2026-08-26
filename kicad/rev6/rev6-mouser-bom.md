@@ -10,40 +10,40 @@ Links are Mouser part-number searches (`mouser.fi/c/?q=…`) so they can't rot; 
 
 | Ref | Part | Qty/board | Order | Mouser |
 |---|---|---|---|---|
-| U1 | Raspberry Pi Pico W (SC0918) — or Pico 2 W | 1 | 2 | [SC0918](https://www.mouser.fi/c/?q=SC0918) |
-| P1, P2 | DE9 male, right-angle THT, **.318″ / 8.08 mm footprint family** — Kycon K22X-E9P-N (per schematic). Boardlock screws bolt THROUGH the pcb: 2× 3.2 mm plated holes, 25 mm apart, sitting **midway between the two pin rows**, 1.42 mm behind the near row; near pin row 7.70 mm from edge; pin holes 1.1 mm. | 2 | 3 | [K22X-E9P-N](https://www.mouser.fi/c/?q=K22X-E9P-N) — Mouser 806-K22X-E9P-N. Digi-Key FI fallback: 9990172, ~€1.79, deep stock. Same land: NorComp 182-009-113R531, TE 5747840-x, Würth 618009231221, Amphenol L717 code 33E. **The discriminator is where the boardlock holes sit relative to the pin rows — not the backset on its own.** |
-| J9, J11 | DIN5 180° socket (A2000/A3000 kbd) — Kycon KCDX-5S-N | 2 | 3 | [KCDX-5S-N](https://www.mouser.fi/ProductDetail/Kycon/KCDX-5S-N) |
-| J10, J12 | Mini-DIN6 / PS-2 socket (A4000 kbd) — Same Sky MD-60S | 2 | 3 | [MD-60S](https://www.mouser.fi/c/?q=MD-60S) (exactly MD-60S, not MD-60SM) |
-| J4 | USB-A receptacle, RA THT — Molex 67643-3910 | 1 | 2 | [67643-3910](https://www.mouser.fi/c/?q=67643-3910) (67643-0910 = same land) |
-| J13 | USB-C power-only 6P — GCT USB4135-GF-A | 1 | 2 | [USB4135-GF-A](https://www.mouser.fi/c/?q=USB4135-GF-A) (fallback: Farnell/TME) |
-| J1, J8 | Pin header 1×8, 2.54 mm vertical | 2 | — | one 1×40 breakaway covers all headers: [M20-9994046](https://www.mouser.fi/c/?q=M20-9994046) ×1 |
+| U1 | Raspberry Pi Pico W (SC0918) — or Pico 2 W | 1 | 2 | [SC0918](https://www.mouser.fi/en/c/?q=SC0918) |
+| P1, P2 | DE9 male, right-angle THT, **.318″ / 8.08 mm footprint family** — Kycon K22X-E9P-N (per schematic). Boardlock screws bolt THROUGH the pcb: 2× 3.2 mm plated holes, 25 mm apart, sitting **midway between the two pin rows**, 1.42 mm behind the near row; near pin row 7.70 mm from edge; pin holes 1.1 mm. | 2 | 3 | [K22X-E9P-N](https://www.mouser.fi/en/c/?q=K22X-E9P-N) — Mouser 806-K22X-E9P-N. Digi-Key FI fallback: 9990172, ~€1.79, deep stock. Same land: NorComp 182-009-113R531, TE 5747840-x, Würth 618009231221, Amphenol L717 code 33E. **The discriminator is where the boardlock holes sit relative to the pin rows — not the backset on its own.** |
+| J9, J11 | DIN5 180° socket (A2000/A3000 kbd) — Kycon KCDX-5S-N | 2 | 3 | [KCDX-5S-N](https://www.mouser.fi/en/ProductDetail/Kycon/KCDX-5S-N) |
+| J10, J12 | Mini-DIN6 / PS-2 socket (A4000 kbd) — Same Sky MD-60S | 2 | 3 | [MD-60S](https://www.mouser.fi/en/c/?q=MD-60S) (exactly MD-60S, not MD-60SM) |
+| J4 | USB-A receptacle, RA THT — Molex 67643-3910 | 1 | 2 | [67643-3910](https://www.mouser.fi/en/c/?q=67643-3910) (67643-0910 = same land) |
+| J13 | USB-C power-only 6P — GCT USB4135-GF-A | 1 | 2 | [USB4135-GF-A](https://www.mouser.fi/en/c/?q=USB4135-GF-A) (fallback: Farnell/TME) |
+| J1, J8 | Pin header 1×8, 2.54 mm vertical | 2 | — | one 1×40 breakaway covers all headers: [M20-9994046](https://www.mouser.fi/en/c/?q=M20-9994046) ×1 |
 | J2 | Pin header 1×6 | 1 | — | (from the same breakaway) |
 | J3 | Pin header 1×4 | 1 | — | (from the same breakaway) |
 | J7 | Pin header 1×3 | 1 | — | (from the same breakaway) |
-| — | Female header 1×20, 2.54 mm (proto socketing of U1) | 2 | 2 | [M20-7822046](https://www.mouser.fi/c/?q=M20-7822046) or any 1×20 female |
+| — | Female header 1×20, 2.54 mm (proto socketing of U1) | 2 | 2 | [M20-7822046](https://www.mouser.fi/en/c/?q=M20-7822046) or any 1×20 female |
 | JP1 | Solder jumper — no part | — | — | — |
-| F1 | **PLACEHOLDER — hand-fit after bench measurement.** Order all three: | 1 | 1+1+1 | [MF-MSMF035-2](https://www.mouser.fi/c/?q=MF-MSMF035-2) + [MF-MSMF050-2](https://www.mouser.fi/c/?q=MF-MSMF050-2) + [MF-MSMF075-2](https://www.mouser.fi/c/?q=MF-MSMF075-2) — same 1812 land |
+| F1 | **PLACEHOLDER — hand-fit after bench measurement.** Order all three: | 1 | 1+1+1 | [MF-MSMF035-2](https://www.mouser.fi/en/c/?q=MF-MSMF035-2) + [MF-MSMF050-2](https://www.mouser.fi/en/c/?q=MF-MSMF050-2) + [MF-MSMF075-2](https://www.mouser.fi/en/c/?q=MF-MSMF075-2) — same 1812 land |
 
 ## SMD parts (JLC-assembled in route A; order from Mouser only for hand-build route B)
 
 | Ref | Part | Qty/board | Order | LCSC (JLC route) | Mouser equivalent |
 |---|---|---|---|---|---|
-| Q1–Q19 | BSS138 N-FET, SOT-23 | 19 | 25 | C78284 | [onsemi BSS138](https://www.mouser.fi/c/?q=BSS138%20onsemi) |
-| R1–R38 | 10 kΩ 0603 1% | 38 | 100 | C25804 | [RC0603FR-0710KL](https://www.mouser.fi/c/?q=RC0603FR-0710KL) |
-| R39, R40 | 1 kΩ 0603 | 2 | 10 | C21190 | [RC0603FR-071KL](https://www.mouser.fi/c/?q=RC0603FR-071KL) |
-| R41, R42 | 4.7 kΩ 0603 (I²C pull-ups) | 2 | 10 | C23162 | [RC0603FR-074K7L](https://www.mouser.fi/c/?q=RC0603FR-074K7L) |
-| R43, R44 | 5.1 kΩ 0603 (USB-C CC) | 2 | 10 | C23186 | [RC0603FR-075K1L](https://www.mouser.fi/c/?q=RC0603FR-075K1L) |
-| R45 | 470 Ω 0603 (JP1 LED ballast) | 1 | 10 | C23179 | [RC0603FR-07470RL](https://www.mouser.fi/c/?q=RC0603FR-07470RL) |
-| C1 | 220 µF 16 V SMD alu, D6.3×7.7 — Panasonic EEE-FK1C221XP | 1 | 2 | C128533 | [EEE-FK1C221XP](https://www.mouser.fi/c/?q=EEE-FK1C221XP) |
-| C4 | 150 µF 16 V SMD alu, D6.3×7.7 — Panasonic EEE-FKC151XAP | 1 | 2 | C413656 | [EEE-FKC151XAP](https://www.mouser.fi/c/?q=EEE-FKC151XAP) (any FK-series 150 µF/16 V in 6.3×7.7 fits) |
-| C2, C6 | 10 µF 0805 X5R ≥16 V | 2 | 10 | C15850 | [CL21A106KAYNNNE](https://www.mouser.fi/c/?q=CL21A106KAYNNNE) or equiv |
-| C3, C5, C7 | 100 nF 0603 X7R 50 V | 3 | 10 | C14663 | [CL10B104KB8NNNC](https://www.mouser.fi/c/?q=CL10B104KB8NNNC) or equiv |
-| D1, D2 | SS34 Schottky 3 A 40 V, SMA | 2 | 5 | C8678 | [SS34 (SMA)](https://www.mouser.fi/c/?q=SS34%20SMA) — any brand |
-| D10–D30 | PESD5V0S1BA ESD clamp, SOD-323 | 21 | 30 | C19224 | [PESD5V0S1BA](https://www.mouser.fi/c/?q=PESD5V0S1BA) (Nexperia) |
-| F2, F3 | Polyfuse 500 mA hold, 1812 — Bourns MF-MSMF050-2 | 2 | 4 | C17313 | [MF-MSMF050-2](https://www.mouser.fi/c/?q=MF-MSMF050-2) |
-| LED1 | Red 0603 | 1 | 5 | C2286 | [LTST-C190KRKT](https://www.mouser.fi/c/?q=LTST-C190KRKT) or equiv red 0603 |
-| LED2 | Yellow-green 0603, **Vf ≈ 2.0–2.2 V** (not blue/white-class InGaN) | 1 | 5 | C2289 (KT-0603YG) | [LTST-C190GKT](https://www.mouser.fi/c/?q=LTST-C190GKT) or equiv |
-| U2 | USBLC6-2SC6 USB ESD array, SOT-23-6 | 1 | 2 | C7519 | [USBLC6-2SC6](https://www.mouser.fi/c/?q=USBLC6-2SC6) (ST) |
+| Q1–Q19 | BSS138 N-FET, SOT-23 | 19 | 25 | C78284 | [onsemi BSS138](https://www.mouser.fi/en/c/?q=BSS138%20onsemi) |
+| R1–R38 | 10 kΩ 0603 1% | 38 | 100 | C25804 | [RC0603FR-0710KL](https://www.mouser.fi/en/c/?q=RC0603FR-0710KL) |
+| R39, R40 | 1 kΩ 0603 | 2 | 10 | C21190 | [RC0603FR-071KL](https://www.mouser.fi/en/c/?q=RC0603FR-071KL) |
+| R41, R42 | 4.7 kΩ 0603 (I²C pull-ups) | 2 | 10 | C23162 | [RC0603FR-074K7L](https://www.mouser.fi/en/c/?q=RC0603FR-074K7L) |
+| R43, R44 | 5.1 kΩ 0603 (USB-C CC) | 2 | 10 | C23186 | [RC0603FR-075K1L](https://www.mouser.fi/en/c/?q=RC0603FR-075K1L) |
+| R45 | 470 Ω 0603 (JP1 LED ballast) | 1 | 10 | C23179 | [RC0603FR-07470RL](https://www.mouser.fi/en/c/?q=RC0603FR-07470RL) |
+| C1 | 220 µF 16 V SMD alu, D6.3×7.7 — Panasonic EEE-FK1C221XP | 1 | 2 | C128533 | [EEE-FK1C221XP](https://www.mouser.fi/en/c/?q=EEE-FK1C221XP) |
+| C4 | 150 µF 16 V SMD alu, D6.3×7.7 — Panasonic EEE-FKC151XAP | 1 | 2 | C413656 | [EEE-FKC151XAP](https://www.mouser.fi/en/c/?q=EEE-FKC151XAP) (any FK-series 150 µF/16 V in 6.3×7.7 fits) |
+| C2, C6 | 10 µF 0805 X5R ≥16 V | 2 | 10 | C15850 | [CL21A106KAYNNNE](https://www.mouser.fi/en/c/?q=CL21A106KAYNNNE) or equiv |
+| C3, C5, C7 | 100 nF 0603 X7R 50 V | 3 | 10 | C14663 | [CL10B104KB8NNNC](https://www.mouser.fi/en/c/?q=CL10B104KB8NNNC) or equiv |
+| D1, D2 | SS34 Schottky 3 A 40 V, SMA | 2 | 5 | C8678 | [SS34 (SMA)](https://www.mouser.fi/en/c/?q=SS34%20SMA) — any brand |
+| D10–D30 | PESD5V0S1BA ESD clamp, SOD-323 | 21 | 30 | C19224 | [PESD5V0S1BA](https://www.mouser.fi/en/c/?q=PESD5V0S1BA) (Nexperia) |
+| F2, F3 | Polyfuse 500 mA hold, 1812 — Bourns MF-MSMF050-2 | 2 | 4 | C17313 | [MF-MSMF050-2](https://www.mouser.fi/en/c/?q=MF-MSMF050-2) |
+| LED1 | Red 0603 | 1 | 5 | C2286 | [LTST-C190KRKT](https://www.mouser.fi/en/c/?q=LTST-C190KRKT) or equiv red 0603 |
+| LED2 | Yellow-green 0603, **Vf ≈ 2.0–2.2 V** (not blue/white-class InGaN) | 1 | 5 | C2289 (KT-0603YG) | [LTST-C190GKT](https://www.mouser.fi/en/c/?q=LTST-C190GKT) or equiv |
+| U2 | USBLC6-2SC6 USB ESD array, SOT-23-6 | 1 | 2 | C7519 | [USBLC6-2SC6](https://www.mouser.fi/en/c/?q=USBLC6-2SC6) (ST) |
 
 ## Optional / accessories (not on the board)
 
