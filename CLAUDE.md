@@ -66,8 +66,12 @@ Follow `Machine/Coding Standards.md`. Load-bearing rule: **never mention AI tool
   `kicad/rev6/amigahid-pico-rev6.kicad_pro`, which loses the Power netclass and makes later DRC
   runs measure against weaker defaults. After **any** pcbnew-scripted save, run
   `git checkout -- kicad/rev6/amigahid-pico-rev6.kicad_pro` before running a gate; the file must
-  stay byte-identical to HEAD. `kicad-cli pcb drc --save-board` does **not** touch the project
-  file, only the board. **`kicad-cli pcb export gerbers` is also destructive**: it rewrites both
+  stay byte-identical to HEAD. `kicad-cli pcb drc --save-board` was long believed to leave the
+  project file alone, but on KiCad 10.0.5 it has been observed to rewrite `.kicad_pro`/`.kicad_prl`
+  too (full schema migration) — and on the NFS working tree the write can surface *seconds after*
+  a `git status` already reported clean. Treat EVERY kicad-cli invocation that writes as suspect:
+  restore both files afterwards and re-check `git status` again before trusting a clean tree.
+  **`kicad-cli pcb export gerbers` is also destructive**: it rewrites both
   `.kicad_prl` and `.kicad_pro` (a full KiCad-10 schema migration of the project file — the
   netclass patterns happened to survive it once, but do not rely on that). After any gerber
   export, `git checkout -- kicad/rev6/amigahid-pico-rev6.kicad_pro kicad/rev6/amigahid-pico-rev6.kicad_prl`
