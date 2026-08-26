@@ -31408,7 +31408,7 @@
 			)
 		)
 	)
-	(gr_text "based on the rev5 design by borb"
+	(gr_text "r6 by Jusii"
 		(at 76 49.8 0)
 		(layer "F.SilkS")
 		(uuid "5fec46fe-e8c2-4832-8836-9375019c6f25")
@@ -31419,7 +31419,7 @@
 			)
 		)
 	)
-	(gr_text "github.com/borb/amigahid-pico"
+	(gr_text "github.com/jusii/amigahid-pico"
 		(at 76 52.1 0)
 		(layer "F.SilkS")
 		(uuid "56d60244-6ff9-43e7-97cc-5d3aaa9a7440")
@@ -31430,10 +31430,32 @@
 			)
 		)
 	)
-	(gr_text "non-commercial license - see URL above"
+	(gr_text "based on the rev5 design by borb"
 		(at 76 54.4 0)
 		(layer "F.SilkS")
 		(uuid "ca333c6a-67c5-42a8-a68e-a8a627146f3f")
+		(effects
+			(font
+				(size 1.2 1.2)
+				(thickness 0.2)
+			)
+		)
+	)
+	(gr_text "github.com/borb/amigahid-pico"
+		(at 76 56.7 0)
+		(layer "F.SilkS")
+		(uuid "9c41af2e-70d3-4b8a-a1c5-2f6e8d0b3a17")
+		(effects
+			(font
+				(size 1.2 1.2)
+				(thickness 0.2)
+			)
+		)
+	)
+	(gr_text "non-commercial license - see URLs above"
+		(at 76 59 0)
+		(layer "F.SilkS")
+		(uuid "e83b52d9-16fa-4c07-9b2e-74a1c5d68f30")
 		(effects
 			(font
 				(size 1.2 1.2)
