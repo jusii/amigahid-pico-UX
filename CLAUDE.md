@@ -52,7 +52,7 @@ Follow `Machine/Coding Standards.md`. Load-bearing rule: **never mention AI tool
 - Before committing any rev6 **schematic** change, both gates must pass:
   - `kicad-cli sch erc kicad/rev6/amigahid-pico-rev6.kicad_sch --exit-code-violations` (zero violations)
   - `python3 tools/check_rev6_netlist.py` (RESULT: PASS)
-- Before committing any rev6 **board** change, all three gates must pass, in this order, after refilling zones:
+- Before committing any rev6 **board** change, all four gates must pass, in this order, after refilling zones:
   - `kicad-cli pcb drc kicad/rev6/amigahid-pico-rev6.kicad_pcb --schematic-parity --severity-all --refill-zones --save-board --exit-code-violations` (zero violations **and** zero unconnected items)
   - `python3 tools/check_rev6_pcb.py` (full PASS)
   - `python3 tools/check_rev6_netlist.py` (RESULT: PASS)
@@ -67,7 +67,11 @@ Follow `Machine/Coding Standards.md`. Load-bearing rule: **never mention AI tool
   runs measure against weaker defaults. After **any** pcbnew-scripted save, run
   `git checkout -- kicad/rev6/amigahid-pico-rev6.kicad_pro` before running a gate; the file must
   stay byte-identical to HEAD. `kicad-cli pcb drc --save-board` does **not** touch the project
-  file, only the board.
+  file, only the board. **`kicad-cli pcb export gerbers` is also destructive**: it rewrites both
+  `.kicad_prl` and `.kicad_pro` (a full KiCad-10 schema migration of the project file — the
+  netclass patterns happened to survive it once, but do not rely on that). After any gerber
+  export, `git checkout -- kicad/rev6/amigahid-pico-rev6.kicad_pro kicad/rev6/amigahid-pico-rev6.kicad_prl`
+  before running any gate. `kicad-cli pcb export drill` is clean.
 - `net_settings.meta.version` in that same file must stay at 3 or above. `netclass_patterns` is a
   v3 construct; at v2 KiCad's migration builds netclass membership from `classes[*].nets` instead
   and throws the patterns away, so the Power netclass loads empty and every supply rail is checked

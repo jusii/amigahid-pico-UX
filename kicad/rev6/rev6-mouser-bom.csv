@@ -1,6 +1,6 @@
 RefDes,Description,Qty/board,Suggested order qty,LCSC (JLC route),Mouser part,Mouser link
 U1,Raspberry Pi Pico W (or Pico 2 W),1,2,,SC0918,https://www.mouser.fi/c/?q=SC0918
-"P1,P2","DE9 male RA THT, European footprint 9.4mm",2,3,,Amphenol L717SDE09P,https://www.mouser.fi/c/?q=L717SDE09P
+"P1,P2","DE9 male RA THT, 5.34mm footprint family (flange holes through pcb, 4.94mm from edge, 25mm centres) - 9.4mm European family does NOT fit",2,3,,Power Dynamics PDI-09S-5 (TME/Farnell); Mouser equivalent TBD - see rev6-mouser-bom.md,https://www.tme.eu/fi/
 "J9,J11",DIN5 180deg socket,2,3,,Kycon KCDX-5S-N,https://www.mouser.fi/ProductDetail/Kycon/KCDX-5S-N
 "J10,J12",Mini-DIN6 PS/2 socket,2,3,,Same Sky MD-60S,https://www.mouser.fi/c/?q=MD-60S
 J4,USB-A receptacle RA THT,1,2,,Molex 67643-3910,https://www.mouser.fi/c/?q=67643-3910

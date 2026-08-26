@@ -74,12 +74,35 @@ a fillet of epoxy under the overhang — before it takes any downward load from 
 slim d-sub hood plus a normal usb plug fits; a full-size moulded hood plus a fat plug or a
 usb stick does not. use slim hoods, or a short usb extension.
 
-**power the keyboard connector first.** the nineteen high-side pull-ups tie every
-amiga-facing line to sys5v, and sys5v is fed only from the keyboard connector (d1) or the
-usb-c aux input (d2) — the de9 ports take no power. cabling only the joystick ports to a
-running amiga leaves sys5v dead and drags all fourteen port lines low through 10k, so the
-machine sees stuck directions and buttons while the board looks simply dead. connect
-keyboard-connector or aux 5 v before the de9 cables.
+**power the keyboard connector first — but know that f1 ships empty.** the nineteen
+high-side pull-ups tie every amiga-facing line to sys5v, and sys5v is fed only from the
+keyboard connector (via f1 then d1) or the usb-c aux input (d2) — the de9 ports take no
+power. cabling only the joystick ports to a running amiga leaves sys5v dead and drags all
+fourteen port lines low through 10k, so the machine sees stuck directions and buttons
+while the board looks simply dead. connect keyboard-connector or aux 5 v before the de9
+cables. note the trap: until f1 is hand-fitted (see first power below), the
+keyboard-connector leg is an OPEN CIRCUIT and only the aux input (or the pico's own usb)
+powers the board.
+
+**first power / bring-up order (f1 is unfitted by design).** f1's final value is a bench
+decision (mf-msmf035/050/075 share the land), so a fresh board has an open fuse position
+and the amiga/keyboard-connector 5 v leg is dead. do NOT begin by feeding bench 5 v into
+the din-out/kbd 5 v pin — through the empty fuse it proves nothing on a perfectly good
+board. instead:
+1. assemble: bottom smd, then top smd, then tht connectors. leave f1 empty; fit f2/f3.
+2. first power = bench supply into the usb-c aux (j13), current-limited to ~300 ma. the
+   aux leg is unfused (j13 → d2 → sys5v), so the bench limit is the only protection — use
+   a real bench supply, not a phone charger.
+3. expect sys5v ≈ 4.5–4.6 v (one schottky drop) and, once u1 is fitted, +3v3 from the
+   module. this exercises everything downstream of d1: f2/f3 legs, all pull-up rails.
+4. ohm out the f1 leg by hand (kbd-connector 5 v pin ↔ f1 pad 1; f1 pad 2 ↔ d1 anode).
+5. fit/flash the module (pc usb powers it via the module's own vbus→vsys schottky; safe
+   alongside aux power — everything meets at diodes).
+6. measure the full running stack's current draw at the aux input — that current is
+   exactly what f1 will carry.
+7. pick and hand-fit f1 (plan predicts 350–500 ma for the full stack; 750 ma is the
+   draft value on the schematic), then re-test powered from the keyboard connector.
+8. only then cable a real amiga.
 
 **reflashing in a powered amiga.** u1 pad 30 (run) has no net and vsys is fed through
 f1/d1, so plugging the pc usb cable does not reset the rp2040 while the amiga is powering

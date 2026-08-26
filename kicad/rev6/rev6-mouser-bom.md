@@ -11,7 +11,7 @@ Links are Mouser part-number searches (`mouser.fi/c/?q=…`) so they can't rot; 
 | Ref | Part | Qty/board | Order | Mouser |
 |---|---|---|---|---|
 | U1 | Raspberry Pi Pico W (SC0918) — or Pico 2 W | 1 | 2 | [SC0918](https://www.mouser.fi/c/?q=SC0918) |
-| P1, P2 | DE9 male, right-angle THT, **European footprint (9.4 mm)** — Amphenol L717SDE09P | 2 | 3 | [L717SDE09P](https://www.mouser.fi/c/?q=L717SDE09P) — alt: [Assmann A-DS 09 A/KG-T2S](https://www.mouser.fi/c/?q=A-DS%2009%20A%2FKG-T2S) (also LCSC C3127392); local alt: Triopak XYDB9RP94. **Do NOT use .318″/8.08 mm variants.** |
+| P1, P2 | DE9 male, right-angle THT, **5.34 mm footprint family** — Power Dynamics PDI-09S-5 (per schematic). Flange screws bolt THROUGH the pcb: 2× 3.2 mm plated holes, 25 mm apart, 4.94 mm from edge; near pin row 7.78 mm from edge. | 2 | 3 | PDI-09S-5 via TME/Farnell; Mouser-verified equivalents being confirmed — see sourcing note. **CORRECTION: the 9.4 mm "European footprint" family (incl. L717SDE09P, Assmann A-DS 09, Triopak XYDB9RP94) does NOT fit this board — earlier revisions of this BOM were wrong.** |
 | J9, J11 | DIN5 180° socket (A2000/A3000 kbd) — Kycon KCDX-5S-N | 2 | 3 | [KCDX-5S-N](https://www.mouser.fi/ProductDetail/Kycon/KCDX-5S-N) |
 | J10, J12 | Mini-DIN6 / PS-2 socket (A4000 kbd) — Same Sky MD-60S | 2 | 3 | [MD-60S](https://www.mouser.fi/c/?q=MD-60S) (exactly MD-60S, not MD-60SM) |
 | J4 | USB-A receptacle, RA THT — Molex 67643-3910 | 1 | 2 | [67643-3910](https://www.mouser.fi/c/?q=67643-3910) (67643-0910 = same land) |
@@ -56,5 +56,5 @@ Links are Mouser part-number searches (`mouser.fi/c/?q=…`) so they can't rot; 
 1. Every SMD line's LCSC part was stock-verified at pin time; the Mouser column is a functional equivalent, not necessarily the identical brand.
 2. C4's exact Panasonic suffix is worth one look on the Mouser page (150 µF/16 V, case 6.3×7.7 mm is what matters).
 3. F1 ships unfitted — bench measurement picks 035/050/075.
-4. The DE9 rule for any substitution: "European footprint / 9.4 mm / .370″", never .318″/8.08 mm.
+4. The DE9 rule for any substitution: **5.34 mm footprint family only** (flange holes through the pcb at 4.94 mm from edge, 25 mm centres; pin rows 7.78 mm from edge). Neither the 9.4 mm "European" family nor .318″/8.08 mm parts fit. F1's schematic draft value is 750 mA (MF-MSMF075-2) — it ships unfitted; final value chosen at bench (see doc/errata.md "first power").
 5. Physical sample check against the footprints (DIN5, mini-DIN6, DE9 especially) remains the gate before ordering boards.
