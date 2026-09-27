@@ -1,9 +1,9 @@
 # amigahid-pico rev6 — JLCPCB **bare-board** order checklist
 
-**Package:** `amigahid-pico-rev6-gerbers.zip` (9 files, 1.19 MB uncompressed)
-**Cut from:** `board-rev6` @ `3c0bf38`, working tree clean, `kicad/rev6/amigahid-pico-rev6.kicad_pcb`
-**Generated:** 2026-08-26 with `kicad-cli` 10.0.5
-**Audit:** 27/27 structural + 8/8 deep assertions pass (see §7)
+**Package:** `amigahid-pico-ux-rev1-gerbers.zip` (9 files, 1.24 MB uncompressed)
+**Cut from:** `board-rev6` @ `031f865`, working tree clean, `kicad/rev6/amigahid-pico-rev6.kicad_pcb`
+**Generated:** 2026-09-27 with `kicad-cli` 10.0.6 — re-cut for the OLED socket + posts (J3 moved, H1/H2 added, I²C re-routed, credit silk on the bottom)
+**Audit:** package structure, drill table, outline, apertures and silk re-verified (see §7); the board itself passed all four gates at this commit
 
 > **BARE PCBS ONLY — no assembly service.** Every part is hand-soldered from Mouser/local stock
 > (`kicad/rev6/rev6-mouser-bom.md`). Do not upload a BOM or CPL. Do not tick "PCB Assembly".
@@ -21,9 +21,14 @@ The pre-fab report's blocking gate is **not** closed by this package:
 > FAB`, and `rev6-mouser-bom.md` note 5 repeats it. Commit `b19bac9` previously caught **both** DIN
 > footprints X-mirrored — which would have shorted Amiga +5 V to GND on first plug-in.
 
-Put a caliper on real J9/J11 (Kycon KCDX-5S-N), J10/J12 (Same Sky MD-60S), P1/P2 (DE9 **European
-9.4 mm**, never .318″/8.08 mm), J4 (Molex 67643-3910) and J13 (GCT USB4135-GF-A) **before** paying.
-The drill table in §7 is the thing to measure against — it is the physical truth of what gets drilled.
+Put a caliper on real J9/J11 (Kycon KCDX-5S-N), J10/J12 (Same Sky MD-60S), P1/P2 (DE9 **.318″ / 8.08 mm
+family — Kycon K22X-E9P-N; boardlocks midway between the pin rows; the 9.4 mm "European" family does NOT
+fit**), J4 (Molex 67643-3910) and J13 (GCT USB4135-GF-A) **before** paying. The drill table in §7 is the
+thing to measure against — it is the physical truth of what gets drilled.
+
+Also on the bench before ordering: the 0.96″ OLED module (27.5 × 27.8 mm, holes 23.5 × 23.8 mm c-c, 4 pins
+on the top-hole line, silk **GND VCC SCL SDA**) against J3's socket pads (x 81.74–89.36, y 40.5) and the
+two M2 posts H1 (97.3, 40.5) / H2 (97.3, 64.3). A VCC-GND module means J3's pins 1/2 are wrong for it.
 
 Everything below assumes that check has passed.
 
@@ -37,7 +42,7 @@ Values that are **not** the JLC default are marked ⚠.
 |---|---|---|
 | Base Material | **FR-4** | default |
 | Layers | **2** | `.gbrjob` declares `LayerNumber: 2` |
-| Dimension | **100 × 80 mm** | Edge.Cuts routed centreline is exactly 100.000 × 80.000 |
+| Dimension | **100 × 82.76 mm** | Edge.Cuts routed centreline is exactly 100.000 × 82.760 (south edge moved for the DE9 retarget) |
 | PCB Qty | **5** ⚠ | see §2 |
 | Product Type | Industrial/Consumer electronics | default |
 | Different Design | **1** | one design, not panelised |
@@ -47,7 +52,7 @@ Values that are **not** the JLC default are marked ⚠.
 | Silkscreen | White | |
 | Surface Finish | **ENIG** ⚠ | see §3 |
 | Outer Copper Weight | **1 oz** | design is drawn to 1 oz rules (0.2 mm min track) |
-| Via Covering | **Tented** | all 345 vias are already tented in the mask gerbers — verified, zero via openings |
+| Via Covering | **Tented** | all 363 vias are tented in the mask gerbers — the mask layers carry pad and NPTH openings only |
 | Board Outline Tolerance | ±0.2 mm (regular) | see §4 on the M3 holes |
 | Gold Fingers | No | |
 | **Castellated Holes** | **YES** ⚠ | see §4 — this is the order-stopper |
@@ -55,7 +60,7 @@ Values that are **not** the JLC default are marked ⚠.
 | Flying Probe Test | Fully test | default |
 | **Confirm Production File** | **YES** ⚠ | ~$1.50, and worth every cent here — it lets you see JLC's CAM interpretation of the internal-slot castellation before they cut copper |
 
-**Upload:** `amigahid-pico-rev6-gerbers.zip` as-is. Do not unzip and re-zip a folder — the archive is
+**Upload:** `amigahid-pico-ux-rev1-gerbers.zip` as-is. Do not unzip and re-zip a folder — the archive is
 deliberately flat (no directory entries), which is what JLC's parser wants.
 
 **File extensions:** the gerbers use KiCad's `.gbr` extension, not Protel `.gtl/.gbl/.gts/...`
@@ -169,13 +174,13 @@ Pico 2 W** — only TP4/TP5/TP6 shift by 1.5 mm — so the tap works on any of t
 
 ### 4b. M3 corner holes are Edge.Cuts-**milled**, not drilled
 
-Four **Ø3.200 mm circles** on Edge.Cuts at board coordinates **(4, 4), (4, 76), (96, 4), (96, 76)**
-— verified closed, correctly sized and correctly placed (audit E4).
+Four **Ø3.200 mm circles** on Edge.Cuts at board coordinates **(4, 4), (4, 78.76), (96, 4), (96, 78.76)**
+— closed, correctly sized and correctly placed.
 
-⚠ **They are not in the drill file.** The excellon export contains **zero `NonPlated` entries** —
-there is no NPTH file and no NPTH section (audit D3). The four corner holes exist *only* in
-`amigahid-pico-rev6-Edge_Cuts.gbr`, so they are **routed with the profile**: correctly unplated,
-but at **routing tolerance (~±0.13 mm)** rather than drill tolerance (~±0.08 mm).
+⚠ **They are not in the drill file.** The excellon's only `NonPlated` entries are the two **Ø2.200 mm
+OLED posts H1/H2 at (97.3, 40.5) and (97.3, 64.3)** (tool T11 — ordinary NPTH, drilled). The four corner
+holes exist *only* in `amigahid-pico-rev6-Edge_Cuts.gbr`, so they are **routed with the profile**: correctly
+unplated, but at **routing tolerance (~±0.13 mm)** rather than drill tolerance (~±0.08 mm).
 
 - Ø3.2 mm nominal ⇒ worst case ≈ 3.07–3.33 mm. An M3 screw's major diameter is 3.00 mm, so even the
   tight end still clears. **Fine for M3 clearance** — but do not expect a precision fit, and do not
@@ -209,22 +214,24 @@ marker is present, JLC is satisfied, and it is invisible on a built board. rev5 
 
 ## 5. Silkscreen — what shipped
 
-Verified present and right-reading on F.Silkscreen (audit S1/S2, plus a raster of the region):
+The credit block is on **B.Silkscreen** now (mirrored, reads right from the underside) because the OLED
+module covers its old top-side spot:
 
 ```
-r6 by Jusii
+hid-pico Amiga UX
+UX rev 1 - by Jusii
 github.com/jusii/amigahid-pico
 based on the rev5 design by borb
 github.com/borb/amigahid-pico
-non-commercial license - see URLs above
 ```
 
-Five rows, 1.2 mm text at x = 76, y = 49.8 → 59.0, 0.15 mm strokes, all carrying ink.
-Also verified: `TO AMIGA`, `FROM KEYBOARD`, `ONE Amiga`, the `r 6` revision marker, `PORT 1`,
-`PIN 1`, and every connector reference designator (PCB checker H1–H3 at HEAD).
+Title 2.2 mm bold at y 27.2, then four 1.2 mm rows at y 30.5 → 37.4, centred on x = 77.5, 0.2 mm
+strokes. On F.Silkscreen: `TO AMIGA`, `FROM KEYBOARD`, `ONE Amiga`, `PORT 1`, `PORT 2`, `PIN 1`,
+`USB HOST`, `USB / BOOTSEL >`, `AUX 5V` (moved to y 37.4, just north of the module edge) and every
+connector reference designator (PCB checker H1–H3 at HEAD). `J3` sits under the module — deliberate.
 
-⚠ **Silk strokes are at exactly 0.15 mm**, which is JLC's stated minimum, not a margin above it.
-Both silkscreen layers have a single 0.15 mm aperture as their floor (audit A2). Expect the finest
+⚠ **Silk strokes bottom out at exactly 0.15 mm**, which is JLC's stated minimum, not a margin above it
+(F.Silkscreen apertures 0.15 / 0.18 / 0.2 mm and up; B.Silkscreen 0.15 mm and up). Expect the finest
 legend text to render slightly thin or locally broken. Nothing is below the floor, so it will be
 fabricated — but this is the reason to take green/white rather than black/white.
 
@@ -262,7 +269,8 @@ No silkscreen ink falls inside the M3 holes, inside the USB-tap slot, or outside
 | **Polarity-critical parts** | No longer a CPL check, now a **soldering-time** check: **D1, D2** (SS34, SMA — board-side pad 1 is the cathode on SYS5V; reversed kills the Amiga 5 V path entirely), **C1, C4** (board-side pad 1 is `+`; reversed vents two electrolytics on a 5 V rail), **U2** (USBLC6-2SC6, pin 2 = GND), **LED1/LED2**. D10–D30 are bidirectional and orientation-free. |
 | **Five ambiguous ESD designators — D13, D14, D18, D26, D27** | **More important now, not less.** The SOD-323 row along the south edge has no label position within 2 mm that doesn't overlap something, so five designators read ambiguously. You are placing these by hand: **work from the schematic/board file for D13/D14/D18/D26/D27, not from the silkscreen.** |
 | **Mini-DIN6 mask dams at 0.30 mm (J10, J12)** | Fabricable — comfortably above JLC's ~0.25 mm printable floor. Puts `/kbdata` next to GND on J10 and `/KBIN_5V` next to a spare pin on J12. Hand-soldering these needs a steady iron; wick any bridge rather than reflowing it. |
-| **J4 USB-A overhangs the south edge by ~4 mm** | Build note stands: put a **fillet of epoxy under the overhang** before it takes any downward load from a cable. Retained only by four 1.0 mm pins and two 2.3 mm shield legs, nearest 6.3 mm back from the edge. |
+| **J4 USB-A overhangs the south edge by ~1.2 mm** | Was ~4 mm before the DE9 retarget moved the edge. A fillet of epoxy under the front is now belt-and-braces; still cheap insurance if the port is plugged often. |
+| **OLED socket + posts** | J3 is a 1×4 **female** socket (pins x 81.74–89.36, y 40.5, order GND·VCC·SCL·SDA); H1/H2 are Ø2.2 NPTH for M2 posts. Module sits at x 71.8–99.3, y 38.5–66.3; posts = socket body + 2.54 mm (11 mm for an 8.5 mm socket), never under 8 mm — the Pico's micro-USB cable passes under the module's west edge. No post on the two west corners by design. |
 | **South edge cable clash** | USB-A opening 3.68 / 3.67 mm from the DE9 hoods. Slim D-sub hoods + a normal USB plug fit; a full-size moulded hood + fat plug or a USB stick does not. Buy slim hoods or a short USB extension. |
 | **"Power the keyboard connector first"** | SYS5V is fed only from the keyboard connector (D1) or USB-C aux (D2). Cabling only the joystick ports leaves SYS5V dead and drags all 14 port lines low through 10 k — the machine sees stuck directions while the board looks dead. |
 | **Module test points / plain Pico** | The F.Cu keep-out at x 35.40–42.50, y 47.76–49.76 voids TP4/TP5/TP6 for a Pico W or Pico 2 W. A **plain Pico's TP4 is not covered** — put Kapton over its test points if you bodge one in. |
@@ -276,15 +284,15 @@ No silkscreen ink falls inside the M3 holes, inside the USB-tap slot, or outside
 
 | File | Bytes | Role |
 |---|---|---|
-| `amigahid-pico-rev6-F_Cu.gbr` | 448 690 | `Copper,L1,Top` |
-| `amigahid-pico-rev6-B_Cu.gbr` | 420 474 | `Copper,L2,Bot` |
-| `amigahid-pico-rev6-F_Mask.gbr` | 14 329 | `Soldermask,Top` |
-| `amigahid-pico-rev6-B_Mask.gbr` | 13 651 | `Soldermask,Bot` |
-| `amigahid-pico-rev6-F_Silkscreen.gbr` | 156 891 | `Legend,Top` |
-| `amigahid-pico-rev6-B_Silkscreen.gbr` | 151 422 | `Legend,Bot` |
-| `amigahid-pico-rev6-Edge_Cuts.gbr` | 2 042 | `Profile,NP` |
-| `amigahid-pico-rev6-job.gbrjob` | 2 563 | Gerber job — declares 2 layers, 1.6 mm, `Castellated: true` |
-| `amigahid-pico-rev6.drl` | 7 120 | Excellon, `MixedPlating,1,2`, absolute mm |
+| `amigahid-pico-rev6-F_Cu.gbr` | 468 084 | `Copper,L1,Top` |
+| `amigahid-pico-rev6-B_Cu.gbr` | 435 807 | `Copper,L2,Bot` |
+| `amigahid-pico-rev6-F_Mask.gbr` | 14 440 | `Soldermask,Top` |
+| `amigahid-pico-rev6-B_Mask.gbr` | 13 762 | `Soldermask,Bot` |
+| `amigahid-pico-rev6-F_Silkscreen.gbr` | 89 547 | `Legend,Top` |
+| `amigahid-pico-rev6-B_Silkscreen.gbr` | 202 542 | `Legend,Bot` (carries the credit block now) |
+| `amigahid-pico-rev6-Edge_Cuts.gbr` | 2 042 | `Profile,NP` — byte-identical to the previous cut apart from the date header |
+| `amigahid-pico-rev6-job.gbrjob` | 2 564 | Gerber job — declares 2 layers, 1.6 mm, `Castellated: true` |
+| `amigahid-pico-rev6.drl` | 7 455 | Excellon, `MixedPlating,1,2`, absolute mm |
 
 Deliberately **excluded**: the 17 non-fabrication layers a plain export emits (`F_Fab`, `B_Fab`,
 `User_Comments`, both courtyards, `Margin`, `User_Drawings`, `User_1`–`User_4`, `User_Eco1/2`, the
@@ -293,32 +301,33 @@ in a manual CAM pass. The **drill map** (`drill-map.gbr`) is also excluded for t
 is a human-readable plot, not a fab input, and a CAM operator can mistake it for a layer. It is
 kept one directory up as `../drill-map.gbr` if you want to eyeball the hole pattern.
 
-### Drill table — 10 tools, 475 hits, **0 non-plated**
+### Drill table — 11 tools, 495 hits, **2 non-plated**
 
 | Tool | Ø (mm) | Hits | Plating | Aperture function | What it is |
 |---|---|---|---|---|---|
-| T1 | 0.300 | 342 | PTH | `ViaDrill` | vias (Ø0.60 mm pad) |
+| T1 | 0.300 | 360 | PTH | `ViaDrill` | vias (Ø0.60 mm pad) |
 | T2 | 0.500 | 3 | PTH | `ViaDrill` | power-transition vias (Ø0.90 mm pad) |
 | T3 | 0.950 | 4 | PTH | `ComponentDrill` | USB-A J4 signal pins |
-| T4 | 1.000 | 90 | PTH | `ComponentDrill` | 2.54 mm headers, DE9 pins, DIN pins |
-| T5 | 1.100 | 12 | PTH | `ComponentDrill` | mini-DIN6 signal pins (J10/J12) |
+| T4 | 1.000 | 72 | PTH | `ComponentDrill` | 2.54 mm headers, OLED socket, module pads, DIN pins |
+| T5 | 1.100 | 30 | PTH | `ComponentDrill` | mini-DIN6 signal pins (J10/J12) and DE9 pins (P1/P2) |
 | **T6** | **1.300** | **2** | **PTH** | **`CastelletedDrill`** | **USB-tap castellations, internal slot wall** |
-| T7 | 1.400 | 14 | PTH | `ComponentDrill` | DIN5 mounting tabs (J9/J11) |
+| T7 | 1.400 | 14 | PTH | `ComponentDrill` | DIN5 pins + mounting tabs (J9/J11) |
 | T8 | 2.300 | 2 | PTH | `ComponentDrill` | USB-A J4 shield legs |
 | T9 | 2.500 | 2 | PTH | `ComponentDrill` | mini-DIN6 centre shield post (J10/J12) |
 | T10 | 3.200 | 4 | PTH | `ComponentDrill` | DE9 P1/P2 flange holes — plated, on GND, correct |
-| | | **475** | | | **0 NPTH entries** |
+| **T11** | **2.200** | **2** | **NPTH** | `ComponentDrill` | **OLED posts H1/H2 at (97.3, 40.5) / (97.3, 64.3) — unplated, M2** |
+| | | **495** | | | **2 NPTH entries** |
 
-Every size and count reconciles against the board file's own pads and vias: 345 vias
-(342 × 0.30 + 3 × 0.50) + 130 through-hole pads = 475. No oval/slotted pad drills.
+Every size and count reconciles against the board file's own pads and vias: 363 vias
+(360 × 0.30 + 3 × 0.50) + 130 plated through-hole pads + 2 NPTH = 495. No oval/slotted pad drills.
 
 Milled features (Edge.Cuts only, absent from the drill file): 4 × Ø3.2 mm M3 corner circles, the
 3.81 × 2.00 mm USB-tap slot, and the antenna notch in the west edge (x 0–8.50, y 43.71–58.81).
 
-### Audit result — 35 assertions, 35 pass
+### Audit result — re-verified on this cut
 
-Run against the **extracted contents of the zip**, not the staging directory (checksums match
-byte-for-byte).
+Checked on the exported files that went into the zip (the archive is flat, 9 entries, no directory
+entries):
 
 - **Presence** — 7 fab layers + `.gbrjob` + `.drl`, all non-empty, no stray files, no directory
   entries in the archive.
@@ -328,16 +337,17 @@ byte-for-byte).
 - **Outline** — 26 Edge.Cuts endpoints, **every one at degree 2** (no open ends, no T-junctions);
   6 closed chains = 1 outer 100.000 × 80.000 mm profile + 4 M3 circles + 1 tap slot; nothing
   unexplained; the tap slot touches no board edge.
-- **Drill** — table above; the castellated tool is correctly tagged; zero NonPlated entries.
+- **Drill** — table above; the castellated tool is correctly tagged at `X49.8 Y-50.26` / `X49.8 Y-52.26`;
+  the only NonPlated entries are H1/H2.
 - **Silkscreen** — the credit block is present with ink on all five rows at the expected baselines,
   and renders right-reading (not mirrored) when rasterised.
-- **Apertures** — 149 apertures across the 7 layers; **none zero-size or negative**; smallest
-  silkscreen aperture 0.150 mm on both sides (at, not below, JLC's floor); narrowest stroked copper
-  aperture 0.200 mm (meets the 0.2 mm floor the design was drawn to).
-- **Deep checks** — all 345 vias tented; both castellations bisected by the slot wall with 1.14 mm
+- **Apertures** — smallest silkscreen aperture 0.150 mm on both sides (at, not below, JLC's floor —
+  the stock socket footprint's 0.12 mm outline was raised to 0.15 for this cut); narrowest stroked
+  copper aperture 0.200 mm (meets the 0.2 mm floor the design was drawn to).
+- **Deep checks** — all 363 vias tented; both castellations bisected by the slot wall with 1.14 mm
   end clearance; castellation pads have a top-side mask opening so they can be hand-soldered; no
-  silk inside the M3 holes or the tap slot; no silk or copper outside the profile; antenna notch
-  present.
+  silk or copper outside the profile; antenna notch present (Edge.Cuts unchanged since the
+  previous cut).
 
 Two things worth knowing about how this package was produced:
 
@@ -359,7 +369,8 @@ Two things worth knowing about how this package was produced:
 2. Check the four M3 corner holes against an actual M3 screw and your standoffs.
 3. Buzz out the DE9 flange holes to GND (they should be connected — they are plated, on GND).
 4. Dry-fit **every** connector before soldering anything: J9/J11 DIN5, J10/J12 mini-DIN6, P1/P2 DE9,
-   J4 USB-A, J13 USB-C. This is the last chance to catch a footprint error cheaply.
+   J4 USB-A, J13 USB-C — and the OLED module on J3's socket with M2 screws through H1/H2. This is
+   the last chance to catch a footprint error cheaply.
 5. Check the bottom shifter field for via-in-pad barrels that arrived plugged or cratered —
    especially C2, C7, R18, F1, F2 (§6).
 6. Then follow the build order in `doc/errata.md`: bottom-side SMD first, connectors, **epoxy
