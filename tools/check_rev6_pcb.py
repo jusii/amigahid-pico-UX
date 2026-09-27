@@ -165,9 +165,8 @@ NETLIST_CHECKER = "tools/check_rev6_netlist.py"
 # re-baselined a second time for the OLED socket: J3 became a female socket that
 # the 0.96in SSD1306 module plugs straight into, so its pin map was RE-TARGETED
 # to the module's order (1 = GND, 2 = 3V3; SCL/SDA unchanged).  same assertion
-# count (357), nothing relaxed; the commit hash is pinned in the follow-up commit
-# that can know it.
-NETLIST_CHECKER_M2_COMMIT = "84f2598220b00b59e1f444ac4af5ddd74ca22a57"
+# count (357), nothing relaxed.
+NETLIST_CHECKER_M2_COMMIT = "ec0990541ffb62d417550080657d10b4ff9b7e49"
 NETLIST_CHECKER_M2_BLOB = "cbffadae75433c403881a21d921c662f62dea3be"
 
 # K: the rev6 project settings.  every scripted pcbnew save rewrites this file
