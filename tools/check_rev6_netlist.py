@@ -135,8 +135,9 @@ CONNECTORS = {
     "J4": {  # USB-A host
         "1": "usba_5v", "2": "usb_dm", "3": "usb_dp", "4": "gnd", SHIELD: "gnd",
     },
-    "J3": {  # OLED 1x4
-        "1": "3v3", "2": "gnd", "3": "i2c_scl", "4": "i2c_sda",
+    "J3": {  # OLED 1x4 socket: the 0.96in SSD1306 module plugs straight in, so the
+             # pin order is the module's (GND VCC SCL SDA), not the old header's
+        "1": "gnd", "2": "3v3", "3": "i2c_scl", "4": "i2c_sda",
     },
     "J2": {  # debug 1x6
         "1": "gnd", "2": "uart_tx", "3": "uart_rx", "4": "swdio",

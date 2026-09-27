@@ -9914,7 +9914,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical"
+		(property "Footprint" "Connector_PinSocket_2.54mm:PinSocket_1x04_P2.54mm_Vertical"
 			(at 320.04 105.41 0)
 			(hide yes)
 			(effects
@@ -9941,7 +9941,7 @@
 				)
 			)
 		)
-		(property "Sourcing" "generic 2.54 mm pin header, 1x4 vertical - hand-solder, not JLC-assembled"
+		(property "Sourcing" "generic 2.54 mm female pin socket, 1x4 vertical, TALL body (8.5 mm standard) - the 0.96in OLED module plugs straight in; hand-solder, not JLC-assembled"
 			(at 320.04 105.41 0)
 			(hide yes)
 			(effects
@@ -9974,7 +9974,7 @@
 		)
 		(uuid "713718af-6812-58e5-a169-7ce19fb21724")
 	)
-	(label "+3V3"
+	(label "GND"
 		(at 307.34 102.87 180)
 		(effects
 			(font
@@ -9995,7 +9995,7 @@
 		)
 		(uuid "6800f583-0a35-53ec-b6c3-4b0a4d08e975")
 	)
-	(label "GND"
+	(label "+3V3"
 		(at 307.34 105.41 180)
 		(effects
 			(font

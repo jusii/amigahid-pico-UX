@@ -18,7 +18,7 @@ Links are Mouser part-number searches (`mouser.fi/c/?q=…`) so they can't rot; 
 | J13 | USB-C power-only 6P — GCT USB4135-GF-A | 1 | 2 | [USB4135-GF-A](https://www.mouser.fi/en/c/?q=USB4135-GF-A) (fallback: Farnell/TME) |
 | J1, J8 | Pin header 1×8, 2.54 mm vertical | 2 | — | one 1×40 breakaway covers all headers: [M20-9994046](https://www.mouser.fi/en/c/?q=M20-9994046) ×1 |
 | J2 | Pin header 1×6 | 1 | — | (from the same breakaway) |
-| J3 | Pin header 1×4 | 1 | — | (from the same breakaway) |
+| J3 | **Pin socket 1×4 female, tall** (8.5 mm body; the 0.96″ OLED plugs straight in, pin order GND·VCC·SCL·SDA) | 1 | 2 | [PPTC041LFBN-RC](https://www.mouser.fi/en/c/?q=PPTC041LFBN-RC) (Sullins, 8.5 mm) — any 2.54 mm 1×4 female header of the same height; taller only if the posts follow |
 | J7 | Pin header 1×3 | 1 | — | (from the same breakaway) |
 | — | Female header 1×20, 2.54 mm (proto socketing of U1) | 2 | 2 | [M20-7822046](https://www.mouser.fi/en/c/?q=M20-7822046) or any 1×20 female |
 | JP1 | Solder jumper — no part | — | — | — |
@@ -47,9 +47,10 @@ Links are Mouser part-number searches (`mouser.fi/c/?q=…`) so they can't rot; 
 
 ## Optional / accessories (not on the board)
 
-- 0.96″ SSD1306 **or** 1.3″ SH1106 I²C OLED module, 4-pin (3V3/GND/SCL/SDA) — any vendor; firmware auto-detects at 0x3C (SH1106 needs `-DDISPLAY_CONTROLLER=DISPLAY_SH1106`)
+- 0.96″ SSD1306 I²C OLED module, 4-pin **GND·VCC·SCL·SDA**, 27.5 × 27.8 mm PCB with 23.5 × 23.8 mm hole spacing — the socket and posts are laid out for exactly this module (a VCC·GND module needs J3's pins 1/2 swapped back; a 1.3″ SH1106 still works electrically but does not fit the posts); firmware auto-detects at 0x3C (SH1106 needs `-DDISPLAY_CONTROLLER=DISPLAY_SH1106`)
 - Cables: DB9 **straight-through** F-F ×2 (beware: most F-F serial cables are null-modem!); PS/2 male-male **6-wire** (A4000); DIN5 male-male **all-5-pins wired** (A2000/A3000 — beware MIDI cables that omit pin 1 = KCLK)
 - M3 standoffs/screws ×4; micro-USB cable for flashing
+- **OLED posts:** M2 × 11 mm standoffs ×2 (= socket body 8.5 + module header body 2.54) with M2 screws/nuts, for H1/H2 (Ø2.2 NPTH at (97.3, 40.5) and (97.3, 64.3)); ≥ 8 mm whatever the socket, the Pico's micro-USB cable runs under the module's west edge
 
 ## Notes for the final check
 

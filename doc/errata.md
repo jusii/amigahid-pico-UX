@@ -96,6 +96,32 @@ usb stick does not. use slim hoods, or a short usb extension. the lateral gap is
 by the de9 retarget; the usb plug now simply sits closer to the board edge, where the d-sub
 hoods are at their narrowest.
 
+**the oled plugs straight in, on two posts.** j3 is no longer a pin header next to the
+pico: it is a 1x4 *female* socket at x 81.74-89.36, y 40.5, and the generic 0.96in ssd1306
+module (27.5 x 27.8 mm pcb, holes 23.5 x 23.8 mm on 2.0 mm insets, 4-pin header centred on
+the top-hole line) plugs down onto it with its glass facing up. the module then sits at
+x 71.8-99.3, y 38.5-66.3, flush inside the east edge, and two m2 posts hold the other
+edge: h1 (97.3, 40.5) and h2 (97.3, 64.3), 2.2 mm npth, no copper. the other two corners
+have no post on purpose - the lower-left one lands on q18 and six of the port-2 nets, and
+the upper-left one sits in the corridor the i2c pair had to cross - so the socket carries
+the north edge and the posts the east edge; a 3 g module on a 1 mm fr4 plate needs nothing
+more. post length = socket body + 2.54 mm (the module's own male header body): 11 mm for a
+standard 8.5 mm socket. keep the posts at 8 mm or more regardless, because the pico's
+micro-usb cable passes UNDER the module's west edge at up to ~7 mm.
+
+the socket's pin order is the module's, GND VCC SCL SDA west to east, which is why j3's
+pins 1 and 2 swapped nets (the old header was 3V3 GND SCL SDA); check your module's silk
+before soldering the socket, a VCC-GND module wants the labels swapped back. the display
+image's top is the header edge, i.e. north, towards the keyboard connectors; the firmware
+inits with segment + com remap, two bytes flip it if the case wants it the other way.
+
+moving j3 45 mm east cost real routing: the i2c pair leaves the pico through the lane the
+redundant +3V3 f.cu loop used to occupy (the pull-ups and j7 are now fed from the west via a
+via at the old j3 pad-1 spot and one link down to the pico-side +3V3), /swclk /swdio and
+/cont1_b2_lo were lifted out of the socket's pad row and re-threaded north of it, and three
+gnd stitch vias re-link pour patches the new lanes had walled off. the credit block moved to
+the bottom silkscreen because the module covers where it was.
+
 **power the keyboard connector first — but know that f1 ships empty.** the nineteen
 high-side pull-ups tie every amiga-facing line to sys5v, and sys5v is fed only from the
 keyboard connector (via f1 then d1) or the usb-c aux input (d2) — the de9 ports take no

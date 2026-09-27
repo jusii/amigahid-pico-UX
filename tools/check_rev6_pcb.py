@@ -162,8 +162,13 @@ NETLIST_CHECKER = "tools/check_rev6_netlist.py"
 # the draft value stands F1 must carry no LCSC code, so the placeholder cannot be
 # ordered as an assembled part.  that is one assertion more than before (356 -> 357).
 # any further move of this pin has to come with the same kind of justification.
+# re-baselined a second time for the OLED socket: J3 became a female socket that
+# the 0.96in SSD1306 module plugs straight into, so its pin map was RE-TARGETED
+# to the module's order (1 = GND, 2 = 3V3; SCL/SDA unchanged).  same assertion
+# count (357), nothing relaxed; the commit hash is pinned in the follow-up commit
+# that can know it.
 NETLIST_CHECKER_M2_COMMIT = "84f2598220b00b59e1f444ac4af5ddd74ca22a57"
-NETLIST_CHECKER_M2_BLOB = "7fe30582ad568d91c186f5d4ae4fe57f10339c6d"
+NETLIST_CHECKER_M2_BLOB = "cbffadae75433c403881a21d921c662f62dea3be"
 
 # K: the rev6 project settings.  every scripted pcbnew save rewrites this file
 # behind our back - it drops the netclass patterns and resets constraints to
