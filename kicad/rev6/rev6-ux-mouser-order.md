@@ -13,7 +13,7 @@ One order covers everything on the board. Links are exact Mouser product pages (
 | J13 | **USB-C aux 5V — GCT USB4135-GF-A** (power-only, 6P) | 2 | ✔ [mouser.fi/en/ProductDetail/GCT/USB4135-GF-A](https://www.mouser.fi/en/ProductDetail/GCT/USB4135-GF-A) |
 | U1 | **Raspberry Pi Pico W (SC0918)** — and/or Pico 2 W (SC1633) | 1+1 | ✔ [mouser.fi/en/ProductDetail/Raspberry-Pi/SC0918](https://www.mouser.fi/en/ProductDetail/Raspberry-Pi/SC0918) · ✔ [SC1633](https://www.mouser.fi/en/ProductDetail/Raspberry-Pi/SC1633) |
 | J1,J2,J7,J8 | **Pin headers** — one 1×40 breakaway covers 8+8+6+3 | 1 | ✔ [mouser.fi/en/ProductDetail/Harwin/M20-9994046](https://www.mouser.fi/en/ProductDetail/Harwin/M20-9994046) (any 2.54 mm 1×40 breakaway works) |
-| J3 | **OLED socket** — 1×4 female, 8.5 mm body; the 0.96″ module plugs straight in | 2 | (p) [mouser.fi/en/ProductDetail/Sullins/PPTC041LFBN-RC](https://www.mouser.fi/en/ProductDetail/Sullins/PPTC041LFBN-RC) — any 2.54 mm 1×4 female header; the posts are sized for 8.5 mm |
+| J3 | **OLED socket** — 1×4 female, 8.4 mm body (in hand); the 0.96″ module plugs straight in | 2 | (p) [mouser.fi/en/ProductDetail/Sullins/PPTC041LFBN-RC](https://www.mouser.fi/en/ProductDetail/Sullins/PPTC041LFBN-RC) — any 2.54 mm 1×4 female header; the posts are sized for 8.5 mm |
 | (proto) | **Female headers 1×20** ×2 — socketing the Pico W | 2 | (p) [mouser.fi/en/ProductDetail/Harwin/M20-7822046](https://www.mouser.fi/en/ProductDetail/Harwin/M20-7822046) — or any 2.54 mm 1×20 female strip |
 
 ## SMD (you hand-solder these too)
@@ -43,7 +43,7 @@ JP1 = solder bridge, no part.
 ## Fittings & cables (Mouser or anywhere)
 
 - **M3 nylon standoffs + screws** ×4 — any hardware kit; [search: M3 nylon standoff](https://www.mouser.fi/en/c/?q=M3%20nylon%20standoff%20kit)
-- **M2 × 11 mm standoffs + M2 screws/nuts** ×2 — the OLED posts (H1/H2); 11 = 8.5 mm socket + 2.54 mm module header
+- **M2 × 11 mm standoffs + M2 screws/nuts** ×2 — the OLED posts (H1/H2); 11 = 8.4 mm socket + 2.54 mm module header (10.94)
 - **OLED module**: 0.96″ SSD1306, I²C 4-pin **GND·VCC·SCL·SDA**, 27.5 × 27.8 mm, holes 23.5 × 23.8 mm — hobby vendors; the socket and posts fit exactly this board
 - **Cables** (hobby/retro vendors are better than Mouser for these): DB9 **straight-through** F-F ×2 (⚠ most F-F serial cables are null-modem — verify pin 2→2 3→3); PS/2 male-male **6-wire full** (A4000); DIN5 male-male **all 5 pins wired** (A2000/A3000 — MIDI cables often omit pin 1 = KCLK); micro-USB cable (flashing)
 

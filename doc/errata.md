@@ -105,8 +105,8 @@ edge: h1 (97.3, 40.5) and h2 (97.3, 64.3), 2.2 mm npth, no copper. the other two
 have no post on purpose - the lower-left one lands on q18 and six of the port-2 nets, and
 the upper-left one sits in the corridor the i2c pair had to cross - so the socket carries
 the north edge and the posts the east edge; a 3 g module on a 1 mm fr4 plate needs nothing
-more. post length = socket body + 2.54 mm (the module's own male header body): 11 mm for a
-standard 8.5 mm socket. keep the posts at 8 mm or more regardless, because the pico's
+more. post length = socket body + 2.54 mm (the module's own male header body): 11 mm for the
+8.4 mm socket in hand (10.94 mm; the socket contacts absorb the difference). keep the posts at 8 mm or more regardless, because the pico's
 micro-usb cable passes UNDER the module's west edge at up to ~7 mm.
 
 the socket's pin order is the module's, GND VCC SCL SDA west to east, which is why j3's
