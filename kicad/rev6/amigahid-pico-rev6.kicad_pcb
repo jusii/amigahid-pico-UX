@@ -193,7 +193,7 @@
 			(uuid "aa32ea54-1187-4d29-b627-e224dc36c0a6")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/rev6.3dshapes/M2_post_11mm.wrl"
+		(model "${KIPRJMOD}/rev6.3dshapes/M2_post_11mm.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -204,7 +204,7 @@
 				(xyz 0 0 0)
 			)
 		)
-		(model "${KIPRJMOD}/rev6.3dshapes/OLED_0.96in_128x64_on_posts.wrl"
+		(model "${KIPRJMOD}/rev6.3dshapes/OLED_0.96in_128x64_on_posts.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -650,7 +650,7 @@
 			(uuid "856b2021-c54b-45d3-84f2-21b346cf2c7e")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/rev6.3dshapes/DIN5_Socket_Kycon_KCDX-5S-N.wrl"
+		(model "${KIPRJMOD}/rev6.3dshapes/DIN5_Socket_Kycon_KCDX-5S-N.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -8444,7 +8444,7 @@
 			(uuid "39e11c2b-426b-4855-a46a-0ff086cf8fbf")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/rev6.3dshapes/M2_post_11mm.wrl"
+		(model "${KIPRJMOD}/rev6.3dshapes/M2_post_11mm.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -9480,7 +9480,7 @@
 			(uuid "86d957b0-276d-44ae-85a6-e177ca91f12f")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/rev6.3dshapes/MiniDIN6_Socket_MD-60S.wrl"
+		(model "${KIPRJMOD}/rev6.3dshapes/MiniDIN6_Socket_MD-60S.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -10475,7 +10475,7 @@
 			(uuid "7d4c717d-a30a-41ce-af74-1426648049b3")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/rev6.3dshapes/DIN5_Socket_Kycon_KCDX-5S-N.wrl"
+		(model "${KIPRJMOD}/rev6.3dshapes/DIN5_Socket_Kycon_KCDX-5S-N.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -10728,7 +10728,7 @@
 			(uuid "84ee4a52-adc7-4b96-ab4a-59a0876eb78c")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/rev6.3dshapes/MiniDIN6_Socket_MD-60S.wrl"
+		(model "${KIPRJMOD}/rev6.3dshapes/MiniDIN6_Socket_MD-60S.step"
 			(offset
 				(xyz 0 0 0)
 			)
