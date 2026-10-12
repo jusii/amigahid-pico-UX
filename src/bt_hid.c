@@ -92,7 +92,10 @@ static bool bt_hid_ready;
 
 static bt_classic_connection_t bt_classic_connections[INPUT_BRIDGE_BT_CLASSIC_SLOTS];
 static uint8_t bt_classic_descriptor_storage[BT_CLASSIC_DESCRIPTOR_STORAGE_SIZE];
-static const hid_protocol_mode_t bt_classic_report_mode = HID_PROTOCOL_MODE_REPORT_WITH_FALLBACK_TO_BOOT;
+// btstack dropped HID_PROTOCOL_MODE_REPORT_WITH_FALLBACK_TO_BOOT (pico-sdk 2.3.1 pin);
+// asking for REPORT now runs the SDP/descriptor path and the device's actual mode comes
+// back in the SET_PROTOCOL response, which bt_classic_connections[].protocol_mode tracks.
+static const hid_protocol_mode_t bt_classic_report_mode = HID_PROTOCOL_MODE_REPORT;
 
 static btstack_packet_callback_registration_t bt_classic_hci_event_callback;
 static btstack_packet_callback_registration_t bt_le_hci_event_callback;
