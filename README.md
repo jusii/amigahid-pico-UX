@@ -46,6 +46,9 @@ working. Both inputs are merged on the board; nothing on the Amiga changes.
   where the firmware is heading (gamepads, CD32, port 2, settings) and has its own, different, r6 board.
 * **fboldog** — SH1106 1.3″ OLED support ([#46](https://github.com/borb/amigahid-pico/pull/46)).
 * **BennehBoy**, **rfuest** — keyboard fixes upstream.
+
+An LLM assistant was used throughout this project, for the board layout, the checker scripts,
+the firmware port and these docs. Every result was reviewed, built and tested by hand.
 * µgui by Achim Döbler — see the [display readme](./src/display/README.md).
 
 ## license
