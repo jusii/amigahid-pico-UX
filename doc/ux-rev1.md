@@ -68,5 +68,7 @@ the socket edge (north); flip in firmware if the case wants it the other way.
 * `kicad/rev6/fab/` — gerbers as ordered, `ORDER-CHECKLIST.md` (JLCPCB form, field by field),
   `fit-check-1to1.pdf` (print at 100 %, lay the connectors on it before ordering).
 * `kicad/rev6/rev6-mouser-bom.md` + `rev6-ux-mouser-cart.csv` — parts, Mouser-importable.
+* `kicad/rev6/bom/ibom.html` — interactive BOM (InteractiveHtmlBom); open in a browser to find
+  every part on the board while hand-soldering.
 * `kicad/rev6/mech/` — STEP/STL, board-only and full assembly, for the case.
 * `tools/check_rev6_*.py` — the board gates; run them before committing any board change.
