@@ -44,7 +44,22 @@ but you can also run this to get a revision 2 pcb build (the pin assignments are
 $ cmake -B build/ -S . -DBOARD_TYPE=BOARD_HIDPICO_REV2
 ```
 
-at present there are only two targets, revision 2 and revision 4. revision 3 users should not use the pcb as it has a faulty pin assignment which can spontaneously reset the rp2040 controller, so please do not use it.
+targets: `BOARD_HIDPICO_REV2`, `BOARD_HIDPICO_REV4` (also the r5 pcb) and `BOARD_HIDPICO_REV6` (the UX rev 1 board). revision 3 users should not use the pcb as it has a faulty pin assignment which can spontaneously reset the rp2040 controller, so please do not use it.
+
+### UX rev 1 (rev6)
+
+the board carries a pico w or a pico 2 w; **the image must match the module** — the wrong one leaves the pico silent (no usb, no serial, no led). these are the configurations ci builds:
+
+```shell
+# pico w, bluetooth, ssd1306 display
+$ cmake -B build/ -S . -DBOARD_TYPE=BOARD_HIDPICO_REV6 -DPICO_BOARD=pico_w -DENABLE_BLUETOOTH_HID=ON
+# pico 2 w
+$ cmake -B build/ -S . -DBOARD_TYPE=BOARD_HIDPICO_REV6 -DPICO_BOARD=pico2_w -DENABLE_BLUETOOTH_HID=ON
+# plain pico (no bluetooth)
+$ cmake -B build/ -S . -DBOARD_TYPE=BOARD_HIDPICO_REV6 -DPICO_BOARD=pico
+```
+
+rev6 has dedicated real-keyboard input pins, so `PORT2_ROLE=KEYBOARD` does not apply (the build refuses it). see the [board guide](./ux-rev1.md).
 
 you can also enable generation of debug symbols so as to use `openocd` and `gdb` to debug a running target over serial-wire debug (swd). to do this, add the parameter `-DCMAKE_BUILD_TYPE=Debug`, e.g.:
 
@@ -80,7 +95,7 @@ for the simplest option, pick usb. swd is good for remote debugging and reprogra
 
 ### usb (bootsel)
 
-take a powered down pico, hold the bootsel button and attach a micro usb cable. copy the `amigahid-pico.uf2` file from `build/src/` to the mounted usb storage volume. the pico will spontaneously disconnect, and when it comes back, it will be running the amigahid-pico code. disconnect usb and attach an otg adapter.
+take a powered down pico (on the ux board: unplug every supply and wait 15 s, or hold bootsel while shorting the RUN castellation to GND — the bulk capacitors keep it alive through a quick unplug), hold the bootsel button and attach a micro usb cable. copy the `amigahid-pico.uf2` file from `build/src/` to the mounted usb storage volume. the pico will spontaneously disconnect, and when it comes back, it will be running the amigahid-pico code. disconnect usb and attach an otg adapter.
 
 ### serial wire debug (swd)
 

@@ -1,69 +1,52 @@
-# amigahid-pico
+# hid-pico Amiga UX
 
-**about this fork:** this fork adds support for attaching a *real amiga keyboard* to controller port 2 (build with `-DPORT2_ROLE=KEYBOARD`; see [installation](./doc/installation.md) and [hardware](./doc/hardware.md)). it is based on upstream [pr #44](https://github.com/borb/amigahid-pico/pull/44) (bluetooth support by stefan reinauer) — see that pr for details of the bluetooth work. tested configuration: rev 5 pcb, standard pico (non-w), `BOARD_HIDPICO_REV4` firmware target with `PORT2_ROLE=KEYBOARD`. the original project lives at [borb/amigahid-pico](https://github.com/borb/amigahid-pico).
+USB and Bluetooth keyboards, mice and joysticks on a Commodore Amiga, with the real Amiga keyboard
+passed through alongside them. A Raspberry Pi Pico W / Pico 2 W on a carrier board that plugs
+straight into the Amiga's keyboard and controller ports.
 
-## introduction
+This is a fork of [borb/amigahid-pico](https://github.com/borb/amigahid-pico) that has grown into
+its own board (**UX rev 1**, internal name rev6) and is not going back upstream as a PR — the
+hardware and the firmware target are different enough to live here.
 
-amigahid-pico uses the rp2040 microcontroller (e.g. the raspberry pi pico) in a carrier board to attach usb input devices to a standard amiga without the need for a usb stack on the amiga itself.
+![UX rev 1](./doc/images/ux-rev1-iso.png)
 
-it currently supports keyboards and mice and provides connection via the internal keyboard connector, the rj11/din socket on big-box amigas, and via the controller ports.
+## what it does
 
-**this project is very much a work in progress.**
+* **Keyboard out** to the Amiga: DIN5 (A2000/A3000), mini-DIN6 (A4000) or the A500 header.
+* **Real Amiga keyboard in** on its own connectors (DIN5 / mini-DIN6 / A500 header), merged with
+  USB and Bluetooth input — the original keyboard keeps working.
+* **Controller port 1** mouse / joystick emulation on a DE9; port 2 is wired, firmware for it is
+  not written yet.
+* **USB host** (USB-A) and **Bluetooth HID** (Pico W / Pico 2 W).
+* 0.96″ OLED status display on a socket, two status LEDs, USB-C auxiliary 5 V input.
+* Amiga-powered through the keyboard port; every Amiga-facing line is level-shifted.
 
-## **important note**
+## start here
 
-* current kicad files are for the r5 pcb, which is mostly identical to r4. there is no separate r5 firmware target: build `BOARD_HIDPICO_REV4` (the default) — this fork has been built and tested on an r5 board with the rev 4 target. controller port 2 can now be used as an input for a real amiga keyboard via `-DPORT2_ROLE=KEYBOARD` (see the [hardware](./doc/hardware.md) guide for wiring).
+* [UX rev 1 board guide](./doc/ux-rev1.md) — connectors, pin orders, power, bring-up, cautions.
+* [installation](./doc/installation.md) — building and flashing (pick the image for *your* Pico).
+* [errata](./doc/errata.md) — design notes and known traps, read before building.
+* Fabrication: [`kicad/rev6/fab/`](./kicad/rev6/fab/) (gerbers + JLCPCB order checklist + 1:1
+  fit-check template), parts: [`kicad/rev6/rev6-mouser-bom.md`](./kicad/rev6/rev6-mouser-bom.md),
+  case work: [`kicad/rev6/mech/`](./kicad/rev6/mech/) (STEP/STL, bare board and full assembly).
 
-* **always read the [errata](./doc/errata.md) section for the current pcb layout before deciding whether or not to build.**
+## credits
 
-![rev 5 pcb](./doc/images/board-rev-5.jpg)
-
-## documentation
-
-* [installation](./doc/installation.md)
-* [hardware](./doc/hardware.md)
-* [errors in revisions (errata)](./doc/errata.md)
-
-## history
-
-this project is a rewrite of the [amigahid](https://github.com/borb/amigahid) project to the rp2040 microcontroller.
-
-originally, after the retirement of the arduino adk board and shortening availability of the max3421e "usb host shield" for arduino boards, the need for a cheap, easy and continually available replacement was sought.
-
-at first, the uhs mini via a level shifter seemed ideal, but significant issues were found convincing it to work with a variety of arduino boards.
-
-the rp2040 made sense as a target because it is widely available, has sufficient physical connections and is powerful enough to meet multiple needs.
-
-## what is the latency of this?
-
-i have not measured the latency, but the keyboard signals are sent out the moment they are received on the usb bus. the potential latency is likely fractionally longer than the amiga mcu but bear in mind the rp2040 is significantly faster than the standard amiga keyboard controller.
-
-## roadmap
-
-please see the issues tab on the [github repository](https://github.com/borb/amigahid-pico) for the current list of planned features. the tl;dr is:
-
-normal:
-* i<sup>2</sup>c display for config/status
-* controller emulation
-    * keyboard-based controller emulation (use udlr for directions?)
-* flash memory-based configuration
-* possible amiga-side control panel (using bidirectional controller port signals)
-* rotary control simulation (for controlling gotek drives)
-
-crazy talk:
-* non-amiga support
-* non-hidbp support
-* analogue/paddle emulation
-* fix some tinyusb issues (hotplug, timing-related instability)
+* **nine (borb)** — the original [amigahid](https://github.com/borb/amigahid) and
+  [amigahid-pico](https://github.com/borb/amigahid-pico): the whole idea, the Amiga keyboard and
+  quadrature code, the rev 2–5 boards this descends from.
+* **Stefan Reinauer** — Bluetooth HID host, the mouse-motion rewrite, the per-device input bridge
+  and the SDK/TinyUSB/CYW43 update, taken from his PRs
+  ([#44](https://github.com/borb/amigahid-pico/pull/44), [#47](https://github.com/borb/amigahid-pico/pull/47),
+  [#48](https://github.com/borb/amigahid-pico/pull/48), [#49](https://github.com/borb/amigahid-pico/pull/49)).
+  His fork [reinauer/amigahid-pico](https://github.com/reinauer/amigahid-pico) is the reference for
+  where the firmware is heading (gamepads, CD32, port 2, settings) and has its own, different, r6 board.
+* **fboldog** — SH1106 1.3″ OLED support ([#46](https://github.com/borb/amigahid-pico/pull/46)).
+* **BennehBoy**, **rfuest** — keyboard fixes upstream.
+* µgui by Achim Döbler — see the [display readme](./src/display/README.md).
 
 ## license
 
-on the fence at the moment, but the current license choice is Eclipse Public License 2.0 (EPL-2.0).
+Inherited from upstream: Eclipse Public License 2.0 (EPL-2.0), tentative there too.
 
-## third party licenses
-
-* µgui: this code contains 'µgui' by achim döbler; the license for this can be read at in the [display readme](./src/display/README.md)
-
-## whuh... who?
-
-nine <[nine@aphlor.org](mailto:nine@aphlor.org)>
+Jusii — board, keyboard passthrough, this fork.
