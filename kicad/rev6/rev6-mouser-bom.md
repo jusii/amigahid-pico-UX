@@ -52,6 +52,12 @@ Links are Mouser part-number searches (`mouser.fi/c/?q=…`) so they can't rot; 
 - M3 standoffs/screws ×4; micro-USB cable for flashing
 - **OLED posts:** M2 × 11 mm standoffs ×2 (= socket body 8.4 + module header body 2.54 = 10.94) with M2 screws/nuts, for H1/H2 (Ø2.2 NPTH at (97.3, 40.5) and (97.3, 64.3)); ≥ 8 mm whatever the socket, the Pico's micro-USB cable runs under the module's west edge
 
+## BOM audit 2026-10-13
+
+Cross-checked against the board file (115 placed footprints; H1/H2 are bare holes): every reference designator is covered by exactly one line of `rev6-mouser-bom.csv`, and every purchasable line is in `rev6-ux-mouser-cart.csv`. JP1 is a solder bridge, no part. Fixed in this pass: the cart lacked J3's female socket and still described J3 as part of the header breakaway; the csv carried older part numbers for C2/C6, C3/C5/C7, R43/R44, D1/D2 and D10–D30 than the cart actually ordered. The cart now carries spares on the hand-soldered small SMDs (BSS138 25, 10 k 45, other 0603s 5, ESD 25, SMA 3, LEDs 3) — one dropped 0603 should not stall a build.
+
+Not on Mouser and not in the cart: the 0.96″ OLED module, M2 × 11 mm posts + M2 screws/nuts ×2, M3 standoffs ×4, cables.
+
 ## Notes for the final check
 
 1. Every SMD line's LCSC part was stock-verified at pin time; the Mouser column is a functional equivalent, not necessarily the identical brand.
