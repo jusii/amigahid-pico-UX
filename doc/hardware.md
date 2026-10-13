@@ -2,6 +2,15 @@
 
 ## how do i attach this to my amiga?
 
+### ux rev 1 (rev6) board: cables, no wiring
+
+the ux rev 1 board has the amiga's own keyboard connectors on it. big-box amigas connect with
+off-the-shelf **straight-through male-male** cables: din5 for the a2000, a3000 and a4000t,
+mini-din6 (ps/2 style) for the a4000. the real keyboard plugs into the matching input socket
+(j11/j12). controller ports use straight-through de9 female-female cables, not null-modem.
+nothing below applies to it; see the [board guide](./ux-rev1.md). the rest of this page is
+for the earlier header-based boards.
+
 ### a500
 
 the standard board is designed to be mounted atop the amiga 500 keyboard header. mount a strip of eight 2.54mm pitch sockets with sufficient clearance from the nearby custom chips (cia, mostly). the drill holes are m3 - use some nylon supports to support the board and stop it flexing.
