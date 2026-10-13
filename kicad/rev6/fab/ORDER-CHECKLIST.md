@@ -169,7 +169,7 @@ puts them on an *internal* slot wall. Expect a query, not silent acceptance.
 3. **Worst case, skip it.** The tap is only ever reached by hand-soldering (build sequence step 5c),
    so the plating is convenience, not function. Bodge wires direct to the module's TP2/TP3 pads.
 
-Per `doc/errata.md`, TP1/TP2/TP3 and all four USB shell pads are **identical on Pico, Pico W and
+Per `../DESIGN-NOTES.md`, TP1/TP2/TP3 and all four USB shell pads are **identical on Pico, Pico W and
 Pico 2 W** — only TP4/TP5/TP6 shift by 1.5 mm — so the tap works on any of the three modules.
 
 ### 4b. M3 corner holes are Edge.Cuts-**milled**, not drilled
@@ -373,5 +373,5 @@ Two things worth knowing about how this package was produced:
    the last chance to catch a footprint error cheaply.
 5. Check the bottom shifter field for via-in-pad barrels that arrived plugged or cratered —
    especially C2, C7, R18, F1, F2 (§6).
-6. Then follow the build order in `doc/errata.md`: bottom-side SMD first, connectors, **epoxy
+6. Then follow the build order in `../DESIGN-NOTES.md`: bottom-side SMD first, connectors, **epoxy
    fillet under J4**, module last, and buzz the module's castellated edge before powering anything.

@@ -51,4 +51,4 @@ JP1 = solder bridge, no part.
 
 1. **DE9 done**: the board is retargeted to the Kycon .318″ land (commit 700f727, all gates green) — order the K22X-E9P-N (or listed equivalents) freely. The Triopak RP94s you have: keep as spares, they don't fit this land.
 2. Physical fit-check of DIN5 / mini-DIN6 / DE9 samples on a 1:1 printout stays the last gate before the JLCPCB order.
-3. F1 stays off the board at first power — bring-up procedure is in doc/errata.md.
+3. F1 stays off the board at first power — bring-up procedure is in DESIGN-NOTES.md.

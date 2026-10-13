@@ -31,7 +31,7 @@ ports to a running Amiga leaves the board dead and the port lines dragged low �
 or USB-C first.
 
 **F1 ships unfitted.** First power: current-limited bench 5 V into J13, measure the stack, fit
-MF-MSMF030 / 050 / 075 to suit. Sequence in the [errata](./errata.md).
+MF-MSMF030 / 050 / 075 to suit. Sequence in the [design notes](../kicad/rev6/DESIGN-NOTES.md).
 
 ## the Pico
 
@@ -48,6 +48,7 @@ silently dead: no USB, no serial, no LED. Recover with BOOTSEL and the right fil
 * **Micro-USB cable:** the Pico's port sits under the west edge of the OLED (11 mm above the
   board) and next to the Pico's own pins — use a cable with a slim plug; chunky overmoulds don't fit.
 * **South edge:** 3.7 mm between each DE9 and the USB-A. Slim D-sub hoods, or a short USB extension.
+* **Only hand assembly is tested.** The JLCPCB assembled variant has not been ordered or verified.
 * **D10–D30 are optional.** They're ESD clamps on the Amiga-facing lines. The board works without
   them; fit them on a unit that lives on a real Amiga with cables being swapped.
 * **Polarity, hand-soldered:** D1/D2 cathode (band) toward `SYS5V` (west); C1/C4 `+` per silk;

@@ -28,7 +28,7 @@ working. Both inputs are merged on the board; nothing on the Amiga changes.
 
 * [UX rev 1 board guide](./doc/ux-rev1.md) — connectors, pin orders, power, bring-up, cautions.
 * [installation](./doc/installation.md) — building and flashing (pick the image for *your* Pico).
-* [errata](./doc/errata.md) — design notes and known traps, read before building.
+* [errata](./doc/errata.md) — the short list of gotchas, read before building.
 * Fabrication: [`kicad/rev6/fab/`](./kicad/rev6/fab/) (gerbers + JLCPCB order checklist + 1:1
   fit-check template), parts: [`kicad/rev6/rev6-mouser-bom.md`](./kicad/rev6/rev6-mouser-bom.md),
   case work: [`kicad/rev6/mech/`](./kicad/rev6/mech/) (STEP/STL, bare board and full assembly).
