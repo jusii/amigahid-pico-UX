@@ -4,15 +4,18 @@ USB and Bluetooth keyboards, mice and joysticks on a Commodore Amiga, with the r
 passed through alongside them. A Raspberry Pi Pico W / Pico 2 W on a carrier board that plugs
 straight into the Amiga's keyboard and controller ports.
 
-This is a fork of [borb/amigahid-pico](https://github.com/borb/amigahid-pico) that has grown into
-its own board (**UX rev 1**, internal name rev6) and is not going back upstream as a PR — the
-hardware and the firmware target are different enough to live here.
+A fork of [borb/amigahid-pico](https://github.com/borb/amigahid-pico) with its own board,
+**UX rev 1** (internal name rev6).
+
+The use it was built for: an IP-KVM (or anything else that speaks USB HID) drives the Amiga
+remotely — a person, or an AI agent — while the real Amiga keyboard stays plugged in and keeps
+working. Both inputs are merged on the board; nothing on the Amiga changes.
 
 ![UX rev 1, first board](./doc/images/ux-rev1-photo.jpg)
 
 ## what it does
 
-* **Keyboard out** to the Amiga: DIN5 (A2000/A3000), mini-DIN6 (A4000) or the A500 header.
+* **Keyboard out** to the Amiga: DIN5 (A2000/A3000/A4000T), mini-DIN6 (A4000) or the A500 header.
 * **Real Amiga keyboard in** on its own connectors (DIN5 / mini-DIN6 / A500 header), merged with
   USB and Bluetooth input — the original keyboard keeps working.
 * **Controller port 1** mouse / joystick emulation on a DE9; port 2 is wired, firmware for it is

@@ -12,7 +12,7 @@
 
 | ref | what | note |
 |---|---|---|
-| J9 / J10 | **TO AMIGA** — DIN5 / mini-DIN6 keyboard out | use one of them: *connect ONE Amiga at a time* |
+| J9 / J10 | **TO AMIGA** — DIN5 (A2000/A3000/A4000T) / mini-DIN6 (A4000) keyboard out | use one of them: *connect ONE Amiga at a time* |
 | J11 / J12 | **FROM KEYBOARD** — DIN5 / mini-DIN6 real keyboard in | the Amiga keyboard plugs in here |
 | J1 / J8 | A500 keyboard header out / in | 8-pin, A500 pinout; pin 7 power LED via JP1 |
 | P1 / P2 | DE9 **male** controller ports 1 / 2 | straight-through F-F cable to the Amiga (not null-modem). P2 wired, no firmware yet |
