@@ -2,6 +2,28 @@
 
 ## configuration
 
+### UX rev 1 (rev6) — start here
+
+prerequisites and the submodule init are in [building](#building-the-source-code) below. the
+board carries a pico w or a pico 2 w; **the image must match the module** — the wrong one leaves
+the pico silent (no usb, no serial, no led). these are the configurations ci builds:
+
+```shell
+# pico w, bluetooth, ssd1306 display
+$ cmake -B build/ -S . -DBOARD_TYPE=BOARD_HIDPICO_REV6 -DPICO_BOARD=pico_w -DENABLE_BLUETOOTH_HID=ON
+# pico 2 w
+$ cmake -B build/ -S . -DBOARD_TYPE=BOARD_HIDPICO_REV6 -DPICO_BOARD=pico2_w -DENABLE_BLUETOOTH_HID=ON
+# plain pico (no bluetooth)
+$ cmake -B build/ -S . -DBOARD_TYPE=BOARD_HIDPICO_REV6 -DPICO_BOARD=pico
+$ cmake --build build/
+```
+
+then flash `build/src/amigahid-pico.uf2` over [bootsel](#usb-bootsel). rev6 has dedicated
+real-keyboard input pins, so `PORT2_ROLE=KEYBOARD` does not apply (the build refuses it). see
+the [board guide](./ux-rev1.md). everything below is for the earlier boards unless it says otherwise.
+
+### general options
+
 the file [CMakeLists.txt](/CMakeLists.txt) has a small number of configuration options. the critical aspects of the build can be specified on the `cmake` commandline; you should not normally need to edit the [CMakeLists.txt](/CMakeLists.txt) file unless you are doing something outlandish.
 
 ### controller port 2 role
@@ -45,21 +67,6 @@ $ cmake -B build/ -S . -DBOARD_TYPE=BOARD_HIDPICO_REV2
 ```
 
 targets: `BOARD_HIDPICO_REV2`, `BOARD_HIDPICO_REV4` (also the r5 pcb) and `BOARD_HIDPICO_REV6` (the UX rev 1 board). revision 3 users should not use the pcb as it has a faulty pin assignment which can spontaneously reset the rp2040 controller, so please do not use it.
-
-### UX rev 1 (rev6)
-
-the board carries a pico w or a pico 2 w; **the image must match the module** — the wrong one leaves the pico silent (no usb, no serial, no led). these are the configurations ci builds:
-
-```shell
-# pico w, bluetooth, ssd1306 display
-$ cmake -B build/ -S . -DBOARD_TYPE=BOARD_HIDPICO_REV6 -DPICO_BOARD=pico_w -DENABLE_BLUETOOTH_HID=ON
-# pico 2 w
-$ cmake -B build/ -S . -DBOARD_TYPE=BOARD_HIDPICO_REV6 -DPICO_BOARD=pico2_w -DENABLE_BLUETOOTH_HID=ON
-# plain pico (no bluetooth)
-$ cmake -B build/ -S . -DBOARD_TYPE=BOARD_HIDPICO_REV6 -DPICO_BOARD=pico
-```
-
-rev6 has dedicated real-keyboard input pins, so `PORT2_ROLE=KEYBOARD` does not apply (the build refuses it). see the [board guide](./ux-rev1.md).
 
 you can also enable generation of debug symbols so as to use `openocd` and `gdb` to debug a running target over serial-wire debug (swd). to do this, add the parameter `-DCMAKE_BUILD_TYPE=Debug`, e.g.:
 
