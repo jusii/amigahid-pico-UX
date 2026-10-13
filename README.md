@@ -8,7 +8,7 @@ This is a fork of [borb/amigahid-pico](https://github.com/borb/amigahid-pico) th
 its own board (**UX rev 1**, internal name rev6) and is not going back upstream as a PR — the
 hardware and the firmware target are different enough to live here.
 
-![UX rev 1](./doc/images/ux-rev1-iso.png)
+![UX rev 1, first board](./doc/images/ux-rev1-photo.jpg)
 
 ## what it does
 

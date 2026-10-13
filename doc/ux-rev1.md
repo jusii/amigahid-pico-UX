@@ -2,7 +2,11 @@
 
 100 × 82.76 mm, two layers, hand-soldered. Internal name rev6; KiCad project in `kicad/rev6/`.
 
-![top view](./images/ux-rev1-top.png)
+![first board, keyboard side](./images/ux-rev1-photo.jpg)
+
+![first board, port side](./images/ux-rev1-photo-ports.jpg)
+
+![render, top](./images/ux-rev1-top.png)
 
 ## connectors
 
