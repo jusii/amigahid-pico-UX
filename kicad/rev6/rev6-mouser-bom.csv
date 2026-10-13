@@ -1,26 +1,26 @@
 RefDes,Description,Qty/board,Suggested order qty,LCSC (JLC route),Mouser part,Mouser link
 U1,Raspberry Pi Pico W (or Pico 2 W),1,2,,SC0918,https://www.mouser.fi/en/c/?q=SC0918
-"P1,P2","DE9 male RA THT, .318in/8.08mm footprint family (boardlock holes 2x3.2mm on 25mm centres MIDWAY between the pin rows, 1.42mm behind the near row; near row 7.70mm from edge; pin holes 1.1mm) - hole position vs pin rows is the discriminator, not backset; 5.34mm PDI and 9.4mm European families do NOT fit",2,3,,Kycon K22X-E9P-N (Mouser 806-K22X-E9P-N; Digi-Key FI 9990172 fallback; same land: NorComp 182-009-113R531 / TE 5747840-x / Wurth 618009231221),https://www.mouser.fi/en/c/?q=K22X-E9P-N
+"P1,P2","DE9 male RA THT, .318in/8.08mm footprint family (see rev6-mouser-bom.md for the land rule)",2,3,,Kycon K22X-E9P-N (Mouser 806-K22X-E9P-N),https://www.mouser.fi/en/c/?q=K22X-E9P-N
 "J9,J11",DIN5 180deg socket,2,3,,Kycon KCDX-5S-N,https://www.mouser.fi/en/ProductDetail/Kycon/KCDX-5S-N
 "J10,J12",Mini-DIN6 PS/2 socket,2,3,,Same Sky MD-60S,https://www.mouser.fi/en/c/?q=MD-60S
 J4,USB-A receptacle RA THT,1,2,,Molex 67643-3910,https://www.mouser.fi/en/c/?q=67643-3910
 J13,USB-C power-only 6P,1,2,,GCT USB4135-GF-A,https://www.mouser.fi/en/c/?q=USB4135-GF-A
 "J1,J2,J7,J8",Pin headers 2.54mm (8+8+6+3 from 1x40 breakaway),4,1,,Harwin M20-9994046,https://www.mouser.fi/en/c/?q=M20-9994046
-J3,"Pin socket 1x4 female 2.54mm, 8.5mm body - the 0.96in OLED plugs straight in (GND VCC SCL SDA)",1,2,,Sullins PPTC041LFBN-RC,https://www.mouser.fi/en/c/?q=PPTC041LFBN-RC
+J3,"Pin socket 1x4 female 2.54mm, 8.5mm body (OLED plugs in)",1,2,,Sullins PPTC041LFBN-RC,https://www.mouser.fi/en/c/?q=PPTC041LFBN-RC
 (proto),Female header 1x20 2.54mm for socketing U1,2,2,,Harwin M20-7822046,https://www.mouser.fi/en/c/?q=M20-7822046
-F1,"Polyfuse 1812 PLACEHOLDER - order all three, fit after bench",1,3,,Bourns MF-MSMF030-2 / 050-2 / 075-2,https://www.mouser.fi/en/c/?q=MF-MSMF
+F1,"Polyfuse 1812, value picked at bench (see errata)",1,3,,Bourns MF-MSMF030-2 / 050-2 / 075-2,https://www.mouser.fi/en/c/?q=MF-MSMF
 Q1-Q19,BSS138 SOT-23,19,25,C78284,onsemi BSS138,https://www.mouser.fi/en/c/?q=BSS138%20onsemi
 R1-R38,10k 0603 1%,38,100,C25804,Yageo RC0603FR-0710KL,https://www.mouser.fi/en/c/?q=RC0603FR-0710KL
 "R39,R40",1k 0603,2,10,C21190,Yageo RC0603FR-071KL,https://www.mouser.fi/en/c/?q=RC0603FR-071KL
 "R41,R42",4.7k 0603,2,10,C23162,Yageo RC0603FR-074K7L,https://www.mouser.fi/en/c/?q=RC0603FR-074K7L
-"R43,R44",5.1k 0603,2,10,C23186,Panasonic ERJ-3EKF5101V (as ordered),https://www.mouser.fi/en/c/?q=ERJ-3EKF5101V
+"R43,R44",5.1k 0603,2,10,C23186,Panasonic ERJ-3EKF5101V,https://www.mouser.fi/en/c/?q=ERJ-3EKF5101V
 R45,470R 0603,1,10,C23179,Yageo RC0603FR-07470RL,https://www.mouser.fi/en/c/?q=RC0603FR-07470RL
 C1,220uF 16V SMD alu 6.3x7.7,1,2,C128533,Panasonic EEE-FK1C221XP,https://www.mouser.fi/en/c/?q=EEE-FK1C221XP
 C4,150uF 16V SMD alu 6.3x7.7,1,2,C413656,Panasonic EEE-FKC151XAP,https://www.mouser.fi/en/c/?q=EEE-FKC151XAP
-"C2,C6",10uF 0805 X5R 16V+,2,10,C15850,TDK C2012X5R1V106K0C (as ordered),https://www.mouser.fi/en/c/?q=C2012X5R1V106K0C
-"C3,C5,C7",100nF 0603 X7R 50V,3,10,C14663,KEMET C0603C104K5RACTU (as ordered),https://www.mouser.fi/en/c/?q=C0603C104K5RACTU
-"D1,D2",SS34 Schottky 3A 40V SMA,2,5,C8678,"Diodes Inc B340A-13-F (SS34 class, as ordered)",https://www.mouser.fi/en/c/?q=B340A-13-F
-D10-D30,PESD5V0S1BA SOD-323 ESD clamp,21,30,C19224,"Bourns CDSOD323-T05C (PESD5V0S1BA equiv, as ordered)",https://www.mouser.fi/en/c/?q=CDSOD323-T05C
+"C2,C6",10uF 0805 X5R 16V+,2,10,C15850,TDK C2012X5R1V106K0C,https://www.mouser.fi/en/c/?q=C2012X5R1V106K0C
+"C3,C5,C7",100nF 0603 X7R 50V,3,10,C14663,KEMET C0603C104K5RACTU,https://www.mouser.fi/en/c/?q=C0603C104K5RACTU
+"D1,D2",SS34 Schottky 3A 40V SMA,2,5,C8678,Diodes Inc B340A-13-F,https://www.mouser.fi/en/c/?q=B340A-13-F
+D10-D30,PESD5V0S1BA SOD-323 ESD clamp,21,30,C19224,Bourns CDSOD323-T05C,https://www.mouser.fi/en/c/?q=CDSOD323-T05C
 "F2,F3",Polyfuse 500mA 1812,2,4,C17313,Bourns MF-MSMF050-2,https://www.mouser.fi/en/c/?q=MF-MSMF050-2
 LED1,Red 0603,1,5,C2286,Lite-On LTST-C190KRKT,https://www.mouser.fi/en/c/?q=LTST-C190KRKT
 LED2,Yellow-green 0603 Vf 2.0-2.2V,1,5,C2289,Lite-On LTST-C190GKT,https://www.mouser.fi/en/c/?q=LTST-C190GKT
