@@ -1,11 +1,11 @@
-# hid-pico Amiga UX
+# amigahid-pico-UX
 
 USB and Bluetooth keyboards, mice and joysticks on a Commodore Amiga, with the real Amiga keyboard
 passed through alongside them. A Raspberry Pi Pico W / Pico 2 W on a carrier board that plugs
 straight into the Amiga's keyboard and controller ports.
 
-A fork of [borb/amigahid-pico](https://github.com/borb/amigahid-pico) with its own board,
-**UX rev 1** (internal name rev6).
+A fork of [borb/amigahid-pico](https://github.com/borb/amigahid-pico) with its own board, the
+**hid-pico Amiga UX rev 1** (internal name rev6, which is also what the board silk says).
 
 The use it was built for: an IP-KVM (or anything else that speaks USB HID) drives the Amiga
 remotely — a person, or an AI agent — while the real Amiga keyboard stays plugged in and keeps

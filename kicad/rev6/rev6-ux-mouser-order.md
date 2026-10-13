@@ -1,4 +1,4 @@
-# hid-pico Amiga UX — Mouser order list (hand-solder build, exact links)
+# amigahid-pico-UX — Mouser order list (hand-solder build, exact links)
 
 One order covers everything on the board. Links are exact Mouser product pages (host-swapped to mouser.fi — Mouser shares product paths across regions). ✔ = link path confirmed via distributor/search cross-check; (p) = canonical pattern link, paste the MPN into Mouser search if it 404s. Mouser blocks robots, so no live stock numbers here — check stock as you order.
 
