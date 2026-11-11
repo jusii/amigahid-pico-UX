@@ -1,5 +1,7 @@
 # amigahid-pico
 
+> **Old, moved:** this project is now **Ninepin UX** at [github.com/jusii/ninepin-ux](https://github.com/jusii/ninepin-ux) (boards, firmware, case, full history). This fork stays only for upstream-facing work on [borb/amigahid-pico](https://github.com/borb/amigahid-pico).
+
 **about this fork:** this fork adds support for attaching a *real amiga keyboard* to controller port 2 (build with `-DPORT2_ROLE=KEYBOARD`; see [installation](./doc/installation.md) and [hardware](./doc/hardware.md)). it is based on upstream [pr #44](https://github.com/borb/amigahid-pico/pull/44) (bluetooth support by stefan reinauer) — see that pr for details of the bluetooth work. tested configuration: rev 5 pcb, standard pico (non-w), `BOARD_HIDPICO_REV4` firmware target with `PORT2_ROLE=KEYBOARD`. the original project lives at [borb/amigahid-pico](https://github.com/borb/amigahid-pico).
 
 ## introduction
